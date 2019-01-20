@@ -106,5 +106,5 @@ public class DriveSubsystem extends Subsystem {
 
     public void resetGyro() {
         gyro.reset();
-    }    
+    }
 }
