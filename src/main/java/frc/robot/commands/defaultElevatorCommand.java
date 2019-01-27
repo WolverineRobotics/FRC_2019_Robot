@@ -13,7 +13,7 @@ public class defaultElevatorCommand extends Command {
 
     @Override
     protected void execute() {
-        c_elevator.setElevatorSpeed(speed);
+        c_elevator.setElevatorSpeed(OI.getElevatorSpeed());
     }
 
     @Override
