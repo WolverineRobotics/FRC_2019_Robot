@@ -13,5 +13,10 @@ public class RobotPIDValues{
     public static final int SPEED_KD = 0;
 
     
-    
+    //********************************************************************************** 
+    // Elevator PID
+    //**********************************************************************************
+    public static final int ELEVATOR_POSITION_KP = 0;
+    public static final int ELEVATOR_POSITION_KI = 0;
+    public static final int ELEVATOR_POSITION_KD = 0;
 }
