@@ -20,6 +20,10 @@ public class TechnicalSubsystem extends Subsystem {
         return pdp.getTemperature();
     }
 
+    public double getPdpVoltage(){
+        return pdp.getVoltage();
+    }
+
     public double getCurrentDraw(){
         return pdp.getTotalCurrent();
     }
