@@ -11,7 +11,7 @@ public class OI {
         return driver.getRawAxis(JoystickMap.LEFT_STICK_X);
     }
 
-    public static double getSpeed() {
+    public static double getThrottle() {
         return driver.getRawAxis(JoystickMap.RIGHT_STICK_Y);
     }
 }

@@ -16,7 +16,7 @@ public class defaultDriveCommand extends Command {
     protected void execute() {
         //driver input
         double turn = OI.getTurn();
-        double throttle = OI.getSpeed();
+        double throttle = OI.getThrottle();
 
         //percentage stick pushed until changes start
         double turnTriggerValue = 0.2;
@@ -33,7 +33,7 @@ public class defaultDriveCommand extends Command {
             throttle = 0;
             stopped = true;
         } else {
-            throttle = OI.getSpeed();
+            throttle = OI.getThrottle();
             stopped = false;
         }
         
