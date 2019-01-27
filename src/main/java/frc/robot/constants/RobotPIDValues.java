@@ -7,5 +7,11 @@ public class RobotPIDValues{
     public static final int GYRO_KP = 0;
     public static final int GYRO_KI = 0;
     public static final int GYRO_KD = 0;
+
+    public static final int SPEED_KP = 0;
+    public static final int SPEED_KI = 0;
+    public static final int SPEED_KD = 0;
+
+    
     
 }
