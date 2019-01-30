@@ -10,11 +10,10 @@ public class OI {
     //********************************************************************************** 
     // Driver control constants
     //**********************************************************************************
-    public static double getLeftSpeed() {
-        return driver.getRawAxis(JoystickMap.LEFT_STICK_Y);
-    }
+    public static double getTurn() {
+        return driver.getRawAxis(JoystickMap.LEFT_STICK_X);
 
-    public static double getRightSpeed() {
+    public static double getThrottle() {
         return driver.getRawAxis(JoystickMap.RIGHT_STICK_Y);
     }
 
