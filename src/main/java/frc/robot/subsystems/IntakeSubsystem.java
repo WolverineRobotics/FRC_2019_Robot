@@ -1,9 +1,6 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.revrobotics.CANEncoder;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -27,5 +24,16 @@ public class IntakeSubsystem extends Subsystem {
         setDefaultCommand(new defaultIntakeCommand());
     }
     
-
+    //********************************************************************************** 
+    // Encoder functions
+    //**********************************************************************************
+    
+    // TODO
+    // public double getEncoderRawPosition(){
+    //     return tiltMotor.getSelectedSensorPosition();
+    // }
+    
+    // public double getEncoderRawVelocity(){
+    //     return tiltMotor.getSelectedSensorVelocity();
+    // }
 }

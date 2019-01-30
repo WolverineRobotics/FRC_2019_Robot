@@ -1,8 +1,8 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.OI;
 import frc.robot.Robot;
+import frc.robot.oi.OI;
 import frc.robot.subsystems.DriveSubsystem;
 
 public class defaultDriveCommand extends Command {
