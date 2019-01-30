@@ -45,6 +45,14 @@ public class DriveSubsystem extends Subsystem {
         rightMotor1.set(speed);
         rightMotor2.set(speed);
     }
+
+    public double getRawLeftSpeed(){
+        return leftMotor1.get();
+    }
+
+    public double getRawRightSpeed(){
+        return rightMotor1.get();
+    }
     
     //********************************************************************************** 
     // Encoder functions
