@@ -1,14 +1,13 @@
 package frc.robot.subsystems;
 
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.constants.RobotMap;
 
 public class ClimbSubsystem extends Subsystem{
-    private CANSparkMax climbMotor = new CANSparkMax(RobotMap.CLIMB_MOTOR_LIFT_ADDRESS, MotorType.kBrushless);
-    private CANSparkMax wheelMotor = new CANSparkMax(RobotMap.CLIMB_MOTOR_WHEEL_ADDRESS, MotorType.kBrushless);
+    private TalonSRX climbMotor = new TalonSRX(RobotMap.CLIMB_MOTOR_LIFT_ADDRESS);
+    private TalonSRX wheelMotor = new TalonSRX(RobotMap.CLIMB_MOTOR_WHEEL_ADDRESS);
 
     @Override
     protected void initDefaultCommand() {
