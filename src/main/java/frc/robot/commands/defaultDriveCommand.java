@@ -65,9 +65,6 @@ public class defaultDriveCommand extends Command {
             leftSpeed *= slowDownSpeed;
             rightSpeed *= slowDownSpeed;
         }
-
-        //setSpeeds
-        c_drive.setRawSpeeds(leftSpeed, rightSpeed);
     }
 
     @Override
