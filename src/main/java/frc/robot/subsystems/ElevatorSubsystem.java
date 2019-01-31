@@ -15,4 +15,23 @@ public class ElevatorSubsystem extends Subsystem {
     protected void initDefaultCommand() {
         setDefaultCommand(new defaultElevatorCommand());
     }
+    
+    //********************************************************************************** 
+    // Motor functions
+    //********************************************************************************** 
+    public void setElevatorSpeed(double speed){
+        elevatorMotor1.set(speed);
+        elevatorMotor2.set(speed);
+    }
+
+    //********************************************************************************** 
+    // Encoder functions
+    //**********************************************************************************
+    public double getEncoderRawPosition(){
+        return elevatorMotor1.getEncoder().getPosition();
+    }
+    
+    public double getEncoderRawVelocity(){
+        return elevatorMotor1.getEncoder().getVelocity();
+    }
 }

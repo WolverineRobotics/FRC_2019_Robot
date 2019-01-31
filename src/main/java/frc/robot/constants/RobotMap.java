@@ -56,5 +56,10 @@ public class RobotMap {
 	public static final int TECHNICAL_PDP_INTAKE_ROLLERS  = 7;
 
 	public static final int TECHNICAL_PDP_CLIMB_LIFT      = 8;
-	public static final int TECHNICAL_PDP_CLIMB_WHEEL     = 9;
+    public static final int TECHNICAL_PDP_CLIMB_WHEEL     = 9;
+
+    //********************************************************************************** 
+    // Blinkin Subsystem
+    //**********************************************************************************
+    public static final int BLINKIN_PWM_PORT = 0;
 }
