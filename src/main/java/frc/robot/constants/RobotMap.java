@@ -12,9 +12,10 @@ public class RobotMap {
 	public static final int DRIVE_PISTON_LEFT_SHIFT_FORWARD_ADDRESS	 = 0;
 	public static final int DRIVE_PISTON_LEFT_SHIFT_REVERSE_ADDRESS  = 1;
 	public static final int DRIVE_PISTON_RIGHT_SHIFT_FORWARD_ADDRESS = 2;
-	public static final int DRIVE_PISTON_RIGHT_SHIFT_REVERSE_ADDRESS = 3;
+    public static final int DRIVE_PISTON_RIGHT_SHIFT_REVERSE_ADDRESS = 3;
     
-
+    public static final int DRIVE_PIGEON_IMU_ADDRESS = 10;
+    
     //********************************************************************************** 
     // Elevator Subsystem
     //**********************************************************************************   
