@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.sensors.PigeonIMU;
 import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
@@ -22,6 +23,7 @@ public class DriveSubsystem extends Subsystem {
     private CANEncoder rightEncoder2 = new CANEncoder(rightMotor2);
 
     private AHRS gyro = new AHRS(SPI.Port.kMXP);
+    private PigeonIMU pigeon = new PigeonIMU(RobotMap.DRIVE_PIGEON_IMU_ADDRESS);
 
     @Override
     protected void initDefaultCommand() {
@@ -44,6 +46,14 @@ public class DriveSubsystem extends Subsystem {
     public void setRawRightSpeed(double speed) {
         rightMotor1.set(speed);
         rightMotor2.set(speed);
+    }
+
+    public double getRawLeftSpeed(){
+        return leftMotor1.get();
+    }
+
+    public double getRawRightSpeed(){
+        return rightMotor1.get();
     }
     
     //********************************************************************************** 
@@ -106,5 +116,13 @@ public class DriveSubsystem extends Subsystem {
 
     public void resetGyro() {
         gyro.reset();
+    }
+
+    public double getPigeonAngle(){
+        return (double) (pigeon.getFusedHeading() % 360);
+    }
+
+    public void resetPigeonAngle(){
+        pigeon.setFusedHeading(0);
     }
 }
