@@ -61,7 +61,11 @@ public class OI {
         return operator.getRawButton(JoystickMap.BUTTON_X);
     }
 
-    public static double getElevatorSpeed(){
+    public static double getElevatorSpeed() {
         return operator.getRawAxis(JoystickMap.LEFT_STICK_Y);
+    }
+
+    public static boolean getButtonX() {
+        return driver.getRawButton(JoystickMap.BUTTON_X);
     }
 }

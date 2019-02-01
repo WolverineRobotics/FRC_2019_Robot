@@ -19,7 +19,10 @@ public class RobotMap {
     // Elevator Subsystem
     //**********************************************************************************   
     public static final int ELEVATOR_MOTOR_MASTER_ADDRESS = 4;
-    public static final int ELEVATOR_MOTOR_SLAVE_ADDRESS  = 5;
+    public static final int ELEVATOR_MOTOR_SLAVE_ADDRESS = 5;
+    
+    public static final int ELEVATOR_SHIFTER_MASTER_ADDRESS_FORWARD = 6;
+    public static final int ELEVATOR_SHIFTER_MASTER_ADDRESS_REVERSE = 7;
 
     //********************************************************************************** 
     // Intake Subsystem
