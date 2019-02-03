@@ -6,6 +6,7 @@ import frc.robot.commands.defaultBlinkinCommand;
 import frc.robot.constants.RobotMap;
 
 public class BlinkinSubsystem extends Subsystem {
+    
     private Spark blinkin = new Spark(RobotMap.BLINKIN_PWM_PORT);
 
     public enum Colour {
