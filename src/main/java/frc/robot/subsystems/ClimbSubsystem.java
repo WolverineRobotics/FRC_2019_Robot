@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -12,7 +13,7 @@ public class ClimbSubsystem extends Subsystem {
 
     @Override
     protected void initDefaultCommand() {
-
+        setDefaultCommand(new defaultClimbCommand());
     }    
     //********************************************************************************** 
     // Motor Functions
@@ -21,14 +22,19 @@ public class ClimbSubsystem extends Subsystem {
         climbMotor.set(ControlMode.PercentOutput, speed);
     }
 
+    public void setWheelSpeed(double speed) {
+        wheelMotor.set(ControlMode.PercentOutput, speed);
+    }
+
     //********************************************************************************** 
     // Encoder functions
     //**********************************************************************************
 
-    // TODO
-    // public double getEncoderRawPosition(){
-    //     return climbMotor.getSelectedSensorPosition();
-    // }
+    // TODO TEST ME
+    public double getEncoderRawPosition(){
+        climbMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 30);
+        return climbMotor.getSelectedSensorPosition();
+    }
     
     // public double getEncoderRawVelocity(){
     //     return climbMotor.getSelectedSensorVelocity();

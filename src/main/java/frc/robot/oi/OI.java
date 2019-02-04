@@ -50,6 +50,7 @@ public class OI {
     public static double getTurn() {
         return driver.getRawAxis(JoystickMap.LEFT_STICK_X);
     }
+
     public static double getThrottle() {
         return driver.getRawAxis(JoystickMap.RIGHT_STICK_Y);
     }
@@ -61,7 +62,11 @@ public class OI {
         return operator.getRawButton(JoystickMap.BUTTON_X);
     }
 
-    public static double getElevatorSpeed(){
+    public static double getElevatorSpeed() {
         return operator.getRawAxis(JoystickMap.LEFT_STICK_Y);
+    }
+    
+    public static double getClimbTestSpeed(){
+        return operator.getRawAxis(JoystickMap.RIGHT_STICK_Y);
     }
 }
