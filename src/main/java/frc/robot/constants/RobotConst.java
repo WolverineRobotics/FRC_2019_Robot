@@ -4,24 +4,31 @@ public class RobotConst{
     //********************************************************************************** 
     // Drive constants
     //**********************************************************************************
-    public static final int DRIVE_ENCODER_COUNTS_PER_INCH_HIGH = 1;
-    public static final int DRIVE_ENCODER_COUNTS_PER_INCH_LOW  = 1;
+    public static final int DRIVE_ENCODER_COUNTS_PER_INCH_HIGH = 1; //TBD
+    public static final int DRIVE_ENCODER_COUNTS_PER_INCH_LOW  = 1; //TBD
     
     //********************************************************************************** 
     // Elevator constants
     //**********************************************************************************
-    public static final int ELEVATOR_ENCODER_COUNTS_PER_INCH_HIGH = 1;
-    public static final int ELEVATOR_ENCODER_COUNTS_PER_INCH_LOW  = 1;
+    public static final int ELEVATOR_ENCODER_COUNTS_PER_INCH_HIGH = 1; //TBD
+    public static final int ELEVATOR_ENCODER_COUNTS_PER_INCH_LOW  = 1; //TBD
 
-    public static final int ELEVATOR_FIRST_LEVEL_HEIGHT  = 0;
-    public static final int ELEVATOR_SECOND_LEVEL_HEIGHT = 0;
-    public static final int ELEVATOR_THIRD_LEVEL_HEIGHT  = 0;
+    public static final int ELEVATOR_FIRST_LEVEL_HEIGHT  = 0; //TBD
+    public static final int ELEVATOR_SECOND_LEVEL_HEIGHT = 0; //TBD
+    public static final int ELEVATOR_THIRD_LEVEL_HEIGHT  = 0; //TBD
     
     //********************************************************************************** 
     // Intake constants
     //**********************************************************************************
 
+    public static final double INTAKE_ENCODER_MAXIMUM = 0; //TBD
+    public static final double INTAKE_ENCODER_MINIMUM = 0; //TBD
+
+    public static final double RUMBLE_INTENSITY = 1; //When operator is intaking, driver controller will rumble. I assume that 1 is the max value?
+
     //********************************************************************************** 
     // Climb constants
     //**********************************************************************************
+
+
 }

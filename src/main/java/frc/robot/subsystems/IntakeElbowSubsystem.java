@@ -7,6 +7,7 @@ import frc.robot.commands.defaultcommands.DefaultIntakeElbowCommand;
 import frc.robot.constants.RobotMap;
 
 public class IntakeElbowSubsystem extends Subsystem {
+
     private TalonSRX tilt = new TalonSRX(RobotMap.INTAKE_MOTOR_TILT_ADDRESS);
 
     @Override
@@ -25,4 +26,8 @@ public class IntakeElbowSubsystem extends Subsystem {
     public void setEncoderPosition(int position) {
         tilt.setSelectedSensorPosition(position);
     }
+
+    //********************************************************************************** 
+    // Fixed functions
+    //**********************************************************************************
 }

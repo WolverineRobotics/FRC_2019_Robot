@@ -20,7 +20,6 @@ public class DefaultIntakeElbowCommand extends Command{
     // Untested
     @Override
     public void execute() {
-
         double tilt = OI.getOperatorIntakeTilt();
         double currentEncoderCount = c_intakeElbow.getEncoderPosition();
         double anticipate = currentEncoderCount + tilt;

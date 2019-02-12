@@ -15,11 +15,13 @@ public class DefaultIntakeInOutCommand extends Command {
     public void execute() {
         boolean intakeIn = OI.getOperatorIntakeIn();
         boolean intakeOut = OI.getOperatorIntakeOut();
-        if(!(intakeIn && intakeOut)) {
+        if(!(intakeIn && intakeOut)) { //Precaution: makes sure both aren't pressed at the same time
             if(intakeIn) {
                 c_intakeInOut.activate(true);
+                OI.driverRumble(true);
             } else {
                 c_intakeInOut.activate(false);
+                OI.driverRumble(false);
             }
         }
     }

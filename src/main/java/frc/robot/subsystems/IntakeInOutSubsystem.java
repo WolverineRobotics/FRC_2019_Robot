@@ -16,20 +16,37 @@ public class IntakeInOutSubsystem extends Subsystem {
         setDefaultCommand(new DefaultIntakeInOutCommand());
     }
 
-    public void activate(boolean activate) {
+    /**
+     * Will turn intake motors
+     */
+    public void activate(boolean activate) { //TODO don't think this will work
         this.activated = activate;
         while(activated) {
-            intake.setSelectedSensorPosition(intake.getSelectedSensorPosition(0) + 1);
+            this.setEncoderPosition(this.getEncoderPosition() + 1);
         }
     }
 
+    /**
+     * Will return state of motors
+     * If motors are on, returns true
+     */
     public boolean getActivated() {
         return this.activated;
     }
 
+    /**
+     * @return
+     * Encoder Position
+     */
     public int getEncoderPosition() {
         return intake.getSelectedSensorPosition(0);
     }
+
+    /**
+     * 
+     * @param position
+     * 
+     */
     public void setEncoderPosition(int position) {
         intake.setSelectedSensorPosition(position);
     }
