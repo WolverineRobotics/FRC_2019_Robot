@@ -35,17 +35,18 @@ public class IntakeInOutSubsystem extends Subsystem {
     }
 
     /**
+     * Will return the encoder position (0 on a primary closed loop)
      * @return
-     * Encoder Position
+     * Encoder Position - 
      */
     public int getEncoderPosition() {
         return intake.getSelectedSensorPosition(0);
     }
 
     /**
-     * 
+     * Will set the encoder position. Parameter value (# to #)
      * @param position
-     * 
+     * Encoder position value from # - # --> TBD
      */
     public void setEncoderPosition(int position) {
         intake.setSelectedSensorPosition(position);
