@@ -1,14 +1,14 @@
-package frc.robot.commands;
+package frc.robot.commands.defaultcommands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.oi.OI;
 import frc.robot.subsystems.ElevatorSubsystem;
 
-public class defaultElevatorCommand extends Command {
-    ElevatorSubsystem c_elevator = Robot.getElevatorSubsystem();
+public class DefaultElevatorCommand extends Command {
+    private final ElevatorSubsystem c_elevator = Robot.getElevatorSubsystem();
 
-    public defaultElevatorCommand(){
+    public DefaultElevatorCommand(){
         requires(c_elevator);
     }
 

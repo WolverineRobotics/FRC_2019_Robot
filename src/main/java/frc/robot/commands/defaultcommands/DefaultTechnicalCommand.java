@@ -1,11 +1,15 @@
-package frc.robot.commands;
+package frc.robot.commands.defaultcommands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.subsystems.TechnicalSubsystem;
 
-public class defaultTechnicalCommand extends Command {
-    public defaultTechnicalCommand(){
-        requires(Robot.getTechnicalSubsystem());
+public class DefaultTechnicalCommand extends Command {
+    
+    private TechnicalSubsystem c_technical = Robot.getTechnicalSubsystem();
+
+    public DefaultTechnicalCommand(){
+        requires(c_technical);
     }
 
     @Override

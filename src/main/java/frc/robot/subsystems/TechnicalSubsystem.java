@@ -2,14 +2,14 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.commands.defaultTechnicalCommand;
+import frc.robot.commands.defaultcommands.DefaultTechnicalCommand;
 
 public class TechnicalSubsystem extends Subsystem {
     private PowerDistributionPanel pdp = new PowerDistributionPanel();
 
     @Override
     protected void initDefaultCommand() {
-        setDefaultCommand(new defaultTechnicalCommand());
+        setDefaultCommand(new DefaultTechnicalCommand());
     }
 
     public void clearStickys(){

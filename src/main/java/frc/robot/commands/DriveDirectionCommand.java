@@ -1,19 +1,22 @@
-package frc.robot.commands.drive;
+package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.constants.RobotPIDValues;
+import frc.robot.subsystems.DriveSubsystem;
 import frc.util.PID;
 
-public class driveDirectionCommand extends Command{
+public class DriveDirectionCommand extends Command{
+    private DriveSubsystem c_drive = Robot.getDriveSubsystem();
+    
     private double targetHeading;
     private double targetSpeed;
 
     private PID gyroPid = new PID(RobotPIDValues.GYRO_KP, RobotPIDValues.GYRO_KI, RobotPIDValues.GYRO_KD, 0);
 
-    public driveDirectionCommand(double heading, double speed, double timeout){
+    public DriveDirectionCommand(double heading, double speed, double timeout){
         super(timeout);
-        requires(Robot.getDriveSubsystem());
+        requires(c_drive);
         targetHeading = heading;
         targetSpeed = speed;
 
@@ -32,11 +35,9 @@ public class driveDirectionCommand extends Command{
         if(steering < 0){
             rightSpeed *= 1 - rightSpeed;
         }
-
         if(steering > 0){
             leftSpeed *= 1 - leftSpeed;
         }
-
         Robot.getDriveSubsystem().setRawSpeeds(leftSpeed, rightSpeed);
     }
 

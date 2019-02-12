@@ -8,7 +8,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.commands.defaultDriveCommand;
+import frc.robot.commands.defaultcommands.DefaultDriveCommand;
 import frc.robot.constants.RobotMap;
 
 public class DriveSubsystem extends Subsystem {
@@ -27,7 +27,7 @@ public class DriveSubsystem extends Subsystem {
 
     @Override
     protected void initDefaultCommand() {
-        setDefaultCommand(new defaultDriveCommand());
+        setDefaultCommand(new DefaultDriveCommand());
     }
 
     //********************************************************************************** 

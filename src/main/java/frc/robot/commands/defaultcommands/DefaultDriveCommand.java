@@ -1,26 +1,28 @@
-package frc.robot.commands;
+package frc.robot.commands.defaultcommands;
+
+import java.io.BufferedReader;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.oi.OI;
 import frc.robot.subsystems.DriveSubsystem;
 
-public class defaultDriveCommand extends Command {
+public class DefaultDriveCommand extends Command {
     private DriveSubsystem c_drive = Robot.getDriveSubsystem();
 
-    public defaultDriveCommand() {
+    public DefaultDriveCommand() {
         requires(c_drive);
     }
 
     @Override
     protected void execute() {
         //driver input
-        double turn = OI.getTurn();
-        double throttle = OI.getThrottle();
+        double turn = OI.getDriverTurn();
+        double throttle = OI.getDriverThrottle();
 
         //percentage stick pushed until changes start
-        double turnTriggerValue = 0.2;
-        double throttleTriggerValue = 0.1;
+        final double turnTriggerValue = 0.2;
+        final double throttleTriggerValue = 0.1;
 
         //misc values
         double leftSpeed = 0;
@@ -33,7 +35,7 @@ public class defaultDriveCommand extends Command {
             throttle = 0;
             stopped = true;
         } else {
-            throttle = OI.getThrottle();
+            throttle = OI.getDriverThrottle();
             stopped = false;
         }
         
@@ -42,7 +44,7 @@ public class defaultDriveCommand extends Command {
             turn = 0;
             stopped = true;
         } else {
-            turn = OI.getTurn();
+            turn = OI.getDriverTurn();
             stopped = false;
         }
 
@@ -65,6 +67,7 @@ public class defaultDriveCommand extends Command {
             leftSpeed *= slowDownSpeed;
             rightSpeed *= slowDownSpeed;
         }
+        c_drive.setRawSpeeds(leftSpeed, rightSpeed);
     }
 
     @Override

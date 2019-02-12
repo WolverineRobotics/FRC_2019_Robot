@@ -4,7 +4,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.commands.defaultElevatorCommand;
+import frc.robot.commands.defaultcommands.DefaultElevatorCommand;
 import frc.robot.constants.RobotMap;
 
 public class ElevatorSubsystem extends Subsystem {
@@ -13,7 +13,7 @@ public class ElevatorSubsystem extends Subsystem {
 
     @Override
     protected void initDefaultCommand() {
-        setDefaultCommand(new defaultElevatorCommand());
+        setDefaultCommand(new DefaultElevatorCommand());
     }
     
     //********************************************************************************** 
@@ -29,9 +29,5 @@ public class ElevatorSubsystem extends Subsystem {
     //**********************************************************************************
     public double getEncoderRawPosition(){
         return elevatorMotor1.getEncoder().getPosition();
-    }
-    
-    public double getEncoderRawVelocity(){
-        return elevatorMotor1.getEncoder().getVelocity();
     }
 }
