@@ -11,11 +11,10 @@ public class DefaultIntakeElbowCommand extends Command{
     private final IntakeElbowSubsystem c_intakeElbow = Robot.getIntakeElbowSubsystem();
 
     public DefaultIntakeElbowCommand() {
-        this.requires(c_intakeElbow);
+        requires(c_intakeElbow);
     }
 
-    // Someone professional please look over this
-    // Untested
+    // Someone professional please look over this & UNTESTED
     @Override
     public void execute() {
         double tilt = OI.getOperatorIntakeTilt();

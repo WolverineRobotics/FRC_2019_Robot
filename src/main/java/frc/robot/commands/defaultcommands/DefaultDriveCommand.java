@@ -1,7 +1,5 @@
 package frc.robot.commands.defaultcommands;
 
-import java.io.BufferedReader;
-
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.oi.OI;
@@ -50,7 +48,7 @@ public class DefaultDriveCommand extends Command {
 
         //set speeds
         leftSpeed = throttle + turn;
-        rightSpeed = throttle - turn;
+        rightSpeed = (-1 * throttle) - turn;
 
         //max limit
         if(leftSpeed > 1){
@@ -60,6 +58,16 @@ public class DefaultDriveCommand extends Command {
         //min limit
         if(leftSpeed < -1){
             leftSpeed = -1;
+        }
+
+        //max limit
+        if(rightSpeed > 1) {
+            rightSpeed = 1;
+        }
+
+        //min limit
+        if(rightSpeed < -1) {
+            rightSpeed = -1;
         }
 
         //Slow to stop

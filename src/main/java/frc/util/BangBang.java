@@ -68,8 +68,6 @@ public class BangBang{
     	}
     }
     
-    
-    
     public void autoMinMax(double maxSpeed) {
         this.maxOutput = (this.targetValue / maxSpeed) * 1.2;
         this.minOutput = (this.targetValue / maxSpeed) * 0.7;

@@ -58,7 +58,7 @@ public class OI {
     public static boolean getDriverRequestCargoLED() { //returns true if A was released
         return driver.getRawButtonReleased(JoystickMap.BUTTON_A);
     }
-    public static boolean getDriverDefaultLED() { //returns true if B was released
+    public static boolean getDriverCancel() { //returns true if B was released
         return driver.getRawButtonReleased(JoystickMap.BUTTON_B);
     }
     public static boolean getDriverRequestionHatchLED() { //returns true if X was released
@@ -77,7 +77,7 @@ public class OI {
     //********************************************************************************** 
     // Operator controls
     //**********************************************************************************
-    public static double getElevatorSpeed(){ //returns -1 to 1 double on LEFT STICK Y axis
+    public static double getOperatorElevatorSpeed(){ //returns -1 to 1 double on LEFT STICK Y axis
         return operator.getRawAxis(JoystickMap.LEFT_STICK_Y);
     }
 
@@ -111,3 +111,4 @@ public class OI {
         }
     }
 }
+

@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -10,6 +11,10 @@ public class IntakeInOutSubsystem extends Subsystem {
 
     private TalonSRX intake = new TalonSRX(RobotMap.INTAKE_MOTOR_ROLLERS_ADDRESS);
     private boolean activated = false;
+
+    public IntakeInOutSubsystem() {
+        intake.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+    }
 
     @Override
     public void initDefaultCommand() {
