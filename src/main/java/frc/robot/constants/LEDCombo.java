@@ -5,8 +5,7 @@ public enum LEDCombo {
     REQUEST_HATCH(Colour.WHITE, Colour.HOT_PINK), 
     REQUEST_CARGO(Colour.WHITE, Colour.ORANGE), 
     CLIMBING(Colour.AQUA, Colour.WHITE),
-    STATIC_RED(Colour.RED, null),
-    NONE(null, null);
+    STATIC(Colour.RED, null);
 
     private Colour colour1;
     private Colour colour2;

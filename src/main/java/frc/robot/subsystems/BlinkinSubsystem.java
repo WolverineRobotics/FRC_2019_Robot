@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.commands.BlinkCommand;
 import frc.robot.commands.defaultcommands.DefaultBlinkinCommand;
 import frc.robot.constants.Colour;
 import frc.robot.constants.LEDCombo;
@@ -11,13 +12,21 @@ public class BlinkinSubsystem extends Subsystem {
 
     private Spark blinkin = new Spark(RobotMap.BLINKIN_PWM_PORT);
 
-    private Colour currentLED = Colour.RED;
+    private Colour currentLED = Colour.RED; //Set to RED by default
     private LEDCombo currentLEDCombo;
     private boolean isBlinkin = false;
+    private BlinkCommand currentBlinkin;
+
+    /**
+     * Will automatically set default colour to RED
+     */
+    public BlinkinSubsystem() {
+        setStaticColour(currentLED); //handles the other variables in this method. See setStaticColour() in this class.
+    }
 
     @Override
     protected void initDefaultCommand() {
-        this.setDefaultCommand(new DefaultBlinkinCommand());
+        setDefaultCommand(new DefaultBlinkinCommand());
     }
 
     // **********************************************************************************
@@ -35,7 +44,7 @@ public class BlinkinSubsystem extends Subsystem {
         blinkin.set(colour.getValue());
         currentLED = colour;
         isBlinkin = false;
-        currentLEDCombo = LEDCombo.NONE;
+        currentLEDCombo = LEDCombo.STATIC;
     }
 
     /**
@@ -57,7 +66,6 @@ public class BlinkinSubsystem extends Subsystem {
             e.printStackTrace();
             System.out.println("Something went wrong with sleeping threads in the Blinking Subsystem");
         }
-        
     }
 
     /**
@@ -67,24 +75,54 @@ public class BlinkinSubsystem extends Subsystem {
         return isBlinkin;
     }
 
-    public void setBlinkin(boolean blinkin) {
+    /**
+     * Will set the subsystem 'isBlinkin' variable to the value.
+     * @param blinkin Are the LEDs blinking?
+     */
+    public void setIsBlinkin(boolean blinkin) {
         isBlinkin = blinkin;
     }
 
     /**
-     * Will return Colour enum of the current colour. Not recommended to be used if
-     * LEDs are blinking. See isBlinkin()
+     * Will return Colour enum of the current colour. 
+     * Not recommended to be used if LEDs are blinking. 
+     * See isBlinkin()
      */
     public Colour getCurrentLED() {
         return this.currentLED;
     }
 
+    /**
+     * Sets the current LED combo
+     * LEDCombo is an enum in \constants
+     */
     public void setCurrentLEDCombo(LEDCombo ledCombo) {
         this.currentLEDCombo = ledCombo;
     }
 
+    /**
+     * Get the current LEDCombo
+     * @return LEDCombo
+     */
     public LEDCombo getCurrentLEDCombo() {
         return this.currentLEDCombo;
+    }
+
+    /**
+     * Set the current blink command
+     * @param blinkin
+     */
+    public void setCurrentBlinkin(BlinkCommand blinkin) {
+        this.currentBlinkin = blinkin;
+    }
+
+    /**
+     * Get if the subsystem is currently blinking.
+     * If returns false, it is most likely in static red mode
+     * @return boolean (true/false) if currently blinking
+     */
+    public BlinkCommand getCurrentBlinkin() {
+        return this.currentBlinkin;
     }
 
 }

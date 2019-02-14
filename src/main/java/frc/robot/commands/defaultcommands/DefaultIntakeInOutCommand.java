@@ -18,10 +18,8 @@ public class DefaultIntakeInOutCommand extends Command {
         if(!(intakeIn && intakeOut)) { //Precaution: makes sure both aren't pressed at the same time
             if(intakeIn) {
                 c_intakeInOut.activate(true);
-                OI.driverRumble(true);
             } else {
                 c_intakeInOut.activate(false);
-                OI.driverRumble(false);
             }
         }
     }

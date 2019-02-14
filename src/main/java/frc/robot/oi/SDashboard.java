@@ -35,8 +35,7 @@ getVelocityRightEncoder()
 */
 
 public SDashboard() {
-    SmartDashboard.putNumber("Intake Elbow Encoder Position", intakeElbow.getEncoderPosition());
-    SmartDashboard.putBoolean("Intake Activated", intakeInOut.getActivated());
+    SmartDashboard.putNumber("Left Drive: ", drivesys.getRawLeftSpeed());
 }
 
 // ELEVATOR

@@ -6,6 +6,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.commands.defaultcommands.DefaultIntakeInOutCommand;
 import frc.robot.constants.RobotMap;
+import frc.robot.oi.OI;
 
 public class IntakeInOutSubsystem extends Subsystem {
 
@@ -28,6 +29,7 @@ public class IntakeInOutSubsystem extends Subsystem {
         this.activated = activate;
         while(activated) {
             this.setEncoderPosition(this.getEncoderPosition() + 1);
+            OI.driverRumble(true);
         }
     }
 
