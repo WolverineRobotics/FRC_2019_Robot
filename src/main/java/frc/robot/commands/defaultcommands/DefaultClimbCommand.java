@@ -16,15 +16,29 @@ public class DefaultClimbCommand extends Command {
 
     @Override
     public void execute() {
-        if(c_climb.getClimbMode()) {
-            double throttle = OI.getDriverThrottle();
-            if(throttle < RobotConst.DRIVE_THORTTLE_TRIGGER_VALUE) {
-                throttle = 0;
+        if(OI.getDriverClimbing()) { //if driver presses Y, activate climb mode.
+            c_climb.setClimbMode(true);
+        }
+        if(OI.getDriverCancel()) { //if driver presses B, disable climb mode.
+            c_climb.setClimbMode(false);
+        }
+        if(c_climb.getClimbMode()) { //if climb subsystem is in climb mode,
+            double throttle = OI.getDriverThrottle(); //get throttle (LEFT STICK Y)
+            if(throttle < RobotConst.DRIVE_THORTTLE_TRIGGER_VALUE) { //if is not within trigger value
+                throttle = 0; //do not move
             }
-            c_climb.setWheelVelocity(throttle);
+            c_climb.setWheelVelocity(throttle); //set the climb wheel to driver throttle
+            if(OI.getDriverClimbSpeedUp()) {
+                c_climb.setWheelVelocity(0.2); //TODO adjust velocity value to liking
+            } else if(OI.getDriverClimbSpeedDown()) {
+                c_climb.setWheelVelocity(-0.2); //TODO adjust velocity value to liking
+            }
         }
     }
 
+    /**
+     * Default Commands will never finish.
+     */
     @Override
     public boolean isFinished() {
         return false;

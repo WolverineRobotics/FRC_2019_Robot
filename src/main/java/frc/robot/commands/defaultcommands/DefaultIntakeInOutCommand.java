@@ -22,12 +22,6 @@ public class DefaultIntakeInOutCommand extends Command {
                 c_intakeInOut.out(true);
             }
         }
-        if(!intakeIn) { //turns off if not pressed
-            c_intakeInOut.in(false);
-        }
-        if(!intakeOut) { //turns off if not pressed
-            c_intakeInOut.out(false);
-        }
     }
     
     @Override

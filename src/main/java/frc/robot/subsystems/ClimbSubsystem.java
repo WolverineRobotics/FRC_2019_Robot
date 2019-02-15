@@ -36,7 +36,7 @@ public class ClimbSubsystem extends Subsystem {
     //********************************************************************************** 
     // Encoder functions
     //**********************************************************************************
-    public double getClimbPosition() {
+    public int getClimbPosition() {
         return climb.getSelectedSensorPosition(0);
     }
 
@@ -50,10 +50,6 @@ public class ClimbSubsystem extends Subsystem {
 
     public void setClimbPosition(int position) {
         climb.setSelectedSensorPosition(position); //TODO check
-    }
-
-    public double getWheelPosition() {
-        return wheel.getSelectedSensorPosition(0);
     }
 
     public double getWheelVelocity() {

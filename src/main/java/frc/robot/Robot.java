@@ -13,6 +13,7 @@ import frc.robot.subsystems.TechnicalSubsystem;
 import frc.robot.subsystems.VisionSubsystem;
 
 public class Robot extends TimedRobot {
+	private static BlinkinSubsystem m_blinkin = new BlinkinSubsystem();
 	private static DriveSubsystem m_drive = new DriveSubsystem();
 	private static ElevatorSubsystem m_elevator = new ElevatorSubsystem();
 	private static IntakeElbowSubsystem m_intakeElbow = new IntakeElbowSubsystem();
@@ -20,13 +21,16 @@ public class Robot extends TimedRobot {
 	private static TechnicalSubsystem m_technical = new TechnicalSubsystem();
 	private static VisionSubsystem m_vision = new VisionSubsystem();
 	private static ClimbSubsystem m_climb = new ClimbSubsystem();
-	private static BlinkinSubsystem m_blinkin = new BlinkinSubsystem();
 
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 	}
 
+	public static BlinkinSubsystem getBlinkinSubsystem(){
+		return m_blinkin;
+	}
+	
 	public static DriveSubsystem getDriveSubsystem() {
 		return m_drive;
 	}
@@ -45,10 +49,6 @@ public class Robot extends TimedRobot {
 
 	public static ClimbSubsystem getClimbSubsystem(){
 		return m_climb;
-	}
-
-	public static BlinkinSubsystem getBlinkinSubsystem(){
-		return m_blinkin;
 	}
 
 	public static IntakeElbowSubsystem getIntakeElbowSubsystem() {

@@ -10,7 +10,8 @@ public class PID  {
 	protected double prevError;
 	private double sumError;
 	protected double finishedRange;
-	private double maxOutput;
+    private double maxOutput;
+    private double minOutput;
 	private int minCycleCount;
 	private int currentCycleCount;
 	private boolean firstCycle;
@@ -69,6 +70,16 @@ public class PID  {
             this.maxOutput = 1.0;
         } else {
             this.maxOutput = max;
+        }
+    }
+
+    public void setMinOutput(double min) { //khalil, i did this. -jeremy
+        if(min > 0.0) {
+            this.minOutput = 0.0;
+        } else if(min < -1.0) {
+            this.minOutput = -1.0;
+        } else {
+            this.minOutput = min;
         }
     }
     

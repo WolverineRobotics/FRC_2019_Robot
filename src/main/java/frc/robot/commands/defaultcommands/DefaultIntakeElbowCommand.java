@@ -20,8 +20,8 @@ public class DefaultIntakeElbowCommand extends Command{
         double tilt = OI.getOperatorIntakeTilt();
         double currentEncoderCount = c_intakeElbow.getEncoderPosition();
         double anticipate = currentEncoderCount + tilt;
-        if(!(anticipate < RobotConst.INTAKE_ENCODER_MINIMUM && anticipate > RobotConst.INTAKE_ENCODER_MAXIMUM)) { //checks if anticipated rotate will exceed limits
-            c_intakeElbow.setEncoderPosition((int) Math.floor(anticipate)); //0 is timeoutMs - time out in milliseconds?? idk help me i wanna die
+        if(!(anticipate < RobotConst.INTAKE_ELBOW_ENCODER_MINIMUM && anticipate > RobotConst.INTAKE_ELBOW_ENCODER_MAXIMUM)) { //checks if anticipated rotate will exceed limits
+            c_intakeElbow.setVelocity(anticipate);
         }
     }
 

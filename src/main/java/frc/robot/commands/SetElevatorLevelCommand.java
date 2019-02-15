@@ -18,7 +18,7 @@ public class SetElevatorLevelCommand extends Command {
     public SetElevatorLevelCommand(GamePiece gamePiece, int level) {
         requires(c_elevator);
         pid = new PID(RobotPIDValues.ELEVATOR_POSITION_KP, RobotPIDValues.ELEVATOR_POSITION_KI, RobotPIDValues.ELEVATOR_POSITION_KD, 0);
-        desiredEncoderPos = gamePiece.getEncoderPos(level);
+        desiredEncoderPos = gamePiece.getElevatorEncoderPos(level);
         pid.setDesiredValue(desiredEncoderPos);
         isDone = false;
     }

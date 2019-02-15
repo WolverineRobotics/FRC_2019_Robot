@@ -26,7 +26,7 @@ import frc.robot.constants.RobotConst;
  * Operator Controller
  * 	Sticks:
  * 		Left Stick Y-axis  	= Elevator Motor Speed (Manual Control)
- * 		Right Stick Y-axis	= Intake Tilt Motor Speed (Manual Control)
+ * 		Right Stick Y-axis	= Intake Elbow Motor Speed (Manual Control)
  * 		Right Stick X    	=
  * 		Right Stick Y    	= 
  * 		Right Stick Press  	= 

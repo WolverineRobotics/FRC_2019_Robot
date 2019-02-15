@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
@@ -23,7 +24,6 @@ public class IntakeElbowSubsystem extends Subsystem {
     //********************************************************************************** 
     // Encoder functions
     //**********************************************************************************
-    
     public int getEncoderPosition(){
         return tilt.getSelectedSensorPosition(0);
     }
@@ -33,6 +33,9 @@ public class IntakeElbowSubsystem extends Subsystem {
     }
 
     //********************************************************************************** 
-    // Fixed functions
+    // Speed controller functions
     //**********************************************************************************
+    public void setVelocity(double velocity) {
+        tilt.set(ControlMode.Velocity, velocity); //TODO can anyone confirm this?
+    }
 }

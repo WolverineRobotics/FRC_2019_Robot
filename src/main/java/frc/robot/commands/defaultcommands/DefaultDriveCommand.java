@@ -75,6 +75,9 @@ public class DefaultDriveCommand extends Command {
         c_drive.setRawSpeeds(leftSpeed, rightSpeed);
     }
 
+    /**
+     * Default commands will never finish.
+     */
     @Override
     protected boolean isFinished() {
         return false;

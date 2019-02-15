@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
@@ -31,7 +32,7 @@ public class IntakeInOutSubsystem extends Subsystem {
     public void in(boolean activate) { //TODO untested
         this.activated = activate;
         while(activated) {
-            this.setEncoderPosition(this.getEncoderPosition() + 1);
+            this.setVelocity(0.5);
             OI.driverRumble(true);
         }
         OI.driverRumble(false);
@@ -43,14 +44,14 @@ public class IntakeInOutSubsystem extends Subsystem {
     public void out(boolean activate) { //TODO don't think this will work
         this.activated = activate;
         while(activated) {
-            this.setEncoderPosition(this.getEncoderPosition() - 1);
+            this.setVelocity(-0.5);
             OI.driverRumble(true);
         }
         OI.driverRumble(false);
     }
 
     /**
-     * Will return the encoder position (0 on a primary closed loop)
+     * Will return the encoder position (0 on a primary closed loop pid index)
      * @return
      * Encoder Position - 
      */
@@ -58,20 +59,30 @@ public class IntakeInOutSubsystem extends Subsystem {
         return intake.getSelectedSensorPosition(0);
     }
 
-    /**
-     * Will set the encoder position. Parameter value (# to #)
-     * @param position
-     * Encoder position value from # - # --> TBD
-     */
     public void setEncoderPosition(int position) {
         intake.setSelectedSensorPosition(position);
     }
 
+    public void setVelocity(double velocity) {
+        intake.set(ControlMode.Velocity, velocity);
+    }
+
     /**
-     * Returns the current game piece.
+     * Returns the current game piece through sensors
      * @return currentGamePiece
      */
     public GamePiece getCurrentGamePiece() {
+        //TODO enter sensor functions here
+        /**
+         * Pseudo code:
+         * if(HATCH sensor detects something) {
+         *  currentGamePiece = GamePiece.HATCH;
+         * } else if(CARGO sensor detects something) {
+         *  currentGamePiece = GamePiece.CARGO;
+         * } else {
+         *  currentGamePiece = GamePiece.NONE;
+         * }
+         */
         return currentGamePiece;
     }
 }
