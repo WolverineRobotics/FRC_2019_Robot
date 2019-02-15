@@ -6,6 +6,7 @@ import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.commands.defaultcommands.DefaultDriveCommand;
@@ -21,6 +22,9 @@ public class DriveSubsystem extends Subsystem {
     private CANEncoder leftEncoder2 = new CANEncoder(leftMotor2);
     private CANEncoder rightEncoder1 = new CANEncoder(rightMotor1);
     private CANEncoder rightEncoder2 = new CANEncoder(rightMotor2);
+
+    private Encoder leftEncoder = new Encoder(RobotMap.DRIVE_LEFT_ENCODER_A, RobotMap.DRIVE_LEFT_ENCODER_B);
+    private Encoder rightEncoder = new Encoder(RobotMap.DRIVE_RIGHT_ENCODER_A, RobotMap.DRIVE_RIGHT_ENCODER_B);
 
     private AHRS gyro = new AHRS(SPI.Port.kMXP);
     private PigeonIMU pigeon = new PigeonIMU(RobotMap.DRIVE_PIGEON_IMU_ADDRESS);

@@ -24,8 +24,14 @@ public class ElevatorSubsystem extends Subsystem {
     //********************************************************************************** 
     // Motor functions
     //********************************************************************************** 
-    public void setElevatorSpeed(double speed){
-        if(getEncoderRawPosition() < RobotConst.ELEVATOR_MAX_HEIGHT) {
+    public void setElevatorRawSpeed(double speed){
+        if(speed > 1) {
+            speed = 1;
+        }
+        if(speed < -1) {
+            speed = -1;
+        }
+        if(getEncoderPosition() < RobotConst.ELEVATOR_MAX_HEIGHT) {
             elevatorMotor1.set(speed);
             elevatorMotor2.set(speed);
         } else {
@@ -37,7 +43,7 @@ public class ElevatorSubsystem extends Subsystem {
     //********************************************************************************** 
     // Encoder functions
     //**********************************************************************************
-    public double getEncoderRawPosition(){
+    public double getEncoderPosition(){
         return elevatorMotor1.getEncoder().getPosition();
     }
 

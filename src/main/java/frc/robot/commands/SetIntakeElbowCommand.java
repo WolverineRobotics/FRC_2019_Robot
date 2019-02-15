@@ -39,7 +39,7 @@ public class SetIntakeElbowCommand extends Command{
     @Override
     public void execute(){
         double power = pid.calcPID(c_intakeElbow.getEncoderPosition());
-        c_intakeElbow.setVelocity(power);
+        c_intakeElbow.setRawSpeed(power);
 
         //TODO can anyone confirm this?
         int currentPos = c_intakeElbow.getEncoderPosition();

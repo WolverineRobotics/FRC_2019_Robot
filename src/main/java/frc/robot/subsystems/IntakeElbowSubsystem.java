@@ -35,7 +35,13 @@ public class IntakeElbowSubsystem extends Subsystem {
     //********************************************************************************** 
     // Speed controller functions
     //**********************************************************************************
-    public void setVelocity(double velocity) {
-        tilt.set(ControlMode.Velocity, velocity); //TODO can anyone confirm this?
+    public void setRawSpeed(double percent) {
+        if(percent > 1) {
+            percent = 1;
+        }
+        if(percent < -1) {
+            percent = -1;
+        }
+        tilt.set(ControlMode.PercentOutput, percent);
     }
 }

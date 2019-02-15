@@ -2,12 +2,12 @@ package frc.robot.commands.autonomouscommands;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class AutoSetLiftCommand extends Command {
+public class AutoSetElevatorCommand extends Command {
     
     private boolean isDone;
 
-    public AutoSetLiftCommand() {
-
+    public AutoSetElevatorCommand() {
+        
     }
 
     @Override

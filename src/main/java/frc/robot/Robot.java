@@ -3,6 +3,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import frc.robot.commands.commandgroups.AutonomousCommandGroup;
 import frc.robot.subsystems.BlinkinSubsystem;
 import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
@@ -21,6 +22,16 @@ public class Robot extends TimedRobot {
 	private static TechnicalSubsystem m_technical = new TechnicalSubsystem();
 	private static VisionSubsystem m_vision = new VisionSubsystem();
 	private static ClimbSubsystem m_climb = new ClimbSubsystem();
+
+	@Override
+	public void autonomousInit() {
+		Scheduler.getInstance().add(new AutonomousCommandGroup());
+	}
+
+	@Override
+	public void autonomousPeriodic() {
+		Scheduler.getInstance().run();
+	}
 
 	@Override
 	public void teleopPeriodic() {

@@ -30,9 +30,9 @@ public class SetElevatorLevelCommand extends Command {
 
     @Override
     public void execute() {
-        double currentPos = c_elevator.getEncoderRawPosition();
+        double currentPos = c_elevator.getEncoderPosition();
         speed = pid.calcPID(currentPos);
-        c_elevator.setElevatorSpeed(speed);
+        c_elevator.setElevatorRawSpeed(speed);
         if(currentPos == desiredEncoderPos) { //TODO: see if position is NEAR (not completely equal)
             isDone = true;
         }

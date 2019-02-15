@@ -2,6 +2,7 @@ package frc.robot.oi;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
+import frc.robot.constants.GamePiece;
 import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
@@ -35,11 +36,21 @@ getVelocityRightEncoder()
 */
 
 public SDashboard() {
-    SmartDashboard.putNumber("Left Drive: ", drivesys.getRawLeftSpeed());
-    SmartDashboard.putNumber("Right Drive: ", drivesys.getRawRightSpeed());
+    GamePiece hatch = GamePiece.HATCH;
+    GamePiece cargo = GamePiece.CARGO;
 
-    SmartDashboard.putNumber("Intake Elbow Position: ", intakeElbow.getEncoderPosition());
-}
+    SmartDashboard.putNumber("Current Elevator Pos", elevsys.getEncoderPosition());
+
+    SmartDashboard.putNumber("Hatch Level 0:", hatch.getElevatorEncoderPos(0));
+    SmartDashboard.putNumber("Hatch Level 1:", hatch.getElevatorEncoderPos(1));
+    SmartDashboard.putNumber("Hatch Level 2:", hatch.getElevatorEncoderPos(2));
+      
+    SmartDashboard.putNumber("Cargo Level 0:", cargo.getElevatorEncoderPos(0));
+    SmartDashboard.putNumber("Cargo Level 1:", cargo.getElevatorEncoderPos(1));
+    SmartDashboard.putNumber("Cargo Level 2:", cargo.getElevatorEncoderPos(2));
+
+    SmartDashboard.putNumber("Current Intake Elbow Pos", intakeElbow.getEncoderPosition());
+    }
 
 // ELEVATOR
 

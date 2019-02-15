@@ -44,8 +44,8 @@ public class ClimbSubsystem extends Subsystem {
         return climb.getSelectedSensorVelocity(0);
     }
 
-    public void setClimbVelocity(double velocity) {
-        climb.set(ControlMode.Velocity, velocity); //TODO check
+    public void setClimbRawSpeed(double percent) {
+        climb.set(ControlMode.PercentOutput, percent); //TODO check
     }
 
     public void setClimbPosition(int position) {
@@ -56,8 +56,8 @@ public class ClimbSubsystem extends Subsystem {
         return wheel.getSelectedSensorVelocity(0);
     }
 
-    public void setWheelVelocity(double velocity) {
-        wheel.set(ControlMode.Velocity, velocity); //TODO check
+    public void setWheelRawSpeed(double percent) {
+        wheel.set(ControlMode.PercentOutput, percent); //TODO check
     }
 
     public void setWheelPosition(int position) {

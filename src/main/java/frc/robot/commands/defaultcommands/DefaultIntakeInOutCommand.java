@@ -13,17 +13,20 @@ public class DefaultIntakeInOutCommand extends Command {
     }
     @Override
     public void execute() {
-        boolean intakeIn = OI.getOperatorIntakeIn();
-        boolean intakeOut = OI.getOperatorIntakeOut();
+        boolean intakeIn = OI.getOperatorIntakeIn(); //if operator is pressing left trigger
+        boolean intakeOut = OI.getOperatorIntakeOut(); //if operator is perssing right trigger
         if(!(intakeIn && intakeOut)) { //Precaution: makes sure both aren't pressed at the same time
             if(intakeIn) {
-                c_intakeInOut.in(true);
-            } else {
-                c_intakeInOut.out(true);
+                c_intakeInOut.cargoIntakeIn(true);
+            } else if(intakeOut) {
+                c_intakeInOut.cargoIntakeOut(true);
             }
         }
     }
     
+    /**
+     * Default commands don't finish
+     */
     @Override
     public boolean isFinished() {
         return false;

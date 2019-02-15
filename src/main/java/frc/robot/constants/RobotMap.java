@@ -15,6 +15,12 @@ public class RobotMap {
     public static final int DRIVE_PISTON_RIGHT_SHIFT_REVERSE_ADDRESS = 3;
     
     public static final int DRIVE_PIGEON_IMU_ADDRESS = 10;
+
+    public static final int DRIVE_LEFT_ENCODER_A = 0;
+    public static final int DRIVE_LEFT_ENCODER_B = 0;
+
+    public static final int DRIVE_RIGHT_ENCODER_A = 0;
+    public static final int DRIVE_RIGHT_ENCODER_B = 0;
     
     //********************************************************************************** 
     // Elevator Subsystem
@@ -70,5 +76,7 @@ public class RobotMap {
     //********************************************************************************** 
     // Vision Subsystem
     //**********************************************************************************
-    public static final int LED_RING = 10;
+    public static final int VISION_LED_RING = 10;
+    public static final int VISION_I2C_DEVICE_ADDRESS = 0; //TBD
+    public static final int VISION_I2C_REGISTER_ADDRESS = 0; //TBD
 }

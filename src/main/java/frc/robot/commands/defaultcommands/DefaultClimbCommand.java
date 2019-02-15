@@ -27,11 +27,11 @@ public class DefaultClimbCommand extends Command {
             if(throttle < RobotConst.DRIVE_THORTTLE_TRIGGER_VALUE) { //if is not within trigger value
                 throttle = 0; //do not move
             }
-            c_climb.setWheelVelocity(throttle); //set the climb wheel to driver throttle
-            if(OI.getDriverClimbSpeedUp()) {
-                c_climb.setWheelVelocity(0.2); //TODO adjust velocity value to liking
-            } else if(OI.getDriverClimbSpeedDown()) {
-                c_climb.setWheelVelocity(-0.2); //TODO adjust velocity value to liking
+            c_climb.setWheelRawSpeed(throttle); //set the climb wheel to driver throttle
+            if(OI.getDriverClimbSpeedUp() > 0.2) {
+                c_climb.setClimbRawSpeed(0.2); //TODO adjust velocity value to liking
+            } else if(OI.getDriverClimbSpeedDown() > 0.2) {
+                c_climb.setClimbRawSpeed(-0.2); //TODO adjust velocity value to liking
             }
         }
     }

@@ -32,13 +32,15 @@ import frc.robot.constants.RobotConst;
  * 		Right Stick Press  	= 
  * 		Left Stick Press 	= 
  * 	Buttons:
- *      A Button            = 
- * 		X Button			= 
+ *      A Button            = 1st Level
+ *      B Button            = 2nd Level
+ *      X Button            = Auto Intake In (ball)
+ * 		Y Button			= 3rd Level
  * 	Bumpers/Triggers:
  * 		Left Trigger 		= Intake in (ball mechanism)
  * 		Right Trigger		= Intake out (ball mechanism)
- * 		Left Bumper			= Eject hatch (automatic)		
- * 		Right Bumper		= Grab hatch (automatic)
+ * 		Left Bumper			= Grab hatch (automatic)		
+ * 		Right Bumper		= Eject hatch (automatic)
  *
  */
 
@@ -47,7 +49,7 @@ public class OI {
     private static Joystick operator = new Joystick(JoystickMap.OPERATOR_PORT);
 
     //********************************************************************************** 
-    // Driver control constants
+    // Driver control
     //**********************************************************************************
     public static double getDriverTurn() { //returns -1 to 1 on left stick X axis
         return driver.getRawAxis(JoystickMap.RIGHT_STICK_X);
@@ -67,11 +69,25 @@ public class OI {
     public static boolean getDriverClimbing() { //returns true if Y was released
         return driver.getRawButtonReleased(JoystickMap.BUTTON_Y);
     }
-    public static boolean getDriverClimbSpeedDown() { //returns true if LEFT TRIGGER was pushed
-        return driver.getRawButtonPressed(JoystickMap.LEFT_TRIGGER);
+    public static double getDriverClimbSpeedDown() { //returns LEFT TRIGGER value
+        return driver.getRawAxis(JoystickMap.LEFT_TRIGGER);
     }
-    public static boolean getDriverClimbSpeedUp() { //returns true if RIGHT TRIGGER was pushed
-        return driver.getRawButtonPressed(JoystickMap.RIGHT_TRIGGER);
+    public static double getDriverClimbSpeedUp() { //returns RIGHT TRIGGER value
+        return driver.getRawAxis(JoystickMap.RIGHT_TRIGGER);
+    }
+
+    public static void driverRumble(boolean rumble) {
+        if(rumble) {
+            driver.setRumble(RumbleType.kLeftRumble, RobotConst.RUMBLE_INTENSITY);
+            driver.setRumble(RumbleType.kRightRumble, RobotConst.RUMBLE_INTENSITY);
+        } else {
+            driver.setRumble(RumbleType.kLeftRumble, 0);
+            driver.setRumble(RumbleType.kRightRumble, 0);
+        }
+    }
+
+    public static boolean getDriverTestButton() { //returns true if START was released
+        return driver.getRawButtonReleased(JoystickMap.BUTTON_START);
     }
 
     //********************************************************************************** 
@@ -111,17 +127,6 @@ public class OI {
 
     public static boolean getOperatorElevatorLevel3() { //returns true if BUTTON Y is released
         return operator.getRawButtonReleased(JoystickMap.BUTTON_Y);
-    }
-
-
-    public static void driverRumble(boolean rumble) {
-        if(rumble) {
-            driver.setRumble(RumbleType.kLeftRumble, RobotConst.RUMBLE_INTENSITY);
-            driver.setRumble(RumbleType.kRightRumble, RobotConst.RUMBLE_INTENSITY);
-        } else {
-            driver.setRumble(RumbleType.kLeftRumble, 0);
-            driver.setRumble(RumbleType.kRightRumble, 0);
-        }
     }
 }
 
