@@ -20,4 +20,18 @@ public class RobotPIDValues{
     public static final int ELEVATOR_POSITION_KP = 0;
     public static final int ELEVATOR_POSITION_KI = 0;
     public static final int ELEVATOR_POSITION_KD = 0;
+
+    //********************************************************************************** 
+    // Intake Tilt PID
+    //**********************************************************************************
+    public static final int INTAKE_TILT_POSITION_KP = 0;
+    public static final int INTAKE_TILT_POSITION_KI = 0;
+    public static final int INTAKE_TILT_POSITION_KD = 0;
+
+    //********************************************************************************** 
+    // CLimb PID
+    //**********************************************************************************
+    public static final int CLIMB_POSITION_KP = 0;
+    public static final int CLIMB_POSITION_KI = 0;
+    public static final int CLIMB_POSITION_KD = 0;
 }

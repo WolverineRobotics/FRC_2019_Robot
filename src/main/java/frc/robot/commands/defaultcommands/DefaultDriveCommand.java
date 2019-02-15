@@ -2,6 +2,7 @@ package frc.robot.commands.defaultcommands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.constants.RobotConst;
 import frc.robot.oi.OI;
 import frc.robot.subsystems.DriveSubsystem;
 
@@ -18,10 +19,6 @@ public class DefaultDriveCommand extends Command {
         double turn = OI.getDriverTurn();
         double throttle = OI.getDriverThrottle();
 
-        //percentage stick pushed until changes start
-        final double turnTriggerValue = 0.2;
-        final double throttleTriggerValue = 0.1;
-
         //misc values
         double leftSpeed = 0;
         double rightSpeed = 0;
@@ -29,7 +26,7 @@ public class DefaultDriveCommand extends Command {
         boolean stopped = false;
 
         //trigger for throttle
-        if(Math.abs(throttle) < throttleTriggerValue){
+        if(Math.abs(throttle) < RobotConst.DRIVE_THORTTLE_TRIGGER_VALUE){
             throttle = 0;
             stopped = true;
         } else {
@@ -38,7 +35,7 @@ public class DefaultDriveCommand extends Command {
         }
         
         //trigger for turning
-        if(Math.abs(turn) < turnTriggerValue){
+        if(Math.abs(turn) < RobotConst.DRIVE_TURN_TRIGGER_VALUE){
             turn = 0;
             stopped = true;
         } else {
@@ -48,7 +45,7 @@ public class DefaultDriveCommand extends Command {
 
         //set speeds
         leftSpeed = throttle + turn;
-        rightSpeed = (-1 * throttle) - turn;
+        rightSpeed = -throttle - turn;
 
         //max limit
         if(leftSpeed > 1){

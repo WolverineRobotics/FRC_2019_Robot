@@ -17,10 +17,16 @@ public class DefaultIntakeInOutCommand extends Command {
         boolean intakeOut = OI.getOperatorIntakeOut();
         if(!(intakeIn && intakeOut)) { //Precaution: makes sure both aren't pressed at the same time
             if(intakeIn) {
-                c_intakeInOut.activate(true);
+                c_intakeInOut.in(true);
             } else {
-                c_intakeInOut.activate(false);
+                c_intakeInOut.out(true);
             }
+        }
+        if(!intakeIn) { //turns off if not pressed
+            c_intakeInOut.in(false);
+        }
+        if(!intakeOut) { //turns off if not pressed
+            c_intakeInOut.out(false);
         }
     }
     

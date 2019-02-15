@@ -1,4 +1,4 @@
-package frc.robot.constants;
+package frc.robot.constants.blinkin;
 
 public enum Colour {
 

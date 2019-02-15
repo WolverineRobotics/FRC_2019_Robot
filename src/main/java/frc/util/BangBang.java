@@ -7,7 +7,6 @@ public class BangBang{
     
     private boolean aboveSpeed = false;
     
-    
     public BangBang(double onOutput, double offOutput) {
         this.setMaxOutput(onOutput);
         this.setMinOutput(offOutput);

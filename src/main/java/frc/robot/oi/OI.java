@@ -64,7 +64,7 @@ public class OI {
     public static boolean getDriverRequestionHatchLED() { //returns true if X was released
         return driver.getRawButtonReleased(JoystickMap.BUTTON_X);
     }
-    public static boolean getDriverClimbingLED() { //returns true if Y was released
+    public static boolean getDriverClimbing() { //returns true if Y was released
         return driver.getRawButtonReleased(JoystickMap.BUTTON_Y);
     }
     public static boolean getDriverClimbSpeedDown() { //returns true if LEFT TRIGGER was pushed
@@ -100,6 +100,19 @@ public class OI {
     public static boolean getOperatorGrabHatch() { //returns true if RIGHT BUMPER is released
         return operator.getRawButtonReleased(JoystickMap.BUTTON_RIGHT_BUMPER);
     }
+
+    public static boolean getOperatorElevatorBase() { //returns true if BUTTON A is released
+        return operator.getRawButtonReleased(JoystickMap.BUTTON_A);
+    }
+
+    public static boolean getOperatorElevatorLevel2() { //returns true if BUTTON B is released
+        return operator.getRawButtonReleased(JoystickMap.BUTTON_B);
+    }
+
+    public static boolean getOperatorElevatorLevel3() { //returns true if BUTTON Y is released
+        return operator.getRawButtonReleased(JoystickMap.BUTTON_Y);
+    }
+
 
     public static void driverRumble(boolean rumble) {
         if(rumble) {

@@ -4,9 +4,9 @@ import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.commands.BlinkCommand;
 import frc.robot.commands.defaultcommands.DefaultBlinkinCommand;
-import frc.robot.constants.Colour;
-import frc.robot.constants.LEDCombo;
 import frc.robot.constants.RobotMap;
+import frc.robot.constants.blinkin.Colour;
+import frc.robot.constants.blinkin.LEDCombo;
 
 public class BlinkinSubsystem extends Subsystem {
 
@@ -106,23 +106,6 @@ public class BlinkinSubsystem extends Subsystem {
      */
     public LEDCombo getCurrentLEDCombo() {
         return this.currentLEDCombo;
-    }
-
-    /**
-     * Set the current blink command
-     * @param blinkin
-     */
-    public void setCurrentBlinkin(BlinkCommand blinkin) {
-        this.currentBlinkin = blinkin;
-    }
-
-    /**
-     * Get if the subsystem is currently blinking.
-     * If returns false, it is most likely in static red mode
-     * @return boolean (true/false) if currently blinking
-     */
-    public BlinkCommand getCurrentBlinkin() {
-        return this.currentBlinkin;
     }
 
 }

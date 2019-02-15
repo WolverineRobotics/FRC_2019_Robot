@@ -12,14 +12,25 @@ public class ClimbSubsystem extends Subsystem {
     private TalonSRX climb = new TalonSRX(RobotMap.CLIMB_MOTOR_LIFT_ADDRESS);
     private TalonSRX wheel = new TalonSRX(RobotMap.CLIMB_MOTOR_WHEEL_ADDRESS);
 
+    private boolean inClimbMode;
+
     public ClimbSubsystem() {
         climb.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
         wheel.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+        inClimbMode = false;
     }
 
     @Override
     protected void initDefaultCommand() {
         setDefaultCommand(new DefaultClimbCommand());
+    }
+
+    public boolean getClimbMode() {
+        return inClimbMode;
+    }
+
+    public void setClimbMode(boolean climbMode) {
+        inClimbMode = climbMode;
     }
 
     //********************************************************************************** 

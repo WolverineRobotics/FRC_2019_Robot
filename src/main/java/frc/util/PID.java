@@ -122,7 +122,6 @@ public class PID  {
         	}
         	 this.sumError += error; 
         }
-       
         
         iVal = this.kI * this.sumError;
         
@@ -149,7 +148,6 @@ public class PID  {
         	SmartDashboard.putNumber("D out", dVal);
         	SmartDashboard.putNumber("PID OutPut", output);
         }
-        
         return output;
     }
     

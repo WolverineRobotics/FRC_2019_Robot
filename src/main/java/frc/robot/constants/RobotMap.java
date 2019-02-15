@@ -19,14 +19,17 @@ public class RobotMap {
     //********************************************************************************** 
     // Elevator Subsystem
     //**********************************************************************************   
-    public static final int ELEVATOR_MOTOR_MASTER_ADDRESS = 4;
-    public static final int ELEVATOR_MOTOR_SLAVE_ADDRESS  = 5;
+    public static final int ELEVATOR_MOTOR_MASTER_ADDRESS = 6;
+    public static final int ELEVATOR_MOTOR_SLAVE_ADDRESS  = 7;
+
+    public static final int ELEVATOR_UPPER_LIMIT_SWITCH = 0; //TBD
+    public static final int ELEVATOR_LOWER_LIMIT_SWITCH = 1; //TBD
 
     //********************************************************************************** 
     // Intake Subsystem
     //**********************************************************************************
-    public static final int INTAKE_MOTOR_TILT_ADDRESS    = 6;
-	public static final int INTAKE_MOTOR_ROLLERS_ADDRESS = 7;
+    public static final int INTAKE_MOTOR_TILT_ADDRESS    = 8;
+	public static final int INTAKE_MOTOR_ROLLERS_ADDRESS = 4;
 	
 	public static final int INTAKE_PISTON_CLAW_FORWARD_ADDRESS   	 = 4;
 	public static final int INTAKE_PISTON_CLAW_REVERSE_ADDRESS   	 = 5;
@@ -36,14 +39,14 @@ public class RobotMap {
     //********************************************************************************** 
     // Climb Subsystem
     //**********************************************************************************
-    public static final int CLIMB_MOTOR_LIFT_ADDRESS  = 8;
-    public static final int CLIMB_MOTOR_WHEEL_ADDRESS = 9;
+    public static final int CLIMB_MOTOR_LIFT_ADDRESS  = 9;
+    public static final int CLIMB_MOTOR_WHEEL_ADDRESS = 5;
 
     //********************************************************************************** 
     // Technical Subsystem
     //**********************************************************************************
-    public static final int TECHNICAL_PDP_ADDRESS = 10;
-	public static final int TECHNICAL_PCM_ADDRESS = 11;
+    public static final int TECHNICAL_PDP_ADDRESS = 11;
+	public static final int TECHNICAL_PCM_ADDRESS = 12;
 	
 	public static final int TECHNICAL_PDP_LDRIVE_MASTER   = 0;
 	public static final int TECHNICAL_PDP_LDRIVE_SLAVE    = 1;
@@ -63,4 +66,9 @@ public class RobotMap {
     // Blinkin Subsystem
     //**********************************************************************************
     public static final int BLINKIN_PWM_PORT = 0;
+
+    //********************************************************************************** 
+    // Vision Subsystem
+    //**********************************************************************************
+    public static final int LED_RING = 10;
 }
