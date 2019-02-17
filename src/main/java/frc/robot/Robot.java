@@ -11,7 +11,7 @@ import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.IntakeElbowSubsystem;
 import frc.robot.subsystems.IntakeInOutSubsystem;
 import frc.robot.subsystems.TechnicalSubsystem;
-// import frc.robot.subsystems.VisionSubsystem;
+import frc.robot.subsystems.VisionSubsystem;
 
 public class Robot extends TimedRobot {
 	private static BlinkinSubsystem m_blinkin = new BlinkinSubsystem();
@@ -20,7 +20,7 @@ public class Robot extends TimedRobot {
 	private static IntakeElbowSubsystem m_intakeElbow = new IntakeElbowSubsystem();
 	private static IntakeInOutSubsystem m_intakeInOut = new IntakeInOutSubsystem();
 	private static TechnicalSubsystem m_technical = new TechnicalSubsystem();
-	// private static VisionSubsystem m_vision = new VisionSubsystem();
+	private static VisionSubsystem m_vision = new VisionSubsystem();
 	private static ClimbSubsystem m_climb = new ClimbSubsystem();
 
 	@Override
@@ -54,9 +54,9 @@ public class Robot extends TimedRobot {
 		return m_technical;
 	}
 
-	// public static VisionSubsystem getVisionSubsystem(){
-	// 	return m_vision;
-	// }
+	public static VisionSubsystem getVisionSubsystem(){
+		return m_vision;
+	}
 
 	public static ClimbSubsystem getClimbSubsystem(){
 		return m_climb;
