@@ -6,6 +6,8 @@ import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.commands.defaultcommands.DefaultDriveCommand;
@@ -22,8 +24,13 @@ public class DriveSubsystem extends Subsystem {
     private CANEncoder rightEncoder1 = new CANEncoder(rightMotor1);
     private CANEncoder rightEncoder2 = new CANEncoder(rightMotor2);
 
+    private Encoder leftEncoder = new Encoder(RobotMap.DRIVE_LEFT_ENCODER_A, RobotMap.DRIVE_LEFT_ENCODER_B);
+    private Encoder rightEncoder = new Encoder(RobotMap.DRIVE_RIGHT_ENCODER_A, RobotMap.DRIVE_RIGHT_ENCODER_B);
+
     private AHRS gyro = new AHRS(SPI.Port.kMXP);
     private PigeonIMU pigeon = new PigeonIMU(RobotMap.DRIVE_PIGEON_IMU_ADDRESS);
+
+    public DoubleSolenoid shift = new DoubleSolenoid(RobotMap.DRIVE_PISTON_SHIFT_FORWARD_ADDRESS, RobotMap.DRIVE_PISTON_SHIFT_REVERSE_ADDRESS);
 
     @Override
     protected void initDefaultCommand() {
@@ -59,52 +66,26 @@ public class DriveSubsystem extends Subsystem {
     //********************************************************************************** 
     // Encoder functions
     //********************************************************************************** 
-    public double getPositionLeftMasterEncoder() {
-        return leftEncoder1.getPosition();
+    public int getRawLeftEncoder() {
+        return leftEncoder.get();
     }
 
-    public double getPositionLeftSlaveEncoder() {
-        return leftEncoder2.getPosition();
+    public int getRawRightEncoder() {
+        return rightEncoder.get();
     }
 
-    public double getPositionRightMasterEncoder() {
-        return rightEncoder1.getPosition();
-    }
-    
-    public double getPositionRightSlaveEncoder() {
-        return rightEncoder2.getPosition();
+    public void resetLeftEncoder() {
+        leftEncoder.reset();
     }
 
-    public double getPositionLeft() {
-        return (getPositionLeftMasterEncoder() + getPositionLeftSlaveEncoder()) / 2;
+    public void resetRightEncoder() {
+        rightEncoder.reset();
+        
     }
 
-    public double getPositionRight() {
-        return (getPositionRightMasterEncoder() + getPositionRightSlaveEncoder()) / 2;
-    }
-
-    public double getVelocityLeftMasterEncoder() {
-        return leftEncoder1.getVelocity();
-    }
-
-    public double getVelocityLeftSlaveEncoder() {
-        return leftEncoder2.getVelocity();
-    }
-
-    public double getVelocityRightMasterEncoder() {
-        return rightEncoder1.getVelocity();
-    }
-    
-    public double getVelocityRightSlaveEncoder() {
-        return rightEncoder2.getVelocity();
-    }
-
-    public double getVelocityLeftEncoder() {
-        return (getVelocityLeftMasterEncoder() + getVelocityLeftSlaveEncoder()) / 2;
-    }
-
-    public double getVelocityRightEncoder() {
-        return (getVelocityRightMasterEncoder() + getVelocityRightSlaveEncoder()) / 2;
+    public void resetEncoders() {
+        resetLeftEncoder();
+        resetRightEncoder();
     }
 
     //********************************************************************************** 

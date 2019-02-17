@@ -36,7 +36,7 @@ public class ClimbSubsystem extends Subsystem {
     //********************************************************************************** 
     // Encoder functions
     //**********************************************************************************
-    public double getClimbPosition() {
+    public int getClimbPosition() {
         return climb.getSelectedSensorPosition(0);
     }
 
@@ -44,24 +44,20 @@ public class ClimbSubsystem extends Subsystem {
         return climb.getSelectedSensorVelocity(0);
     }
 
-    public void setClimbVelocity(double velocity) {
-        climb.set(ControlMode.Velocity, velocity); //TODO check
+    public void setClimbRawSpeed(double percent) {
+        climb.set(ControlMode.PercentOutput, percent); //TODO check
     }
 
     public void setClimbPosition(int position) {
         climb.setSelectedSensorPosition(position); //TODO check
     }
 
-    public double getWheelPosition() {
-        return wheel.getSelectedSensorPosition(0);
-    }
-
     public double getWheelVelocity() {
         return wheel.getSelectedSensorVelocity(0);
     }
 
-    public void setWheelVelocity(double velocity) {
-        wheel.set(ControlMode.Velocity, velocity); //TODO check
+    public void setWheelRawSpeed(double percent) {
+        wheel.set(ControlMode.PercentOutput, percent); //TODO check
     }
 
     public void setWheelPosition(int position) {

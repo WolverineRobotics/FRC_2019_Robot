@@ -2,7 +2,6 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.commands.BlinkCommand;
 import frc.robot.commands.defaultcommands.DefaultBlinkinCommand;
 import frc.robot.constants.RobotMap;
 import frc.robot.constants.blinkin.Colour;
@@ -15,7 +14,6 @@ public class BlinkinSubsystem extends Subsystem {
     private Colour currentLED = Colour.RED; //Set to RED by default
     private LEDCombo currentLEDCombo;
     private boolean isBlinkin = false;
-    private BlinkCommand currentBlinkin;
 
     /**
      * Will automatically set default colour to RED
