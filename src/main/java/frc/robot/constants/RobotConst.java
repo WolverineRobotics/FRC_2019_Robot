@@ -14,8 +14,9 @@ public class RobotConst{
     // Elevator constants
     //**********************************************************************************
     public static final int ELEVATOR_ENCODER_COUNTS_PER_INCH_HIGH = 1; //TBD
-    public static final int ELEVATOR_ENCODER_COUNTS_PER_INCH_LOW  = 1; //TBD
+    public static final int ELEVATOR_ENCODER_COUNTS_PER_INCH_LOW = 1; //TBD
 
+    public static final int ELEVATOR_SAFE_LEVEL_HEIGHT = 0;
     public static final int ELEVATOR_FIRST_LEVEL_HEIGHT  = 0; //TBD
     public static final int ELEVATOR_SECOND_LEVEL_HEIGHT = 0; //TBD
     public static final int ELEVATOR_THIRD_LEVEL_HEIGHT  = 0; //TBD

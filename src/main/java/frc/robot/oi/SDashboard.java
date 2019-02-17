@@ -39,7 +39,7 @@ public SDashboard() {
     GamePiece hatch = GamePiece.HATCH;
     GamePiece cargo = GamePiece.CARGO;
 
-    SmartDashboard.putNumber("Current Elevator Pos", elevsys.getEncoderPosition());
+    SmartDashboard.putNumber("Current Elevator Pos", elevsys.getEncoderRawCounts());
 
     SmartDashboard.putNumber("Hatch Level 0:", hatch.getElevatorEncoderPos(0));
     SmartDashboard.putNumber("Hatch Level 1:", hatch.getElevatorEncoderPos(1));

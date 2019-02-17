@@ -87,7 +87,7 @@ public class OI {
     }
 
     public static boolean getDriverTestButton() { //returns true if START was released
-        return driver.getRawButtonReleased(JoystickMap.BUTTON_START);
+        return driver.getRawButton(JoystickMap.BUTTON_START);
     }
 
     //********************************************************************************** 

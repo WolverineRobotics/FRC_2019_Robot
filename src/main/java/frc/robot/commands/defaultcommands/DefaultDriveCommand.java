@@ -1,5 +1,6 @@
 package frc.robot.commands.defaultcommands;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.constants.RobotConst;
@@ -8,9 +9,14 @@ import frc.robot.subsystems.DriveSubsystem;
 
 public class DefaultDriveCommand extends Command {
     private DriveSubsystem c_drive = Robot.getDriveSubsystem();
+    private double leftSpeed, rightSpeed;
+
+    
 
     public DefaultDriveCommand() {
         requires(c_drive);
+        leftSpeed = 0;
+        rightSpeed = 0;
     }
 
     @Override
@@ -20,8 +26,6 @@ public class DefaultDriveCommand extends Command {
         double throttle = OI.getDriverThrottle();
 
         //misc values
-        double leftSpeed = 0;
-        double rightSpeed = 0;
         double slowDownSpeed = 0.5;
         boolean stopped = false;
 
@@ -44,8 +48,13 @@ public class DefaultDriveCommand extends Command {
         }
 
         //set speeds
-        leftSpeed = throttle + turn;
-        rightSpeed = -throttle - turn;
+        if (stopped == true) {
+            leftSpeed *= slowDownSpeed;
+            rightSpeed *= slowDownSpeed;
+        } else {
+            leftSpeed = throttle - turn;
+            rightSpeed = throttle + turn;
+        }
 
         //max limit
         if(leftSpeed > 1){
@@ -63,24 +72,26 @@ public class DefaultDriveCommand extends Command {
         }
 
         //min limit
-        if(rightSpeed < -1) {
+        if (rightSpeed < -1) {
             rightSpeed = -1;
         }
+        
+        c_drive.setRawSpeeds(leftSpeed, -rightSpeed);
 
-        //Slow to stop
-        if(stopped){
-            leftSpeed *= slowDownSpeed;
-            rightSpeed *= slowDownSpeed;
+        if (OI.getDriverTestButton()) {
+            c_drive.shift.set(Value.kForward);
+        } else {
+            c_drive.shift.set(Value.kReverse);
         }
-        c_drive.setRawSpeeds(leftSpeed, rightSpeed);
     }
 
-    /**
-     * Default commands will never finish.
-     */
     @Override
     protected boolean isFinished() {
         return false;
     }
-    
+
+    @Override
+    protected void interrupted() {
+        c_drive.setRawSpeeds(0, 0);
+    }
 }

@@ -23,14 +23,15 @@ public enum GamePiece {
     }
 
     public int getElevatorEncoderPos(int level) {
-        if(level == 0) {
+        switch (level) {
+        case 1:
             return elevatorEncoderPosLvl_1;
-        } else if(level == 1) {
+        case 2:
             return elevatorEncoderPosLvl_2;
-        } else if(level == 2) {
+        case 3:
             return elevatorEncoderPosLvl_3;
-        } else {
-            return 0; //TODO determine safe default encoder value
+        default:
+            return RobotConst.ELEVATOR_SAFE_LEVEL_HEIGHT;
         }
     }
 
