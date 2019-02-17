@@ -7,10 +7,12 @@ import frc.robot.constants.RobotMap;
 
 public class VisionSubsystem extends Subsystem {
 
-    private I2C i2c; //connection to ARDUINO
+    private PixyI2C pixyCam;
+
+    private PixyPacket[] packet1 = new PixyPacket[7];
 
     public VisionSubsystem() {
-        i2c = new I2C(Port.kOnboard, RobotMap.VISION_I2C_DEVICE_ADDRESS);
+        pixyCam = new PixyI2C(Port.kOnboard, RobotMap.VISION_I2C_DEVICE_ADDRESS);
     }
 
     @Override
@@ -18,14 +20,41 @@ public class VisionSubsystem extends Subsystem {
 
     }
 
-    //delete later
-    public void testBlink(String command) {
-        char[] cArray = command.toCharArray();
-        byte[] data = new byte[cArray.length];
-        for(int i = 0; i < cArray.length; i++) {
-            data[i] = (byte) cArray[i];
+    class PixyPacket {
+        int x;
+        int y;
+        int width;
+        int height;
+        int angle;
+    }
+
+    class PixyException extends Exception {
+        public PixyException(String message) {
+            super(message);
         }
-        i2c.transaction(data, data.length, null, 0); //will send byte[] data, will tell that the length of the byte, and will receive null and will receive bytes of size 0.
+    }
+
+    //delete later
+    public void testBlink2() {
+        for(int i = 0; i < packet1.length; i++) { //clears packet1
+            packet1[i] = null;
+        }
+        for (int i = 1; i < 8; i++) {
+			try {
+				packet1[i - 1] = pixyCam.readPacket(i);
+			} catch (PixyException e) {
+				System.out.println("gearPixy Error: " + i + "exception");
+			}
+			if (packet1[i - 1] == null) {
+				System.out.println("gearPixy Error: " + i + "True");
+				continue;
+			}
+			System.out.println("gearPixy X Value: " + i + packet1[i - 1].x);
+			System.out.println("gearPixy Y Value: " + i + packet1[i - 1].y);
+			System.out.println("gearPixy Width Value: " + i + packet1[i - 1].width);
+			System.out.println("gearPixy Height Value: " + i + packet1[i - 1].height);
+			System.out.println("gearPixy Error: " + i + "False");
+		}
     }
     
 }

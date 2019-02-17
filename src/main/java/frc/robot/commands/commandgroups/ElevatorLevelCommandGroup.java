@@ -25,7 +25,7 @@ public class ElevatorLevelCommandGroup extends CommandGroup {
         }
         int level = 0;
         if(gamePiece != GamePiece.NONE || gamePiece != null) {        
-            if(OI.getOperatorElevatorBase()) {
+            if(OI.getOperatorElevatorLevel1()) {
                 level = gamePiece.getElevatorEncoderPos(0);
             } else if (OI.getOperatorElevatorLevel2()) {
                 level = gamePiece.getElevatorEncoderPos(1);

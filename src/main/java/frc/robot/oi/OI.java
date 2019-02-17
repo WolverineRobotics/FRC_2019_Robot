@@ -117,7 +117,8 @@ public class OI {
         return operator.getRawButtonReleased(JoystickMap.BUTTON_RIGHT_BUMPER);
     }
 
-    public static boolean getOperatorElevatorBase() { //returns true if BUTTON A is released
+
+    public static boolean getOperatorElevatorLevel1() { //returns true if BUTTON A is released
         return operator.getRawButtonReleased(JoystickMap.BUTTON_A);
     }
 

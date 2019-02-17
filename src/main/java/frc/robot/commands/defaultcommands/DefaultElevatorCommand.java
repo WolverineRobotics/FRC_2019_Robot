@@ -22,9 +22,9 @@ public class DefaultElevatorCommand extends Command {
         }
         
         //default (manual) elevator control = OPERATOR LEFT STICK Y
-        c_elevator.setElevatorSpeed(elevatorSpeed);
+        c_elevator.setElevatorRawSpeed(elevatorSpeed);
         
-        if(OI.getOperatorElevatorBase()) { //if operator presses A, (lowest elevator level)
+        if(OI.getOperatorElevatorLevel1()) { //if operator presses A, (lowest elevator level)
             new ElevatorLevelCommandGroup();
         } else if(OI.getOperatorElevatorLevel2()) { //if operator presses B, (middle elevator level)
             new ElevatorLevelCommandGroup();
