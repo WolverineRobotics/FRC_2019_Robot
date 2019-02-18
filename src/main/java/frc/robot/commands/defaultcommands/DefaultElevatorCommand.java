@@ -18,6 +18,9 @@ public class DefaultElevatorCommand extends Command {
     protected void execute() {
         double elevatorSpeed = OI.getOperatorElevatorSpeed();
         
+        if(elevatorSpeed < RobotConst.ELEVATOR_LEFT_STICK_Y_TRIGGER_VALUE) { //if operator does't trigger stick enough,
+            elevatorSpeed = 0;
+        }
         //default (manual) elevator control = OPERATOR LEFT STICK Y
         c_elevator.setElevatorRawSpeed(elevatorSpeed);
         

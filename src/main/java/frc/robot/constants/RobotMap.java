@@ -31,10 +31,10 @@ public class RobotMap {
     //********************************************************************************** 
     // Drive Subsystem
     //**********************************************************************************
-    public static final int DRIVE_LEFT_MOTOR_MASTER_ADDRESS  = 0;
-    public static final int DRIVE_LEFT_MOTOR_SLAVE_ADDRESS   = 1;
-    public static final int DRIVE_RIGHT_MOTOR_MASTER_ADDRESS = 2;
-    public static final int DRIVE_RIGHT_MOTOR_SLAVE_ADDRESS  = 3;
+    public static final int DRIVE_LEFT_MOTOR_MASTER_ADDRESS  = 1;
+    public static final int DRIVE_LEFT_MOTOR_SLAVE_ADDRESS   = 2;
+    public static final int DRIVE_RIGHT_MOTOR_MASTER_ADDRESS = 3;
+    public static final int DRIVE_RIGHT_MOTOR_SLAVE_ADDRESS  = 4;
 
     public static final int DRIVE_PISTON_SHIFT_FORWARD_ADDRESS	 = 0;
     public static final int DRIVE_PISTON_SHIFT_REVERSE_ADDRESS  = 1;
@@ -66,22 +66,26 @@ public class RobotMap {
     //********************************************************************************** 
     // Intake Subsystem
     //**********************************************************************************
-    public static final int INTAKE_MOTOR_TILT_ADDRESS    = 8;
-	public static final int INTAKE_MOTOR_ROLLERS_ADDRESS = 4;
+    public static final int INTAKE_MOTOR_TILT_ADDRESS    = 9;
+	public static final int INTAKE_MOTOR_ROLLERS_ADDRESS = 5;
 	
 	public static final int INTAKE_PISTON_CLAW_FORWARD_ADDRESS   	 = 4;
     public static final int INTAKE_PISTON_CLAW_REVERSE_ADDRESS = 5;
     public static final int INTAKE_PISTON_CLAW_PCM_MODULE_ADDRESS = TECHNICAL_PCM_MAIN_ADDRESS;
 
 	public static final int INTAKE_PISTON_KACHUNKER_FORWARD_ADDRESS  = 6;
-    public static final int INTAKE_PISTON_KACHUNKER_REVERSE_ADDRESS = 7;
-    public static final int INTAKE_PISTONKACHUNKER_PCM_MODULE_ADDRESS = TECHNICAL_PCM_MAIN_ADDRESS;
+    public static final int INTAKE_PISTON_KACHUNKER_REVERSE_ADDRESS  = 7;
+    
+    public static final int INTAKE_CARGO_LIMIT_SWITCH_ADDRESS = 0; //TBD
+    public static final int INTAKE_HATCH_TOP_LIMIT_SWITCH_ADDRESS = 0; //TBD
+    public static final int INTAKE_HATCH_BOTTOM_LIMIT_SWITCH_ADDRESS = 0; //TBD
+    public static final int INTAKE_ROTATE_LIMIT_SWITCH_ADDRESS = 0; //TBD
 
     //********************************************************************************** 
     // Climb Subsystem
     //**********************************************************************************
-    public static final int CLIMB_MOTOR_LIFT_ADDRESS  = 9;
-    public static final int CLIMB_MOTOR_WHEEL_ADDRESS = 5;
+    public static final int CLIMB_MOTOR_LIFT_ADDRESS  = 10;
+    public static final int CLIMB_MOTOR_WHEEL_ADDRESS = 6;
 
     //********************************************************************************** 
     // Blinkin Subsystem

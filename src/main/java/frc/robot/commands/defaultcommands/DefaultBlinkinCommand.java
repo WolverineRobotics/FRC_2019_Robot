@@ -2,7 +2,7 @@ package frc.robot.commands.defaultcommands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.commands.BlinkCommand;
+import frc.robot.commands.teleopcommands.BlinkCommand;
 import frc.robot.constants.blinkin.LEDCombo;
 import frc.robot.oi.OI;
 import frc.robot.subsystems.BlinkinSubsystem;

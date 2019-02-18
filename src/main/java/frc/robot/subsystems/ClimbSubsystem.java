@@ -14,6 +14,9 @@ public class ClimbSubsystem extends Subsystem {
 
     private boolean inClimbMode;
 
+    private double climbRawSpeed;
+    private double wheelRawSpeed;
+
     public ClimbSubsystem() {
         climb.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
         wheel.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
@@ -36,31 +39,50 @@ public class ClimbSubsystem extends Subsystem {
     //********************************************************************************** 
     // Encoder functions
     //**********************************************************************************
-    public int getClimbPosition() {
-        return climb.getSelectedSensorPosition(0);
-    }
-
-    public double getClimbVelocity() {
-        return climb.getSelectedSensorVelocity(0);
-    }
-
-    public void setClimbRawSpeed(double percent) {
-        climb.set(ControlMode.PercentOutput, percent); //TODO check
-    }
-
-    public void setClimbPosition(int position) {
+    public void setClimbRawPosition(int position) {
         climb.setSelectedSensorPosition(position); //TODO check
     }
 
-    public double getWheelVelocity() {
-        return wheel.getSelectedSensorVelocity(0);
+    public int getClimbRawPosition() {
+        return climb.getSelectedSensorPosition(0);
     }
 
-    public void setWheelRawSpeed(double percent) {
-        wheel.set(ControlMode.PercentOutput, percent); //TODO check
-    }
-
-    public void setWheelPosition(int position) {
+    public void setWheelRawPosition(int position) {
         wheel.setSelectedSensorPosition(position); //TODO check
+    }
+
+    public int getWheelRawPosition() {
+        return wheel.getSelectedSensorPosition(0);
+    }
+
+    //********************************************************************************** 
+    // Speed controller functions
+    //**********************************************************************************
+    public void setWheelRawSpeed(double percent) {
+        if(percent > 1) {
+            percent = 1;
+        } else if(percent < -1) {
+            percent = -1;
+        }
+        wheelRawSpeed = percent;
+        wheel.set(ControlMode.PercentOutput, wheelRawSpeed);
+    }
+
+    public double getWheelRawSpeed() {
+        return wheelRawSpeed;
+    }
+
+    public void setClimbRawSpeed(double percent) {
+        if(percent > 1) {
+            percent = 1;
+        } else if(percent < -1) {
+            percent = -1;
+        }
+        climbRawSpeed = percent;
+        climb.set(ControlMode.PercentOutput, climbRawSpeed); //TODO check
+    }
+
+    public double getClimbRawSpeed() {
+        return climbRawSpeed;
     }
 }

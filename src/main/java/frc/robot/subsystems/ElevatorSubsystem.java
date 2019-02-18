@@ -57,16 +57,12 @@ public class ElevatorSubsystem extends Subsystem {
     //********************************************************************************** 
     // Encoder functions
     //**********************************************************************************
-    public int getEncoderRawCounts() {
-        return mainElevatorEncoder.get();
+    public double getRawEncoderPosition(){
+        return elevatorMotor1.getEncoder().getPosition();
     }
 
-    public double getEncoderDistance() {
-        return mainElevatorEncoder.getDistance();
-    }
-
-    public void setEncoderCountsPerInch(double countsPerInch) {
-        mainElevatorEncoder.setDistancePerPulse(countsPerInch);
+    public double getRawEncoderSpeed() {
+        return (elevatorMotor1.getEncoder().getVelocity() + elevatorMotor2.getEncoder().getVelocity()) / 2;
     }
 
     public boolean getUpperLimitSwitch() {

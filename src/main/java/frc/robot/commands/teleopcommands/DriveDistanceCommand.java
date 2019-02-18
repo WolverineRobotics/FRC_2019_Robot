@@ -1,4 +1,4 @@
-package frc.robot.commands;
+package frc.robot.commands.teleopcommands;
 
 import frc.robot.Robot;
 import frc.robot.constants.RobotPIDValues;
