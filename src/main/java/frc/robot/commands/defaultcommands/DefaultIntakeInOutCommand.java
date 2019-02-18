@@ -15,12 +15,25 @@ public class DefaultIntakeInOutCommand extends Command {
     public void execute() {
         boolean intakeIn = OI.getOperatorIntakeIn(); //if operator is pressing left trigger
         boolean intakeOut = OI.getOperatorIntakeOut(); //if operator is perssing right trigger
-        if(!(intakeIn && intakeOut)) { //Precaution: makes sure both aren't pressed at the same time
-            if(intakeIn) {
-                c_intakeInOut.cargoIntakeIn(true);
-            } else if(intakeOut) {
-                c_intakeInOut.cargoIntakeOut(true);
-            }
+        
+        if (intakeIn) {
+            c_intakeInOut.setCargoIntakeRawSpeed(0.8);
+        } else if (intakeOut) {
+            c_intakeInOut.setCargoIntakeRawSpeed(-0.8);
+        } else {
+            c_intakeInOut.setCargoIntakeRawSpeed(0);
+        }
+        
+        if (OI.getOperatorElevatorLevel3()) {
+            c_intakeInOut.kachink();
+        } else {
+            c_intakeInOut.kachunk();
+        }
+
+        if(OI.getOperatorGrabHatch()){
+            c_intakeInOut.clawOpen();
+        } else {
+            c_intakeInOut.clawClose();
         }
     }
     

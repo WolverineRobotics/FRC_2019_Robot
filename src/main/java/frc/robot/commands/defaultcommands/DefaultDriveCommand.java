@@ -32,29 +32,25 @@ public class DefaultDriveCommand extends Command {
         //trigger for throttle
         if(Math.abs(throttle) < RobotConst.DRIVE_THORTTLE_TRIGGER_VALUE){
             throttle = 0;
-            stopped = true;
         } else {
             throttle = OI.getDriverThrottle();
-            stopped = false;
         }
         
         //trigger for turning
         if(Math.abs(turn) < RobotConst.DRIVE_TURN_TRIGGER_VALUE){
             turn = 0;
-            stopped = true;
         } else {
             turn = OI.getDriverTurn();
-            stopped = false;
         }
 
         //set speeds
-        if (stopped == true) {
-            leftSpeed *= slowDownSpeed;
-            rightSpeed *= slowDownSpeed;
-        } else {
+        // if (stopped == true) {
+        //     leftSpeed *= slowDownSpeed;
+        //     rightSpeed *= slowDownSpeed;
+        // } else {
             leftSpeed = throttle - turn;
             rightSpeed = throttle + turn;
-        }
+        // }
 
         //max limit
         if(leftSpeed > 1){

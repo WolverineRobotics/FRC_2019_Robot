@@ -102,11 +102,11 @@ public class OI {
     }
 
     public static boolean getOperatorIntakeIn() { //returns true if LEFT TRIGGER is pushed
-        return operator.getRawButtonPressed(JoystickMap.LEFT_TRIGGER);
+        return operator.getRawButton(JoystickMap.BUTTON_A);
     }
 
     public static boolean getOperatorIntakeOut() { //returns true if RIGHT TRIGGER is pushed
-        return operator.getRawButtonPressed(JoystickMap.RIGHT_TRIGGER);
+        return operator.getRawButton(JoystickMap.BUTTON_B);
     }
 
     public static boolean getOperatorEjectHatch() { //returns true if LEFT BUMPER is released
@@ -114,7 +114,7 @@ public class OI {
     }
     
     public static boolean getOperatorGrabHatch() { //returns true if RIGHT BUMPER is released
-        return operator.getRawButtonReleased(JoystickMap.BUTTON_RIGHT_BUMPER);
+        return operator.getRawButton(JoystickMap.BUTTON_X);
     }
 
 
@@ -127,7 +127,7 @@ public class OI {
     }
 
     public static boolean getOperatorElevatorLevel3() { //returns true if BUTTON Y is released
-        return operator.getRawButtonReleased(JoystickMap.BUTTON_Y);
+        return operator.getRawButton(JoystickMap.BUTTON_Y);
     }
 }
 

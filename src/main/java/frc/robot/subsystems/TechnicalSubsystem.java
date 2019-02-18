@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.commands.defaultcommands.DefaultTechnicalCommand;
+import frc.robot.constants.RobotMap;
 
 public class TechnicalSubsystem extends Subsystem {
     private PowerDistributionPanel pdp = new PowerDistributionPanel();

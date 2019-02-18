@@ -18,8 +18,8 @@ public class IntakeInOutSubsystem extends Subsystem {
     //private Sensor hatchSensor
     //private Sensor cargoSensor
 
-    private DoubleSolenoid hatchClaw = new DoubleSolenoid(RobotMap.INTAKE_PISTON_CLAW_FORWARD_ADDRESS, RobotMap.INTAKE_PISTON_CLAW_REVERSE_ADDRESS);
-    private DoubleSolenoid hatchKachunker = new DoubleSolenoid(RobotMap.INTAKE_PISTON_KACHUNKER_FORWARD_ADDRESS, RobotMap.INTAKE_PISTON_KACHUNKER_REVERSE_ADDRESS);
+    private DoubleSolenoid hatchClaw = new DoubleSolenoid(RobotMap.INTAKE_PISTON_CLAW_PCM_MODULE_ADDRESS, RobotMap.INTAKE_PISTON_CLAW_FORWARD_ADDRESS, RobotMap.INTAKE_PISTON_CLAW_REVERSE_ADDRESS);
+    private DoubleSolenoid hatchKachunker = new DoubleSolenoid(RobotMap.INTAKE_PISTONKACHUNKER_PCM_MODULE_ADDRESS, RobotMap.INTAKE_PISTON_KACHUNKER_FORWARD_ADDRESS, RobotMap.INTAKE_PISTON_KACHUNKER_REVERSE_ADDRESS);
 
     private boolean activated = false;
     private GamePiece currentGamePiece;
@@ -109,14 +109,14 @@ public class IntakeInOutSubsystem extends Subsystem {
      * Push solenoid out
      */
     public void kachunk() {
-        hatchKachunker.set(Value.kForward);
+        hatchKachunker.set(Value.kReverse);
     }
 
     /**
      * Push solenoid in
      */
     public void kachink() {
-        hatchKachunker.set(Value.kReverse);
+        hatchKachunker.set(Value.kForward);
     }
 
     /**
