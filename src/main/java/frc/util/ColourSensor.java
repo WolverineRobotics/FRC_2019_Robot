@@ -42,7 +42,6 @@ public class ColourSensor {
 
         sensor.write(CMD | 0x01, (int) (256 - integrationTime / 2.38)); //configures the integration time (time for updating color data)
         sensor.write(CMD | 0x0E, 0b1111);
-
     }
 
     public void read() {
@@ -68,16 +67,11 @@ public class ColourSensor {
         if (prox < 0) {
             prox += 0b10000000000000000;
         }
-
     }
 
     public int status() {
         buffy.clear();
         sensor.read(CMD | 0x13, 1, buffy);
         return buffy.get(0);
-    }
-
-    public void free() {
-        sensor.free();
     }
 }
