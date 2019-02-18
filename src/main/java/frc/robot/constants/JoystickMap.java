@@ -14,6 +14,10 @@ public class JoystickMap {
     public static final int RIGHT_STICK_X = 4;
     public static final int RIGHT_STICK_Y = 5;
 
+    public static final int POV_UP = 0;
+    public static final int POV_DOWN = 90;
+    public static final int POV_NEUTRAL = -1;
+
     
     //********************************************************************************** 
     // Boolean inputs

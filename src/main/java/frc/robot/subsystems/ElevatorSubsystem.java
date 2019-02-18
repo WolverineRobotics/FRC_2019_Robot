@@ -31,7 +31,7 @@ public class ElevatorSubsystem extends Subsystem {
         if(speed < -1) {
             speed = -1;
         }
-        if(getEncoderPosition() < RobotConst.ELEVATOR_MAX_HEIGHT) {
+        if(getRawEncoderPosition() < RobotConst.ELEVATOR_MAX_HEIGHT) {
             elevatorMotor1.set(speed);
             elevatorMotor2.set(speed);
         } else {
@@ -43,12 +43,12 @@ public class ElevatorSubsystem extends Subsystem {
     //********************************************************************************** 
     // Encoder functions
     //**********************************************************************************
-    public double getEncoderPosition(){
+    public double getRawEncoderPosition(){
         return elevatorMotor1.getEncoder().getPosition();
     }
 
-    public double getEncoderRawVelocity() {
-        return elevatorMotor1.getEncoder().getVelocity();
+    public double getRawEncoderSpeed() {
+        return (elevatorMotor1.getEncoder().getVelocity() + elevatorMotor2.getEncoder().getVelocity()) / 2;
     }
 
     public boolean getUpperLimitSwitch() {

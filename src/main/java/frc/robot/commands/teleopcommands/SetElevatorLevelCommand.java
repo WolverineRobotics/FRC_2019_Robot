@@ -1,4 +1,4 @@
-package frc.robot.commands;
+package frc.robot.commands.teleopcommands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
@@ -30,7 +30,7 @@ public class SetElevatorLevelCommand extends Command {
 
     @Override
     public void execute() {
-        double currentPos = c_elevator.getEncoderPosition();
+        double currentPos = c_elevator.getRawEncoderPosition();
         speed = pid.calcPID(currentPos);
         c_elevator.setElevatorRawSpeed(speed);
         if(currentPos == desiredEncoderPos) { //TODO: see if position is NEAR (not completely equal)
