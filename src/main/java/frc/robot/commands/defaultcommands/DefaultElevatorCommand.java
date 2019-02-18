@@ -16,7 +16,7 @@ public class DefaultElevatorCommand extends Command {
     protected void execute() {
         double elevatorSpeed = OI.getOperatorElevatorSpeed();
         if (elevatorSpeed > 0.2) {
-            c_elevator.setElevatorRawSpeed(elevatorSpeed);   
+            c_elevator.setElevatorRawSpeed(elevatorSpeed*0.5);   
         }
         
         // if(OI.getOperatorElevatorLevel1()) { //if operator presses A, (lowest elevator level)
