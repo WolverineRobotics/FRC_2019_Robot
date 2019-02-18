@@ -52,6 +52,20 @@ public class ElevatorSubsystem extends Subsystem {
     //**********************************************************************************    
     public void setLowGear() {
         shift.set(Value.kReverse);
+        lowGear = true;
+    }
+
+    public void setHighGear() {
+        shift.set(Value.kForward);
+        lowGear = false;
+    }
+
+    public boolean isLowGear() {
+        return lowGear;
+    }
+
+    public boolean isHighGear() {
+        return !lowGear;
     }
 
     //********************************************************************************** 

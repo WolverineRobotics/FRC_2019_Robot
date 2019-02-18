@@ -1,13 +1,11 @@
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.commands.defaultcommands.DefaultTechnicalCommand;
 
 public class TechnicalSubsystem extends Subsystem {
     private PowerDistributionPanel pdp = new PowerDistributionPanel();
-    private Compressor compresser = new Compressor();
     @Override
     protected void initDefaultCommand() {
         setDefaultCommand(new DefaultTechnicalCommand());
