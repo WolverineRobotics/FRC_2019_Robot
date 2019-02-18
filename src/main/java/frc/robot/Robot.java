@@ -22,9 +22,11 @@ public class Robot extends TimedRobot {
 	private static ClimbSubsystem m_climb = new ClimbSubsystem();
 	private static TechnicalSubsystem m_technical = new TechnicalSubsystem();
 
+	private static SDashboard m_dashboard = new SDashboard();
+
 	@Override
 	public void robotPeriodic() {
-		new SDashboard();
+		m_dashboard.execute();
 	}
 
 	@Override

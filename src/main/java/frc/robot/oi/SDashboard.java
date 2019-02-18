@@ -31,7 +31,7 @@ public class SDashboard {
         execute();
     }
 
-    private void execute() {
+    public void execute() {
         GamePiece hatch = GamePiece.HATCH;
         GamePiece cargo = GamePiece.CARGO;
     
@@ -45,9 +45,9 @@ public class SDashboard {
         SmartDashboard.putNumber("[Climb] Climb Encoder Position: ", c_climb.getClimbRawPosition());
     
         SmartDashboard.putNumber("[Drive] Left Speed: ", c_drive.getRawLeftSpeed());
-        SmartDashboard.putNumber("[Drive] Left Encoder Position: ", c_drive.getPositionLeft());
+        // SmartDashboard.putNumber("[Drive] Left Encoder Position: ", c_drive.getPositionLeft());
         SmartDashboard.putNumber("[Drive] Right Speed: ", c_drive.getRawRightSpeed());
-        SmartDashboard.putNumber("[Drive] Right Encoder Position: ", c_drive.getPositionRight());
+        // SmartDashboard.putNumber("[Drive] Right Encoder Position: ", c_drive.getPositionRight());
     
         SmartDashboard.putNumber("[Elevator] Speed: ", c_elevator.getRawEncoderSpeed());
         SmartDashboard.putNumber("[Elevator] Encoder Position: ", c_elevator.getRawEncoderPosition());
