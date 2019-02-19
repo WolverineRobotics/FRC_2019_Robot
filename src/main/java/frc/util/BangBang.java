@@ -7,7 +7,6 @@ public class BangBang{
     
     private boolean aboveSpeed = false;
     
-    
     public BangBang(double onOutput, double offOutput) {
         this.setMaxOutput(onOutput);
         this.setMinOutput(offOutput);
@@ -67,8 +66,6 @@ public class BangBang{
     		return false;
     	}
     }
-    
-    
     
     public void autoMinMax(double maxSpeed) {
         this.maxOutput = (this.targetValue / maxSpeed) * 1.2;

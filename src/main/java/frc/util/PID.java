@@ -10,7 +10,8 @@ public class PID  {
 	protected double prevError;
 	private double sumError;
 	protected double finishedRange;
-	private double maxOutput;
+    private double maxOutput;
+    private double minOutput;
 	private int minCycleCount;
 	private int currentCycleCount;
 	private boolean firstCycle;
@@ -28,8 +29,7 @@ public class PID  {
 		this.maxOutput = 1.0;
 		this.currentCycleCount = 0;
 		this.minCycleCount = 5;
-		this.debug = false;
-		
+		this.debug = false;	
 	}
 	
 	public void setConstants(double p,double i, double d){
@@ -62,13 +62,27 @@ public class PID  {
 		this.debug = false;
 	}
 	
-	public void setMaxOutput(double max) {
-        if(max < 0.0) {
-            this.maxOutput = 0.0;
-        } else if(max > 1.0) {
-            this.maxOutput = 1.0;
-        } else {
-            this.maxOutput = max;
+    public void setMaxOutput(double max) {
+        try{
+            if (max < minOutput) {
+                System.out.println("Hey dingdong, Maximum value cannot be less than minimum!");
+            } else {
+                maxOutput = max;
+            }
+        } catch(NullPointerException e){
+            maxOutput = max;
+        }
+    }
+
+    public void setMinOutput(double min) {
+        try{
+            if (min > maxOutput) {
+                System.out.println("Hey dingdong, Minimum value connot be less than maximum!");
+            } else {
+                minOutput = min;
+            }
+        } catch(NullPointerException e){
+            minOutput = min;
         }
     }
     
@@ -122,7 +136,6 @@ public class PID  {
         	}
         	 this.sumError += error; 
         }
-       
         
         iVal = this.kI * this.sumError;
         
@@ -134,10 +147,12 @@ public class PID  {
         double output = pVal + iVal + dVal;
         
         //limit the output
-        if(output > this.maxOutput) {
-            output = this.maxOutput;
-        } else if(output < -this.maxOutput) {
-            output = -this.maxOutput;
+        if (output > maxOutput) {
+            output = maxOutput;
+        }
+
+        if(output < minOutput){
+            output = minOutput;
         }
         
         //store current value as previous for next cycle
@@ -149,7 +164,6 @@ public class PID  {
         	SmartDashboard.putNumber("D out", dVal);
         	SmartDashboard.putNumber("PID OutPut", output);
         }
-        
         return output;
     }
     

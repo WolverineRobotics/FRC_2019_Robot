@@ -4,7 +4,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class PIDF extends PID {
     
-	
 	private double feedForward;
 	
 	public PIDF(double p, double i, double d,double f,double eps){
