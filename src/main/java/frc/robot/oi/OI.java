@@ -3,7 +3,6 @@ package frc.robot.oi;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.constants.JoystickMap;
-import frc.robot.constants.RobotConst;
 
 /**
  * Driver Controller
@@ -15,6 +14,7 @@ import frc.robot.constants.RobotConst;
  *      B Button            = Default - Static RED
  *      X Button            = Requesting Hatch - Blink between YELLOW and WHITE 
  *      Y Button            = Climbing LEDs - Blink between AQUA and WHITE
+ * 
  * 	Bumpers/Triggers:
  * 		Left Bumper			= High Gear (Turbo)
  * 		Left Trigger 		= Climb Speed down (Manual Control)
@@ -27,21 +27,17 @@ import frc.robot.constants.RobotConst;
  * 	Sticks:
  * 		Left Stick Y-axis  	= Elevator Motor Speed (Manual Control)
  * 		Right Stick Y-axis	= Intake Elbow Motor Speed (Manual Control)
- * 		Right Stick X    	=
- * 		Right Stick Y    	= 
- * 		Right Stick Press  	= 
- * 		Left Stick Press 	= 
  * 	Buttons:
  *      A Button            = 1st Level
  *      B Button            = 2nd Level
- *      X Button            = Auto Intake In (ball)
+ *      X Button            = Auto Intake
  * 		Y Button			= 3rd Level
  * 	Bumpers/Triggers:
- * 		Left Trigger 		= Intake in (ball mechanism)
- * 		Right Trigger		= Intake out (ball mechanism)
- * 		Left Bumper			= Grab hatch (automatic)		
- * 		Right Bumper		= Eject hatch (automatic)
- *
+ * 		Left Bumper 		= Close Claw (toggle default open claw)
+ * 		Right Bumper		= Kachunk Kachunker (toggle default kachink)
+ *  POV:
+ *      Forward (0)         = Manual outtake ball
+ *      Backward (180)      = Manual intake ball
  */
 
 public class OI {
@@ -51,83 +47,185 @@ public class OI {
     //********************************************************************************** 
     // Driver control
     //**********************************************************************************
-    public static double getDriverTurn() { //returns -1 to 1 on left stick X axis
+
+    /**
+     * Driver turning stick
+     * 
+     * Right stick x
+     * @return double from -1 to 1
+     */
+    public static double getDriverTurn() {
         return driver.getRawAxis(JoystickMap.RIGHT_STICK_X);
     }
-    public static double getDriverThrottle() { //returns -1 to 1 on right stick Y axis
+
+    /**
+     * Driver throttle stick
+     * 
+     * Left stick y
+     * @return double from -1 to 1
+     */
+    public static double getDriverThrottle() {
         return driver.getRawAxis(JoystickMap.LEFT_STICK_Y);
     }
-    public static boolean getDriverRequestCargoLED() { //returns true if A was released
+
+    /**
+     * Driver request cargo
+     * A Button
+     * @return True when button released (toggle)
+     */
+    public static boolean getDriverRequestCargoLED() {
         return driver.getRawButtonReleased(JoystickMap.BUTTON_A);
     }
-    public static boolean getDriverCancel() { //returns true if B was released
-        return driver.getRawButtonReleased(JoystickMap.BUTTON_B);
+    
+    /**
+     * Driver request hatch
+     * X Button
+     * @return True when button released (toggle)
+     */
+    public static boolean getDriverRequestionHatchLED() {
+        return driver.getRawButtonPressed(JoystickMap.BUTTON_X);
     }
-    public static boolean getDriverRequestionHatchLED() { //returns true if X was released
-        return driver.getRawButtonReleased(JoystickMap.BUTTON_X);
+    
+    /**
+     * Driver cancel request
+     * Button B
+     * @return True when button released (toggle)
+     */
+    public static boolean getDriverCancel() {
+        return driver.getRawButtonPressed(JoystickMap.BUTTON_B);
     }
-    public static boolean getDriverClimbing() { //returns true if Y was released
-        return driver.getRawButtonReleased(JoystickMap.BUTTON_Y);
+    
+    /**
+     * Driver climb state
+     * Button Y
+     * @return True when button released (toggle)
+     */
+    public static boolean getDriverClimbing() {
+        return driver.getRawButtonPressed(JoystickMap.BUTTON_Y);
     }
-    public static double getDriverClimbSpeedDown() { //returns LEFT TRIGGER value
+
+    /**
+     * Manual climb down
+     * Left trigger
+     * @return double from 0 to 1
+     */
+    public static double getDriverClimbSpeedDown() {
         return driver.getRawAxis(JoystickMap.LEFT_TRIGGER);
     }
-    public static double getDriverClimbSpeedUp() { //returns RIGHT TRIGGER value
+    
+    /**
+     * Manuel climb up
+     * Right trigger
+     * @return double from 0 to 1
+     */
+    public static double getDriverClimbSpeedUp() {
         return driver.getRawAxis(JoystickMap.RIGHT_TRIGGER);
     }
 
-    public static void driverRumble(boolean rumble) {
-        if(rumble) {
-            driver.setRumble(RumbleType.kLeftRumble, RobotConst.RUMBLE_INTENSITY);
-            driver.setRumble(RumbleType.kRightRumble, RobotConst.RUMBLE_INTENSITY);
-        } else {
-            driver.setRumble(RumbleType.kLeftRumble, 0);
-            driver.setRumble(RumbleType.kRightRumble, 0);
-        }
-    }
-
-    public static boolean getDriverTestButton() { //returns true if START was released
-        return driver.getRawButton(JoystickMap.BUTTON_START);
+    /**
+     * Set driver controller rumble
+     * @param rumble rumble intensity
+     */
+    public static void driverRumble(double rumble) {
+        driver.setRumble(RumbleType.kLeftRumble, rumble);
+        driver.setRumble(RumbleType.kRightRumble, rumble);
     }
 
     //********************************************************************************** 
     // Operator controls
     //**********************************************************************************
-    public static double getOperatorElevatorSpeed(){ //returns -1 to 1 double on LEFT STICK Y axis
+    /**
+     * Operator elevator speed
+     * Left stick y
+     * @return double from -1 to 1
+     */
+    public static double getOperatorElevatorSpeed() {
         return operator.getRawAxis(JoystickMap.LEFT_STICK_Y);
     }
 
-    public static double getOperatorIntakeTilt() { //returns -1 to 1 double on RIGHT STICK Y axis. 
+    /**
+     * Operator intake tilt speed
+     * Right stick y
+     * @return double from -1 to 1
+     */
+    public static double getOperatorIntakeTilt() {
         return operator.getRawAxis(JoystickMap.RIGHT_STICK_Y);
     }
 
-    public static boolean getOperatorIntakeIn() { //returns true if LEFT TRIGGER is pushed
-        return operator.getRawButton(JoystickMap.BUTTON_A);
+    /**
+     * Operator manual ball intake
+     * POV backward
+     * @return True when being pressed;
+     */
+    public static boolean getOperatorIntakeIn() {
+        return operator.getPOV() == JoystickMap.POV_SOUTH;
     }
 
-    public static boolean getOperatorIntakeOut() { //returns true if RIGHT TRIGGER is pushed
-        return operator.getRawButton(JoystickMap.BUTTON_B);
+    /**
+     * Operator manual ball outake
+     * POV forward
+     * @return True when being pressed
+     */
+    public static boolean getOperatorIntakeOut() {
+        return operator.getPOV() == JoystickMap.POV_NORTH;
     }
 
-    public static boolean getOperatorEjectHatch() { //returns true if LEFT BUMPER is released
-        return operator.getRawButtonReleased(JoystickMap.BUTTON_LEFT_BUMPER);
+    /**
+     * Operator kachunk
+     * Right bumper
+     * @return True when being pressed
+     */
+    public static boolean getOperatorKachunk() {
+        return operator.getRawButton(JoystickMap.BUTTON_RIGHT_BUMPER);
+    }
+
+    /**
+     * Operator close claw
+     * Left bumper
+     * @return True when being pressed
+     */
+    public static boolean getOperatorClaw() {
+        return operator.getRawButton(JoystickMap.BUTTON_LEFT_BUMPER);
     }
     
-    public static boolean getOperatorGrabHatch() { //returns true if RIGHT BUMPER is released
-        return operator.getRawButton(JoystickMap.BUTTON_X);
+    /**
+     * Operator deliver level 1
+     * Button A
+     * @return True once pressed
+     */
+    public static boolean getOperatorElevatorLevel1() {
+        return operator.getRawButtonPressed(JoystickMap.BUTTON_A);
     }
 
-
-    public static boolean getOperatorElevatorLevel1() { //returns true if BUTTON A is released
-        return operator.getRawButtonReleased(JoystickMap.BUTTON_A);
+    /**
+     * Operator deliver level 2
+     * Button B
+     * @return True once pressed
+     */
+    public static boolean getOperatorElevatorLevel2() {
+        return operator.getRawButtonPressed(JoystickMap.BUTTON_B);
     }
 
-    public static boolean getOperatorElevatorLevel2() { //returns true if BUTTON B is released
-        return operator.getRawButtonReleased(JoystickMap.BUTTON_B);
-    }
-
+    /**
+     * Operator deliver level 3
+     * Button Y
+     * @return True once pressed
+     */
     public static boolean getOperatorElevatorLevel3() { //returns true if BUTTON Y is released
-        return operator.getRawButton(JoystickMap.BUTTON_Y);
+        return operator.getRawButtonPressed(JoystickMap.BUTTON_Y);
+    }
+
+    /**
+     * @return instance of driver
+     */
+    public static Joystick getDriver() {
+        return driver;
+    }
+
+    /**
+     * @return instance of operator
+     */
+    public static Joystick getOperator() {
+        return operator;
     }
 }
-

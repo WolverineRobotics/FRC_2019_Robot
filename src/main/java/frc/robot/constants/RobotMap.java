@@ -45,14 +45,6 @@ public class RobotMap {
     //********************************************************************************** 
     // PCM Pneumatics Addresses
     //**********************************************************************************
-    public static final int DRIVE_PISTON_SHIFT_FORWARD_ADDRESS	  = 0;
-    public static final int DRIVE_PISTON_SHIFT_REVERSE_ADDRESS    = 1;
-    public static final int DRIVE_PISTON_SHIFT_PCM_MODULE_ADDRESS = TECHNICAL_PCM_MAIN_ADDRESS;
-    
-    public static final int ELEVATOR_PISTON_SHIFT_FORWARD_ADDRESS    = 2;
-    public static final int ELEVATOR_PISTON_SHIFT_REVERSE_ADDRESS    = 3;
-    public static final int ELEVATOR_PISTON_SHIFT_PCM_MODULE_ADDRESS = TECHNICAL_PCM_MAIN_ADDRESS; 
-
 	public static final int INTAKE_PISTON_CLAW_FORWARD_ADDRESS    = 4;
     public static final int INTAKE_PISTON_CLAW_REVERSE_ADDRESS    = 5;
     public static final int INTAKE_PISTON_CLAW_PCM_MODULE_ADDRESS = TECHNICAL_PCM_MAIN_ADDRESS;
