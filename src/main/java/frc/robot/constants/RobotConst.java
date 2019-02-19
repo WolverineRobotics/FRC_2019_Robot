@@ -9,6 +9,8 @@ public class RobotConst{
 
     public static final double DRIVE_TURN_TRIGGER_VALUE = 0.1; //TBD
     public static final double DRIVE_THORTTLE_TRIGGER_VALUE = 0.2; //TBD
+
+    public static final double DRIVE_SPEED_REDUCTION_RATIO = 0.8;
     
     //********************************************************************************** 
     // Elevator constants
