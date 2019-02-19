@@ -28,6 +28,18 @@ public class JoystickMap {
 
     public static final int BUTTON_START = 8;
 
+    //********************************************************************************** 
+    // POV inputs
+    //**********************************************************************************
+    public static final int POV_OFF = -1;
 
+    public static final int POV_NORTH = 0;
+    public static final int POV_EAST = 90;
+    public static final int POV_SOUTH = 180;
+    public static final int POV_WEST = 270;
 
+    public static final int POV_NORTH_EAST = 45;
+    public static final int POV_SOUTH_EAST = 135;
+    public static final int POV_SOUTH_WEST = 225;
+    public static final int POV_NORTH_WEST = 315;
 }

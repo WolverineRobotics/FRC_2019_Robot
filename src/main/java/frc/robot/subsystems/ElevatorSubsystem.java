@@ -20,9 +20,9 @@ public class ElevatorSubsystem extends Subsystem {
 
     private Encoder mainElevatorEncoder = new Encoder(RobotMap.ELEVATOR_ENCODER_A, RobotMap.ELEVATOR_ENCODER_B);
 
-    private DoubleSolenoid shift = new DoubleSolenoid(RobotMap.ELEVATOR_PCM_MODULE_ADDRESS,
-        RobotMap.ELEVATOR_PISTON_SHIFT_FORWARD_ADDRESS,
-        RobotMap.ELEVATOR_PISTON_SHIFT_REVERSE_ADDRESS);
+    // private DoubleSolenoid shift = new DoubleSolenoid(RobotMap.ELEVATOR_PCM_MODULE_ADDRESS,
+    //     RobotMap.ELEVATOR_PISTON_SHIFT_FORWARD_ADDRESS,
+    //     RobotMap.ELEVATOR_PISTON_SHIFT_REVERSE_ADDRESS);
 
     private boolean lowGear = false;
 

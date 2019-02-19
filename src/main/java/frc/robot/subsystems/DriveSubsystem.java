@@ -7,11 +7,11 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.commands.defaultcommands.DefaultDriveCommand;
 import frc.robot.constants.RobotMap;
+import frc.robot.oi.OI;
 import frc.util.ColourSensor;
 
 public class DriveSubsystem extends Subsystem {
@@ -32,95 +32,21 @@ public class DriveSubsystem extends Subsystem {
 
     @Override
     protected void initDefaultCommand() {
-        setDefaultCommand(new DefaultDriveCommand());
     }
 
     //********************************************************************************** 
     // Motor functions
-    //********************************************************************************** 
-    public void setRawSpeeds(double left, double right){
-        setRawLeftSpeed(left);
-        setRawRightSpeed(right);
-    }
+    //**********************************************************************************
 
-    public void setRawLeftSpeed(double speed) {
-        leftMotor1.set(speed);
-        leftMotor2.set(speed);
-    }
-
-    public void setRawRightSpeed(double speed) {
-        rightMotor1.set(speed);
-        rightMotor2.set(speed);
-    }
-
-    public double getRawLeftSpeed(){
-        return leftMotor1.get();
-    }
-
-    public double getRawRightSpeed(){
-        return rightMotor1.get();
+    /**
+     * sets raw speeds for each side of the drive train
+     * @param left double percent power between -1 and 1
+     * @param right double percent power between -1 and 1
+     */
+    public void setRawSpeeds(double left, double right)  {
     }
     
-    //********************************************************************************** 
-    // Encoder functions
-    //********************************************************************************** 
-    public int getRawLeftEncoder() {
-        return leftEncoder.get();
-    }
-
-    public int getRawRightEncoder() {
-        return rightEncoder.get();
-    }
-
-    public void resetLeftEncoder() {
-        leftEncoder.reset();
-    }
-
-    public void resetRightEncoder() {
-        rightEncoder.reset();
-        
-    }
-
-    public void resetEncoders() {
-        resetLeftEncoder();
-        resetRightEncoder();
-    }
-
-    //********************************************************************************** 
-    // Gyro functions
-    //********************************************************************************** 
-    public double getGyroAngle() {
-        return (double) (gyro.getYaw() % 360);
-    }
-
-    public void resetGyro() {
-        gyro.reset();
-    }
-
-    public double getPigeonAngle(){
-        return (double) (pigeon.getFusedHeading() % 360);
-    }
-
-    public void resetPigeonAngle() {
-        pigeon.setFusedHeading(0);
-    }
-
-    //********************************************************************************** 
-    // Colour sensor functions
-    //********************************************************************************** 
-    public void readColourSensor()  {
-        colourSensor.read();
-    }
-    
-    public short getRed() {
-        return colourSensor.red;
-    }
-    
-    public short getGreen() {
-        return colourSensor.green;
-    }
-
-    public short getBlue() {
-        return colourSensor.blue;
+    public void setRawLeftSpeed(double percent) {
+        rightMotor1.set(percent);
     }
 }

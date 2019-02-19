@@ -28,7 +28,6 @@ public class RobotConst{
     //********************************************************************************** 
     // Intake constants
     //**********************************************************************************
-
     public static final double INTAKE_ELBOW_ENCODER_MAXIMUM = 0; //TBD
     public static final double INTAKE_ELBOW_ENCODER_MINIMUM = 0; //TBD
 
