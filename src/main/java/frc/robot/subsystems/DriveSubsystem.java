@@ -96,6 +96,15 @@ public class DriveSubsystem extends Subsystem {
         return rightEncoder.get();
     }
 
+
+    /**
+     * resets encoder values
+    */
+    public void resetEncoders() {
+        leftEncoder.reset();
+        rightEncoder.reset();
+    }
+
     /**
      * returns the gyro heading
      * @return double value in degrees

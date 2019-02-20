@@ -17,6 +17,7 @@ public class RobotPIDValues{
     public static final int DISTANCE_KP = 0;
     public static final int DISTANCE_KI = 0;
     public static final int DISTANCE_KD = 0;
+    public static final int DISTANCE_EPS = 0;
 
     //********************************************************************************** 
     // Elevator PID
