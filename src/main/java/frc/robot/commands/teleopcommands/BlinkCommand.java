@@ -3,9 +3,13 @@ import frc.robot.Robot;
 import frc.robot.constants.blinkin.Colour;
 import frc.robot.subsystems.BlinkinSubsystem;
 
+//Sets LED to colour1 for "delay" time, then sets LED to colour2
+
+
 public class BlinkCommand extends Command{
 
     private BlinkinSubsystem c_blinkin = Robot.getBlinkinSubsystem();
+    private boolean isDone;
 
     private long delay;
     private Colour colour1;
@@ -23,11 +27,12 @@ public class BlinkCommand extends Command{
         c_blinkin.setColour(colour1);
         Thread.sleep(delay);
         c_blinkin.setColour(colour2);
+        isDone = true;
     }
     
     @Override
     protected boolean isFinished() {
-        return false;
+        return isDone;
     }
     
 

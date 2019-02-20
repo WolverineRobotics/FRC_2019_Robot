@@ -3,6 +3,7 @@ import frc.robot.Robot;
 import frc.robot.constants.blinkin.Colour;
 import frc.robot.subsystems.BlinkinSubsystem;
 
+
 public class StaticCommand extends Command{
 
     private BlinkinSubsystem c_blinkin = Robot.getBlinkinSubsystem();
