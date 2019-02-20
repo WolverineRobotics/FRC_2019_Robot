@@ -11,13 +11,23 @@ import frc.robot.commands.defaultcommands.DefaultElevatorCommand;
 import frc.robot.constants.RobotMap;
 
 public class ElevatorSubsystem extends Subsystem {
-    private CANSparkMax elevatorMotor1 = new CANSparkMax(RobotMap.ELEVATOR_MOTOR_MASTER_ADDRESS, MotorType.kBrushless);
-    private CANSparkMax elevatorMotor2 = new CANSparkMax(RobotMap.ELEVATOR_MOTOR_SLAVE_ADDRESS, MotorType.kBrushless);
+    private CANSparkMax elevatorMotor1;
+    private CANSparkMax elevatorMotor2;
 
-    private DigitalInput upperLimitSwitch = new DigitalInput(RobotMap.ELEVATOR_UPPER_LIMIT_SWITCH);
-    private DigitalInput lowerLimitSwitch = new DigitalInput(RobotMap.ELEVATOR_LOWER_LIMIT_SWITCH);
+    private DigitalInput upperLimitSwitch;
+    private DigitalInput lowerLimitSwitch;
 
-    private Encoder mainElevatorEncoder = new Encoder(RobotMap.ELEVATOR_ENCODER_A, RobotMap.ELEVATOR_ENCODER_B);
+    private Encoder mainElevatorEncoder;
+
+    public ElevatorSubsystem() {
+        elevatorMotor1 = new CANSparkMax(RobotMap.ELEVATOR_MOTOR_MASTER_ADDRESS, MotorType.kBrushless);
+        elevatorMotor2 = new CANSparkMax(RobotMap.ELEVATOR_MOTOR_SLAVE_ADDRESS, MotorType.kBrushless);
+
+        lowerLimitSwitch = new DigitalInput(RobotMap.ELEVATOR_LOWER_LIMIT_SWITCH);
+        upperLimitSwitch = new DigitalInput(RobotMap.ELEVATOR_UPPER_LIMIT_SWITCH);
+
+        mainElevatorEncoder = new Encoder(RobotMap.ELEVATOR_ENCODER_A, RobotMap.ELEVATOR_ENCODER_B);
+    }
 
     @Override
     protected void initDefaultCommand() {
@@ -35,13 +45,16 @@ public class ElevatorSubsystem extends Subsystem {
         if (speed < -1) {
             speed = -1;
         }
-
         elevatorMotor1.set(speed);
         elevatorMotor2.set(speed);
     }
 
+    public double getElevatorRawSpeed() {
+        return (elevatorMotor1.get() + elevatorMotor2.get()) / 2;
+    }
+
     //********************************************************************************** 
-    // Encoder functions
+    // Sensor functions 
     //**********************************************************************************
     public int getEncoderRawCounts() {
         return mainElevatorEncoder.get();

@@ -184,7 +184,7 @@ public class OI {
      * Left bumper
      * @return True when being pressed
      */
-    public static boolean getOperatorClaw() {
+    public static boolean getOperatorBooper() {
         return operator.getRawButton(JoystickMap.BUTTON_LEFT_BUMPER);
     }
     

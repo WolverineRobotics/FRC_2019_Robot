@@ -22,7 +22,7 @@ public class DefaultElevatorCommand extends Command {
             //level 2
         } else if(OI.getOperatorElevatorLevel3()) {
             //level 3
-        } else if(Math.abs(OI.getOperatorElevatorSpeed()) < RobotConst.ELEVATOR_LEFT_STICK_Y_TRIGGER_VALUE) {
+        } else if(Math.abs(OI.getOperatorElevatorSpeed()) > RobotConst.ELEVATOR_LEFT_STICK_Y_TRIGGER_VALUE) {
             double elevatorSpeed = OI.getOperatorElevatorSpeed();
             if(elevatorSpeed > 1) { 
                 elevatorSpeed = 1;

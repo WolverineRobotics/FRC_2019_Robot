@@ -2,7 +2,7 @@ package frc.robot.constants;
 
 public class RobotMap {
     //********************************************************************************** 
-    // CAN Adresses
+    // CAN Addresses
     //**********************************************************************************
     public static final int TECHNICAL_PDP_ADDRESS       = 15;
 	public static final int TECHNICAL_PCM_MAIN_ADDRESS  = 14;
@@ -17,7 +17,7 @@ public class RobotMap {
     public static final int ELEVATOR_MOTOR_MASTER_ADDRESS = 7;
     public static final int ELEVATOR_MOTOR_SLAVE_ADDRESS = 8;
     
-    public static final int INTAKE_MOTOR_TILT_ADDRESS    = 9;
+    public static final int INTAKE_MOTOR_ROTATE_ADDRESS    = 9;
     public static final int INTAKE_MOTOR_ROLLERS_ADDRESS = 5;
     
     public static final int CLIMB_MOTOR_LIFT_ADDRESS  = 10;
@@ -26,20 +26,8 @@ public class RobotMap {
     public static final int VISION_LED_RING = 11;
 
     //********************************************************************************** 
-    // PWM Adresses
+    // PWM Addresses
 	//**********************************************************************************
-    public static final int DRIVE_LEFT_ENCODER_A = 0;
-	public static final int DRIVE_LEFT_ENCODER_B = 1;
-	
-    public static final int DRIVE_RIGHT_ENCODER_A = 2;
-	public static final int DRIVE_RIGHT_ENCODER_B = 3;
-	
-    public static final int ELEVATOR_UPPER_LIMIT_SWITCH = 4;
-    public static final int ELEVATOR_LOWER_LIMIT_SWITCH = 5;
-
-    public static final int ELEVATOR_ENCODER_A = 6;
-	public static final int ELEVATOR_ENCODER_B = 7;
-	
     public static final int BLINKIN_PWM_PORT = 8;
 
     //********************************************************************************** 
@@ -79,4 +67,26 @@ public class RobotMap {
 
     public static final int TECHNICAL_PDP_AUX_VRM = 12;
     public static final int TECHNICAL_PDP_AUX_PCM = 13;
+
+    //**********************************************************************************
+    // DIO Addresses
+    //**********************************************************************************
+    
+    public static final int ELEVATOR_ENCODER_A = 0;
+	public static final int ELEVATOR_ENCODER_B = 1;
+
+    public static final int DRIVE_LEFT_ENCODER_A = 2;
+    public static final int DRIVE_LEFT_ENCODER_B = 3;
+
+    public static final int DRIVE_RIGHT_ENCODER_A = 4;
+    public static final int DRIVE_RIGHT_ENCODER_B = 5;
+
+    public static final int INTAKE_ROTATE_ENCODER_A = -1; //TBD
+    public static final int INTAKE_ROTATE_ENCODER_B = -1; //TBD
+
+    public static final int CLIMB_LIFT_ENCODER_A = -1; //TBD
+    public static final int CLIMB_LIFT_ENCODER_B = -1; //TBD
+	
+    public static final int ELEVATOR_UPPER_LIMIT_SWITCH = -1; //TBD
+    public static final int ELEVATOR_LOWER_LIMIT_SWITCH = -1; //TBD
 }
