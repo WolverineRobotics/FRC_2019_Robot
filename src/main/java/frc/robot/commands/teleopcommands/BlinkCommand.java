@@ -1,3 +1,5 @@
+package frc.robot.commands.teleopcommands;
+
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.constants.blinkin.Colour;
@@ -24,9 +26,14 @@ public class BlinkCommand extends Command{
 
     @Override
     protected void execute() {
-        c_blinkin.setColour(colour1);
-        Thread.sleep(delay);
-        c_blinkin.setColour(colour2);
+        try {
+            c_blinkin.setColour(colour1);
+            Thread.sleep(delay);
+            c_blinkin.setColour(colour2);
+            Thread.sleep(delay);
+        } catch (Exception e) {
+            System.out.println("Thread sleeping caused an error");
+        }
         isDone = true;
     }
     

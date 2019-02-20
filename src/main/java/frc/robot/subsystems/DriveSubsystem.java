@@ -116,4 +116,12 @@ public class DriveSubsystem extends Subsystem {
     public void resetHeading() {
         navX.reset();
     }
+
+    public double getLeftRawSpeed() {
+        return (leftDrive01.get() + leftDrive02.get()) / 2;
+    }
+
+    public double getRightRawSpeed() {
+        return (rightDrive01.get() + rightDrive02.get()) / 2;
+    }
 }

@@ -18,6 +18,10 @@ public class Robot extends TimedRobot {
 	private static IntakeSubsystem m_intake = new IntakeSubsystem();
 	
 	@Override
+	public void robotInit() {
+	}
+
+	@Override
 	public void robotPeriodic() {
 		SDashboard.execute(); // Periodically outputs information
 	}
@@ -40,6 +44,15 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+	}
+
+	@Override
+	public void disabledInit() {
+	}
+
+	@Override
+	public void disabledPeriodic() {
+		SDashboard.execute(); // Periodically outputs information
 	}
 
 	public static BlinkinSubsystem getBlinkinSubsystem() {

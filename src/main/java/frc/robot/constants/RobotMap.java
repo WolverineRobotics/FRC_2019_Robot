@@ -81,12 +81,12 @@ public class RobotMap {
     public static final int DRIVE_RIGHT_ENCODER_A = 4;
     public static final int DRIVE_RIGHT_ENCODER_B = 5;
 
-    public static final int INTAKE_ROTATE_ENCODER_A = -1; //TBD
-    public static final int INTAKE_ROTATE_ENCODER_B = -1; //TBD
+    public static final int INTAKE_ROTATE_ENCODER_A = 6; //TBD
+    public static final int INTAKE_ROTATE_ENCODER_B = 7; //TBD
 
-    public static final int CLIMB_LIFT_ENCODER_A = -1; //TBD
-    public static final int CLIMB_LIFT_ENCODER_B = -1; //TBD
+    public static final int CLIMB_LIFT_ENCODER_A = 8; //TBD
+    public static final int CLIMB_LIFT_ENCODER_B = 9; //TBD
 	
-    public static final int ELEVATOR_UPPER_LIMIT_SWITCH = -1; //TBD
-    public static final int ELEVATOR_LOWER_LIMIT_SWITCH = -1; //TBD
+    public static final int ELEVATOR_UPPER_LIMIT_SWITCH = 10; //TBD
+    public static final int ELEVATOR_LOWER_LIMIT_SWITCH = 11; //TBD
 }
