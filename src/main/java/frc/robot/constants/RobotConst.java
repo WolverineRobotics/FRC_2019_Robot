@@ -25,7 +25,7 @@ public class RobotConst{
 
     public static final int ELEVATOR_MAX_HEIGHT = 0; //TBD
 
-    public static double ELEVATOR_LEFT_STICK_Y_TRIGGER_VALUE = 0.2; //TBD
+    public static double ELEVATOR_LEFT_STICK_Y_TRIGGER_VALUE = 0.3; //TBD
     
     //********************************************************************************** 
     // Intake constants
