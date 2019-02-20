@@ -17,7 +17,6 @@ public class DriveDirectionCommand extends Command{
     private DriveSubsystem c_drive = Robot.getDriveSubsystem();
     	
     public DriveDirectionCommand(double direction, double speed) {
-    	this.direction = direction;
         this.speed = speed;
         requires(c_drive);
         gyroPID.setDesiredValue(direction);
@@ -39,6 +38,13 @@ public class DriveDirectionCommand extends Command{
         }
 
         c_drive.setRawSpeeds(leftSpeed, rightSpeed);
+    }
+    
+    /**
+     * @param speed the speed to set
+     */
+    public void setSpeed(double speed) {
+        this.speed = speed;
     }
 
     @Override
