@@ -8,9 +8,10 @@ import frc.robot.subsystems.ElevatorSubsystem;
 
 public class DefaultElevatorCommand extends Command {
 
-    private ElevatorSubsystem c_elevator = Robot.getElevatorSubsystem();
+    private ElevatorSubsystem c_elevator;
     
     public DefaultElevatorCommand() {
+        c_elevator = Robot.getElevatorSubsystem();
         requires(c_elevator);
     }
      

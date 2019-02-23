@@ -8,9 +8,10 @@ import frc.robot.subsystems.IntakeSubsystem;
 
 public class DefaultIntakeCommand extends Command {
 
-    private IntakeSubsystem c_intake = Robot.getIntakeSubsystem();
+    private IntakeSubsystem c_intake;
 
     public DefaultIntakeCommand() {
+        c_intake = Robot.getIntakeSubsystem();
         requires(c_intake);
     }
 
@@ -19,7 +20,9 @@ public class DefaultIntakeCommand extends Command {
         //Rotate
         double rotateSpeed = OI.getOperatorIntakeTilt();
         if(Math.abs(rotateSpeed) > 0.2) { //TODO add robot const trigger vals. if greater than trigger values
-            c_intake.setRotateRawSpeed(rotateSpeed*0.5);
+            c_intake.setRotateRawSpeed(rotateSpeed*0.5); //set rotate speed to half
+        } else {
+            c_intake.setRotateRawSpeed(0);
         }
 
         //Rollers
@@ -45,13 +48,6 @@ public class DefaultIntakeCommand extends Command {
             c_intake.setBooper(Value.kForward);
         } else {
             c_intake.setBooper(Value.kReverse);
-        }
-        if(OI.getOperatorIntakeOut()) {
-            c_intake.setRollersRawSpeed(1);
-        } else if(OI.getOperatorIntakeOut()) {
-            c_intake.setRollersRawSpeed(-1);
-        } else {
-            c_intake.setRollersRawSpeed(0);
         }
     }
 

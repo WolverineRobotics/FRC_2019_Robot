@@ -11,35 +11,34 @@ import frc.robot.subsystems.BlinkinSubsystem;
 
 public class DefaultBlinkinCommand extends Command {
 
-    private BlinkinSubsystem c_blinkin = Robot.getBlinkinSubsystem();
-
-
+    private BlinkinSubsystem c_blinkin;
 
     public DefaultBlinkinCommand() {
+        c_blinkin = Robot.getBlinkinSubsystem();
         requires(c_blinkin);
     }
 
     @Override
     protected void execute() {
         if (OI.getDriverCancel()) { //B Button
-            if(c_blinkin.getCurrentLEDCombo() == LEDCombo.STATIC){
+            if(c_blinkin.getCurrentLEDCombo() != LEDCombo.STATIC){
                 Scheduler.getInstance().add(new StaticCommand(LEDCombo.STATIC.getColour1()));
                 c_blinkin.setCurrentLEDCombo(LEDCombo.STATIC);
             }
         } else if (OI.getDriverRequestCargoLED()) { //A Button
-            if(c_blinkin.getCurrentLEDCombo() == LEDCombo.REQUEST_CARGO){
-            Scheduler.getInstance().add(new BlinkCommand(250, LEDCombo.REQUEST_CARGO.getColour1(), LEDCombo.REQUEST_CARGO.getColour2()));
-            c_blinkin.setCurrentLEDCombo(LEDCombo.REQUEST_CARGO);
+            if(c_blinkin.getCurrentLEDCombo() == LEDCombo.STATIC){
+                Scheduler.getInstance().add(new BlinkCommand(250, LEDCombo.REQUEST_CARGO.getColour1(), LEDCombo.REQUEST_CARGO.getColour2()));
+                c_blinkin.setCurrentLEDCombo(LEDCombo.REQUEST_CARGO);
             }
         } else if (OI.getDriverRequestionHatchLED()) { //X Button
-            if(c_blinkin.getCurrentLEDCombo() == LEDCombo.REQUEST_HATCH){
+            if(c_blinkin.getCurrentLEDCombo() == LEDCombo.STATIC){
                 Scheduler.getInstance().add(new BlinkCommand(250, LEDCombo.REQUEST_HATCH.getColour1(), LEDCombo.REQUEST_HATCH.getColour2()));
                 c_blinkin.setCurrentLEDCombo(LEDCombo.REQUEST_HATCH);
             }
         } else if (OI.getDriverClimbing()) { //Y Button
-            if(c_blinkin.getCurrentLEDCombo() == LEDCombo.CLIMBING){
-                Scheduler.getInstance().add(new BlinkCommand(250, LEDCombo.CLIMBING.getColour1(), LEDCombo.CLIMBING.getColour2()));
-            c_blinkin.setCurrentLEDCombo(LEDCombo.CLIMBING);
+            if(c_blinkin.getCurrentLEDCombo() == LEDCombo.STATIC){
+                Scheduler.getInstance().add(new BlinkCommand(500, LEDCombo.CLIMBING.getColour1(), LEDCombo.CLIMBING.getColour2()));
+                c_blinkin.setCurrentLEDCombo(LEDCombo.CLIMBING);
             }
         }
     }

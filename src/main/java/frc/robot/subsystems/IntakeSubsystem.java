@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
@@ -19,6 +20,11 @@ public class IntakeSubsystem extends Subsystem {
     private DoubleSolenoid booper;
 
     private Encoder rotateEncoder;
+
+    private DigitalInput cargoSensor;
+
+    private DigitalInput hatchTopSensor;
+    private DigitalInput hatchBotSensor;
 
     public IntakeSubsystem() {
 

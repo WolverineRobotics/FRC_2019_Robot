@@ -44,7 +44,7 @@ public enum GamePiece {
             case 2:
                 return this.intakeElbowEncoderPosLvl_3;
             default:
-                return 0; //TODO determine safe default encoder value
+                return 0 /*RobotConst.INTAKE_SAFE_ENCODER_POSITION*/;
         }
     }
 }

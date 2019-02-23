@@ -12,9 +12,10 @@ public class DriveDistanceCommand extends Command {
     
     private PID gyroPID, distancePID;
             
-    private DriveSubsystem c_drive = Robot.getDriveSubsystem();
+    private DriveSubsystem c_drive;
     	
     public DriveDistanceCommand(double distance, double direction, double speed) {
+        c_drive = Robot.getDriveSubsystem();
         requires(c_drive);
 
         this.speed = speed;

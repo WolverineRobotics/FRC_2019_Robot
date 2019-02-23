@@ -9,15 +9,17 @@ import frc.util.PID;
 public class DriveDirectionCommand extends Command{
     
 	private double  speed;
-    private double leftSpeed = 0;
-    private double rightSpeed = 0;
+    private double leftSpeed;
+    private double rightSpeed;
     
-    private PID gyroPID = new PID(RobotPIDValues.GYRO_KP, RobotPIDValues.GYRO_KI, RobotPIDValues.GYRO_KD,
-            RobotPIDValues.GYRO_EPS);
+    private PID gyroPID;
     private DriveSubsystem c_drive = Robot.getDriveSubsystem();
     	
     public DriveDirectionCommand(double direction, double speed) {
         this.speed = speed;
+        this.leftSpeed = 0;
+        this.rightSpeed = 0;
+        gyroPID = new PID(RobotPIDValues.GYRO_KP, RobotPIDValues.GYRO_KI, RobotPIDValues.GYRO_KD, RobotPIDValues.GYRO_EPS);
         requires(c_drive);
         gyroPID.setDesiredValue(direction);
     }
