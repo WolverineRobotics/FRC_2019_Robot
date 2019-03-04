@@ -43,6 +43,7 @@ import frc.robot.constants.JoystickMap;
 public class OI {
     private static Joystick driver = new Joystick(JoystickMap.DRIVER_PORT);
     private static Joystick operator = new Joystick(JoystickMap.OPERATOR_PORT);
+    private static Joystick controller3 = new Joystick(2);
 
     //********************************************************************************** 
     // Driver control
@@ -227,5 +228,9 @@ public class OI {
      */
     public static Joystick getOperator() {
         return operator;
+    }
+
+    public static boolean getController3TestButton() {
+        return controller3.getRawButtonReleased(JoystickMap.BUTTON_Y);
     }
 }
