@@ -9,16 +9,24 @@ import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.VisionSubsystem;
 
 public class Robot extends TimedRobot {
-	private static BlinkinSubsystem m_blinkin = new BlinkinSubsystem();
-	private static ClimbSubsystem m_climb = new ClimbSubsystem();
-	private static DriveSubsystem m_drive = new DriveSubsystem();
-	private static ElevatorSubsystem m_elevator = new ElevatorSubsystem();
-	private static IntakeSubsystem m_intake = new IntakeSubsystem();
+	private static BlinkinSubsystem m_blinkin;
+	private static ClimbSubsystem m_climb;
+	private static DriveSubsystem m_drive;
+	private static ElevatorSubsystem m_elevator;
+	private static IntakeSubsystem m_intake;
+	private static VisionSubsystem m_vision;
 	
 	@Override
 	public void robotInit() {
+		m_blinkin = new BlinkinSubsystem();
+		m_climb = new ClimbSubsystem();
+		m_drive = new DriveSubsystem();
+		m_elevator = new ElevatorSubsystem();
+		m_intake = new IntakeSubsystem();
+		m_vision = new VisionSubsystem();
 	}
 
 	@Override
@@ -75,4 +83,8 @@ public class Robot extends TimedRobot {
 		return m_intake;
 	}
 	
+	public static VisionSubsystem getVisionSubsystem() {
+		return m_vision;
+	}
+
 }
