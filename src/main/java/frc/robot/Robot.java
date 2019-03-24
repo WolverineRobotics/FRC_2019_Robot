@@ -1,6 +1,7 @@
 //Testing git
 package frc.robot;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.oi.SDashboard;
@@ -9,24 +10,22 @@ import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
-import frc.robot.subsystems.VisionSubsystem;
 
+@SuppressWarnings("deprecation")
 public class Robot extends TimedRobot {
-	private static BlinkinSubsystem m_blinkin;
-	private static ClimbSubsystem m_climb;
-	private static DriveSubsystem m_drive;
-	private static ElevatorSubsystem m_elevator;
-	private static IntakeSubsystem m_intake;
-	private static VisionSubsystem m_vision;
+	private static BlinkinSubsystem m_blinkin = new BlinkinSubsystem();
+	private static ClimbSubsystem m_climb = new ClimbSubsystem();
+	private static DriveSubsystem m_drive = new DriveSubsystem();
+	private static ElevatorSubsystem m_elevator = new ElevatorSubsystem();
+	private static IntakeSubsystem m_intake = new IntakeSubsystem();
 	
 	@Override
+	
 	public void robotInit() {
-		m_blinkin = new BlinkinSubsystem();
-		m_climb = new ClimbSubsystem();
-		m_drive = new DriveSubsystem();
-		m_elevator = new ElevatorSubsystem();
-		m_intake = new IntakeSubsystem();
-		m_vision = new VisionSubsystem();
+		// Scheduler.getInstance().enable();
+		CameraServer.getInstance().startAutomaticCapture();
+		m_intake.toggleClaw();
+		m_intake.toggleShovel();
 	}
 
 	@Override
@@ -36,7 +35,11 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void autonomousInit() {
-
+		m_intake.resetEncoders();
+		m_elevator.resetEncoder();
+		m_climb.resetEncoders();
+		// CameraServer.getInstance().startAutomaticCapture();
+		// Scheduler.getInstance().add(new AutonomousCommandGroup());
 	}
 
 	@Override
@@ -46,7 +49,6 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopInit() {
-		// Scheduler.getInstance().enable();
 	}
 
 	@Override
@@ -55,12 +57,9 @@ public class Robot extends TimedRobot {
 	}
 
 	@Override
-	public void disabledInit() {
-	}
-
-	@Override
 	public void disabledPeriodic() {
-		SDashboard.execute(); // Periodically outputs information
+		Scheduler.getInstance().close();
+		Scheduler.getInstance().removeAll();
 	}
 
 	public static BlinkinSubsystem getBlinkinSubsystem() {
@@ -83,8 +82,4 @@ public class Robot extends TimedRobot {
 		return m_intake;
 	}
 	
-	public static VisionSubsystem getVisionSubsystem() {
-		return m_vision;
-	}
-
 }
