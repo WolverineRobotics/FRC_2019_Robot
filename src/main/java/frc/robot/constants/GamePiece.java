@@ -1,8 +1,14 @@
 package frc.robot.constants;
 
+/**
+ * GamePiece enum:
+ * Holds Elevator and Intake encoder positions for each rocket level,
+ * as well as human player station.
+ */
+
 public enum GamePiece {
-    HATCH(1500, 6800, 12500, -130, -130, -130, 0),
-    CARGO(4600, 7900, 12800, -161, -112, -78, 0);
+    HATCH(1500, 6800, 12500, -130, -130, -130, 0, 0),
+    CARGO(4600, 7900, 12800, -161, -112, -78, 0, 0);
 
     private int elevatorEncoderPosLvl_1;
     private int elevatorEncoderPosLvl_2;
@@ -12,7 +18,17 @@ public enum GamePiece {
     private int intakeRotateEncoderPosLvl_2;
     private int intakeRotateEncoderPosLvl_3;
 
-    GamePiece(int elevatorEncoderPosLvl_1, int elevatorEncoderPosLvl_2, int elevatorEncoderPosLvl_3, int intakeElbowEncoderPosLvl_1, int intakeElbowEncoderPosLvl_2, int intakeElbowEncoderPosLvl_3, int humanStation) {
+    private int playerStationCargo;
+    private int playerStationHatch;
+
+    GamePiece(  int elevatorEncoderPosLvl_1, 
+                int elevatorEncoderPosLvl_2, 
+                int elevatorEncoderPosLvl_3, 
+                int intakeElbowEncoderPosLvl_1, 
+                int intakeElbowEncoderPosLvl_2, 
+                int intakeElbowEncoderPosLvl_3, 
+                int playerStationCargo,
+                int playerStationHatch) {
         this.elevatorEncoderPosLvl_1 = elevatorEncoderPosLvl_1;
         this.elevatorEncoderPosLvl_2 = elevatorEncoderPosLvl_2;
         this.elevatorEncoderPosLvl_3 = elevatorEncoderPosLvl_3;
@@ -20,6 +36,8 @@ public enum GamePiece {
         this.intakeRotateEncoderPosLvl_1 = intakeElbowEncoderPosLvl_1;
         this.intakeRotateEncoderPosLvl_2 = intakeElbowEncoderPosLvl_2;
         this.intakeRotateEncoderPosLvl_3 = intakeElbowEncoderPosLvl_3;
+        this.playerStationCargo = playerStationCargo;
+        this.playerStationHatch = playerStationHatch;
     }
 
     public int getElevatorEncoderPos(int level) {
@@ -31,7 +49,7 @@ public enum GamePiece {
         case 3:
             return elevatorEncoderPosLvl_3;
         default:
-            return RobotConst.ELEVATOR_SAFE_LEVEL_HEIGHT;
+            return 0; //default encoder position
         }
     }
 
@@ -44,7 +62,15 @@ public enum GamePiece {
             case 3:
                 return this.intakeRotateEncoderPosLvl_3;
             default:
-                return RobotConst.INTAKE_ROTATE_ENCODER_MAXIMUM;
+                return 0; //default encoder position
         }
+    }
+
+    public int getPlayerStationCargo() {
+        return playerStationCargo;
+    }
+
+    public int getPlayerStationHatch() {
+        return playerStationHatch;
     }
 }
