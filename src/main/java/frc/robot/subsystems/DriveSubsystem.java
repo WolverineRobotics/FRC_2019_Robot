@@ -8,6 +8,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.commands.defaultcommands.DefaultDriveCommand;
 import frc.robot.constants.RobotConst;
 import frc.robot.constants.RobotMap;
 
@@ -19,7 +20,6 @@ public class DriveSubsystem extends Subsystem {
     private PigeonIMU pigeon;
     /**
      * Drive train subsystem
-     * 
      * include drive motors, gyro, and encoders
      */
     public DriveSubsystem() {
@@ -33,11 +33,14 @@ public class DriveSubsystem extends Subsystem {
 
         navX = new AHRS(Port.kMXP);
         pigeon = new PigeonIMU(RobotMap.DRIVE_PIGEON_IMU_ADDRESS);
+
+        navX.reset();
+        pigeon.setFusedHeadingToCompass();
     }
     
     @Override
     protected void initDefaultCommand() {
-
+        setDefaultCommand(new DefaultDriveCommand());
     }
 
     /**
@@ -96,7 +99,6 @@ public class DriveSubsystem extends Subsystem {
         return rightEncoder.get();
     }
 
-
     /**
      * resets encoder values
     */
@@ -110,15 +112,34 @@ public class DriveSubsystem extends Subsystem {
      * @return double value in degrees
      */
     public double getHeading() {
-        return (double) navX.getPitch();
+        return (double) navX.getYaw();
+    }
+
+    /**
+     * returns the gyro heading
+     * @return double value in degrees
+     */
+    public double getPigeonHeading() {
+        return pigeon.getFusedHeading();
     }
     
+    /**
+     * resets the gyro heading
+     */
     public void resetHeading() {
         navX.reset();
     }
 
+    /**
+     * Set the Encoder counts Per Inch
+     */
+    public void setEncoderCountsPerInch(double encoderCountsPerInch) {
+        leftEncoder.setDistancePerPulse(encoderCountsPerInch);
+        rightEncoder.setDistancePerPulse(encoderCountsPerInch);
+    }
+
     public double getLeftRawSpeed() {
-        return (leftDrive01.get() + leftDrive02.get()) / 2;
+        return (leftDrive01.get() + leftDrive02.get()) /2;
     }
 
     public double getRightRawSpeed() {
