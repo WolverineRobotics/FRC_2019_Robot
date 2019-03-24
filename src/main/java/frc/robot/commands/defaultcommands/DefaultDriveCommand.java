@@ -16,11 +16,6 @@ public class DefaultDriveCommand extends Command {
     }
 
     @Override
-    protected void initialize() {
-
-    }
-
-    @Override
     protected void execute() {
         double throttle = OI.getDriverThrottle();
         double turn = OI.getDriverTurn();
@@ -39,7 +34,7 @@ public class DefaultDriveCommand extends Command {
         leftSpeed = throttle - turn;
         rightSpeed = throttle + turn;
         
-        c_drive.setRawSpeeds(leftSpeed, -rightSpeed);
+        c_drive.setRawSpeeds(leftSpeed*0.7, -rightSpeed*0.7);
     }
 
     @Override
