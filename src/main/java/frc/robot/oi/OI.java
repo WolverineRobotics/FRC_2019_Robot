@@ -3,38 +3,37 @@ package frc.robot.oi;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.constants.JoystickMap;
+import frc.robot.constants.RobotConst;
 
 /**
  * Driver Controller
  * 	Sticks:
- * 		Right Stick Y-axis 	= Drive Motor Turn
- * 		Left Stick X-axis  	= Drive Motor Throttle
+ * 		Right Stick X-axis 	= Drive Motor Turn
+ * 		Left Stick Y-axis  	= Drive Motor Throttle
  * 	Buttons:
  *      A Button            = Requesting Cargo - Blink between ORANGE and WHITE
- *      B Button            = Default - Static RED
+ *      B Button            = Default - Static RED; Disables Climbing Mode (Climb Wheel)
  *      X Button            = Requesting Hatch - Blink between YELLOW and WHITE 
- *      Y Button            = Climbing LEDs - Blink between AQUA and WHITE
+ *      Y Button            = Climbing LEDs - Blink between AQUA and WHITE; Enables Climbing Mode (Climb Wheel)
  * 
  * 	Bumpers/Triggers:
- * 		Left Bumper			= High Gear (Turbo)
  * 		Left Trigger 		= Climb Speed down (Manual Control)
  * 		Right Trigger		= Climb Speed up (Manual Control) 
  *  Extras:
- *      Rumble              = Auto intaking
- * 
+ *      Rumble              = Operator is intaking
  * 
  * Operator Controller
  * 	Sticks:
  * 		Left Stick Y-axis  	= Elevator Motor Speed (Manual Control)
- * 		Right Stick Y-axis	= Intake Elbow Motor Speed (Manual Control)
+ * 		Right Stick Y-axis	= Intake Rotate Motor Speed (Manual Control)
  * 	Buttons:
- *      A Button            = 1st Level
- *      B Button            = 2nd Level
+ *      A Button            = 1st Elevator Level
+ *      B Button            = 2nd Elevator Level
  *      X Button            = Auto Intake
- * 		Y Button			= 3rd Level
+ * 		Y Button			= 3rd Elevator Level
  * 	Bumpers/Triggers:
- * 		Left Bumper 		= Close Claw (toggle default open claw)
- * 		Right Bumper		= Kachunk Kachunker (toggle default kachink)
+ * 		Left Bumper 		= Activate Shovel
+ * 		Right Bumper		= Activate Claw
  *  POV:
  *      Forward (0)         = Manual outtake ball
  *      Backward (180)      = Manual intake ball
@@ -43,7 +42,6 @@ import frc.robot.constants.JoystickMap;
 public class OI {
     private static Joystick driver = new Joystick(JoystickMap.DRIVER_PORT);
     private static Joystick operator = new Joystick(JoystickMap.OPERATOR_PORT);
-    private static Joystick controller3 = new Joystick(2);
 
     //********************************************************************************** 
     // Driver control
@@ -66,7 +64,13 @@ public class OI {
      * @return double from -1 to 1
      */
     public static double getDriverThrottle() {
-        return driver.getRawAxis(JoystickMap.LEFT_STICK_Y);
+        double throttle = driver.getRawAxis(JoystickMap.LEFT_STICK_Y);
+        if (throttle > 1) {
+            throttle = 1;
+        } else if(throttle < -1) {
+            throttle = -1;
+        }
+        return throttle;
     }
 
     /**
@@ -75,7 +79,7 @@ public class OI {
      * @return True when button released (toggle)
      */
     public static boolean getDriverRequestCargoLED() {
-        return driver.getRawButtonReleased(JoystickMap.BUTTON_A);
+        return driver.getRawButton(JoystickMap.BUTTON_A);
     }
     
     /**
@@ -84,7 +88,7 @@ public class OI {
      * @return True when button released (toggle)
      */
     public static boolean getDriverRequestionHatchLED() {
-        return driver.getRawButtonPressed(JoystickMap.BUTTON_X);
+        return driver.getRawButton(JoystickMap.BUTTON_X);
     }
     
     /**
@@ -93,7 +97,7 @@ public class OI {
      * @return True when button released (toggle)
      */
     public static boolean getDriverCancel() {
-        return driver.getRawButtonPressed(JoystickMap.BUTTON_B);
+        return driver.getRawButton(JoystickMap.BUTTON_B);
     }
     
     /**
@@ -101,8 +105,8 @@ public class OI {
      * Button Y
      * @return True when button released (toggle)
      */
-    public static boolean getDriverClimbing() {
-        return driver.getRawButtonPressed(JoystickMap.BUTTON_Y);
+    public static boolean getDriverClimbState() {
+        return driver.getRawButton(JoystickMap.BUTTON_Y);
     }
 
     /**
@@ -141,7 +145,13 @@ public class OI {
      * @return double from -1 to 1
      */
     public static double getOperatorElevatorSpeed() {
-        return operator.getRawAxis(JoystickMap.LEFT_STICK_Y);
+        double val = operator.getRawAxis(JoystickMap.LEFT_STICK_Y);
+
+        if(Math.abs(val) > RobotConst.ELEVATOR_LEFT_STICK_Y_TRIGGER_VALUE){
+            return val;
+        } else {
+            return 0;
+        }
     }
 
     /**
@@ -150,7 +160,7 @@ public class OI {
      * @return double from -1 to 1
      */
     public static double getOperatorIntakeTilt() {
-        return operator.getRawAxis(JoystickMap.RIGHT_STICK_Y);
+        return -operator.getRawAxis(JoystickMap.RIGHT_STICK_Y);
     }
 
     /**
@@ -159,7 +169,11 @@ public class OI {
      * @return True when being pressed;
      */
     public static boolean getOperatorIntakeIn() {
-        return operator.getPOV() == JoystickMap.POV_SOUTH;
+        return (
+            operator.getPOV() == JoystickMap.POV_SOUTH ||
+            operator.getPOV() == JoystickMap.POV_SOUTH_EAST ||
+            operator.getPOV() == JoystickMap.POV_SOUTH_WEST
+        );
     }
 
     /**
@@ -168,25 +182,29 @@ public class OI {
      * @return True when being pressed
      */
     public static boolean getOperatorIntakeOut() {
-        return operator.getPOV() == JoystickMap.POV_NORTH;
+        return (
+            operator.getPOV() == JoystickMap.POV_NORTH ||
+            operator.getPOV() == JoystickMap.POV_NORTH_EAST ||
+            operator.getPOV() == JoystickMap.POV_NORTH_WEST
+        );
     }
 
     /**
-     * Operator kachunk
+     * Operator engage claw
      * Right bumper
      * @return True when being pressed
      */
-    public static boolean getOperatorKachunk() {
-        return operator.getRawButton(JoystickMap.BUTTON_RIGHT_BUMPER);
+    public static boolean getOperatorClaw() {
+        return operator.getRawButtonPressed(JoystickMap.BUTTON_RIGHT_BUMPER);
     }
 
     /**
-     * Operator close claw
+     * Operator engage shovel
      * Left bumper
      * @return True when being pressed
      */
-    public static boolean getOperatorBooper() {
-        return operator.getRawButton(JoystickMap.BUTTON_LEFT_BUMPER);
+    public static boolean getOperatorShovel() {
+        return operator.getRawButtonPressed(JoystickMap.BUTTON_LEFT_BUMPER);
     }
     
     /**
@@ -195,7 +213,7 @@ public class OI {
      * @return True once pressed
      */
     public static boolean getOperatorElevatorLevel1() {
-        return operator.getRawButtonPressed(JoystickMap.BUTTON_A);
+        return operator.getRawButton(JoystickMap.BUTTON_A);
     }
 
     /**
@@ -204,7 +222,16 @@ public class OI {
      * @return True once pressed
      */
     public static boolean getOperatorElevatorLevel2() {
-        return operator.getRawButtonPressed(JoystickMap.BUTTON_B);
+        return operator.getRawButton(JoystickMap.BUTTON_B);
+    }
+
+    /**
+     * Operator auto intake
+     * Button X
+     * @return True once pressed
+     */
+    public static boolean getOperatorPlayerStationBall() {
+        return operator.getRawButton(JoystickMap.BUTTON_X);
     }
 
     /**
@@ -212,8 +239,8 @@ public class OI {
      * Button Y
      * @return True once pressed
      */
-    public static boolean getOperatorElevatorLevel3() { //returns true if BUTTON Y is released
-        return operator.getRawButtonPressed(JoystickMap.BUTTON_Y);
+    public static boolean getOperatorElevatorLevel3() {
+        return operator.getRawButton(JoystickMap.BUTTON_Y);
     }
 
     /**
@@ -228,9 +255,5 @@ public class OI {
      */
     public static Joystick getOperator() {
         return operator;
-    }
-
-    public static boolean getController3TestButton() {
-        return controller3.getRawButtonReleased(JoystickMap.BUTTON_Y);
     }
 }
