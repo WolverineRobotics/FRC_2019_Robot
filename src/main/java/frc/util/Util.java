@@ -14,7 +14,7 @@ public class Util{
     //Piecewise function, if less than deadzone value, 0        
     //Else linear
     //https://www.desmos.com/calculator/h7gnlk21iz 
-    
+
     public static double getDeadzoneResult(double controlInput, double deadzoneAmount){
 
         if(Math.abs(controlInput) < deadzoneAmount){
@@ -46,10 +46,9 @@ public class Util{
 
    public static double setDeadzoneLimits(double controlInput, double deadzoneValue){
         
-        double output = controlInput;
-        output = TriggerDeadzone.getDeadzoneResult(output, deadzoneValue);
-        output = MotorLimits.getMotorLimits(output);
-        return output;
+        controlInput = getDeadzoneResult(controlInput, deadzoneValue);
+        controlInput = getMotorLimits(controlInput);
+        return controlInput;
         
 
     }
