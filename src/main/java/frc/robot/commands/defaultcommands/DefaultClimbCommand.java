@@ -21,7 +21,8 @@ public class DefaultClimbCommand extends Command {
 
     @Override
     protected void execute() {
-        if (OI.getDriverClimbState()) { 
+        if (OI.getDriverClimbState()) {
+             
             c_climb.unlockLock(false);
 		}
 		

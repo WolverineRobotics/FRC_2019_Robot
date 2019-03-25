@@ -1,4 +1,4 @@
-package frc.robot.commands.autonomousfunctions;
+package frc.robot.commands.autonomouscommands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;

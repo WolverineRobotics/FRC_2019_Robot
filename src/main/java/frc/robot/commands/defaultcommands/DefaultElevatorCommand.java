@@ -3,7 +3,7 @@ package frc.robot.commands.defaultcommands;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.Robot;
-import frc.robot.commands.autonomousfunctions.ElevatorCommandGroup;
+import frc.robot.commands.autonomouscommands.ElevatorCommandGroup;
 import frc.robot.constants.GamePiece;
 import frc.robot.constants.JoystickMap;
 import frc.robot.constants.RobotConst;
