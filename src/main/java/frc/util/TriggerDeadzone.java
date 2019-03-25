@@ -5,7 +5,7 @@ public class TriggerDeadzone{
 
     }
 
-    public double getDeadzoneResult(double controlInput, double deadzoneAmount){
+    public static double getDeadzoneResult(double controlInput, double deadzoneAmount){
         //Allows for input values less than trigger values. 
         //Piecewise function, if less than deadzone value, 0
         //Else linear

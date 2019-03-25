@@ -8,9 +8,9 @@ public class MotorLimits {
 
 
     //Ensures motor power values are between -1 and 1
-    public double setMotorLimits(double motorPower){
+    public static double getMotorLimits(double motorPower){
 
-        if (motorPower<-1){
+        if (motorPower < -1){
             motorPower = -1;
         }else if(motorPower > 1){
             motorPower = 1;
