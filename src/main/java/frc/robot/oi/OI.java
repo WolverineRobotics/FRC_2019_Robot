@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.constants.JoystickMap;
 import frc.robot.constants.RobotConst;
-import frc.util.LimitDeadzoneCombo;
+import frc.util.combo.LimitDeadzoneCombo;
 
 /**
  * Driver Controller
