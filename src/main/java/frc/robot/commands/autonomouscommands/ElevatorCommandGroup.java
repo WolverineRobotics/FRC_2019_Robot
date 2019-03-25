@@ -1,4 +1,4 @@
-package frc.robot.commands.autonomousfunctions;
+package frc.robot.commands.autonomouscommands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.constants.GamePiece;
