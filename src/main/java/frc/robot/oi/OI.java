@@ -127,15 +127,6 @@ public class OI {
         return driver.getRawAxis(JoystickMap.RIGHT_TRIGGER);
     }
 
-    /**
-     * Set driver controller rumble
-     * @param rumble rumble intensity
-     */
-    public static void driverRumble(double rumble) {
-        driver.setRumble(RumbleType.kLeftRumble, rumble);
-        driver.setRumble(RumbleType.kRightRumble, rumble);
-    }
-
     //********************************************************************************** 
     // Operator controls
     //**********************************************************************************
@@ -159,7 +150,7 @@ public class OI {
      * Right stick y
      * @return double from -1 to 1
      */
-    public static double getOperatorIntakeTilt() {
+    public static double getOperatorIntakeRotate() {
         return -operator.getRawAxis(JoystickMap.RIGHT_STICK_Y);
     }
 
@@ -187,6 +178,10 @@ public class OI {
             operator.getPOV() == JoystickMap.POV_NORTH_EAST ||
             operator.getPOV() == JoystickMap.POV_NORTH_WEST
         );
+    }
+
+    public static boolean getOperatorAutoHatch() {
+        return operator.getRawButton(JoystickMap.BUTTON_SELECT);
     }
 
     /**
