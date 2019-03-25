@@ -1,6 +1,7 @@
 package frc.util.combo;
 
-import frc.util.*;;
+import frc.util.TriggerDeadzone;
+import frc.util.MotorLimits;
 
 
 //Requires TriggerDeadzone.java and MotorLimits.java
