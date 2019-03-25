@@ -1,7 +1,6 @@
 package frc.robot.commands.defaultcommands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.Robot;
 import frc.robot.commands.autonomouscommands.ElevatorCommandGroup;
 import frc.robot.constants.GamePiece;
@@ -9,6 +8,7 @@ import frc.robot.constants.JoystickMap;
 import frc.robot.oi.OI;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.util.Util;
 
 public class DefaultElevatorCommand extends Command {
 
@@ -28,13 +28,13 @@ public class DefaultElevatorCommand extends Command {
         //Operator A, B and Y Button controls
         GamePiece gamePiece = c_intake.getGamePiece();
         if(OI.getOperatorElevatorLevel1()) {
-            Scheduler.getInstance().add(new ElevatorCommandGroup(gamePiece, 1));
+            Util.addCommand(new ElevatorCommandGroup(gamePiece, 1));
         } else if (OI.getOperatorElevatorLevel2()) {
-            Scheduler.getInstance().add(new ElevatorCommandGroup(gamePiece, 2));
+            Util.addCommand(new ElevatorCommandGroup(gamePiece, 2));
         } else if (OI.getOperatorElevatorLevel3()) {
-            Scheduler.getInstance().add(new ElevatorCommandGroup(gamePiece, 3));
+            Util.addCommand(new ElevatorCommandGroup(gamePiece, 3));
         } else if(OI.getOperatorPlayerStationBall()) {
-            // Scheduler.getInstance().add(new ElevatorCommandGroup(GamePiece.CARGO, 4));
+            // Util.addCommand(new ElevatorCommandGroup(GamePiece.CARGO, 4));
         }
         
         //Manual control
