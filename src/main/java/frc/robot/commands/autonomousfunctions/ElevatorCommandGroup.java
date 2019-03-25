@@ -11,8 +11,8 @@ public class ElevatorCommandGroup extends CommandGroup {
     public ElevatorCommandGroup(GamePiece gamePiece, int level) {
         desiredElevatorEncoderPos = gamePiece.getElevatorEncoderPos(level);
         desiredIntakeRotateEncoderPos = gamePiece.getIntakeElbowEncoderPos(level);
-        addParallel(new SetIntakeRotateCommand(desiredIntakeRotateEncoderPos, 10));
-        addSequential(new SetElevatorCommand(desiredElevatorEncoderPos, 10));
+        addParallel(new SetIntakeRotateCommand(desiredIntakeRotateEncoderPos));
+        addSequential(new SetElevatorCommand(desiredElevatorEncoderPos));
     }
 
 }

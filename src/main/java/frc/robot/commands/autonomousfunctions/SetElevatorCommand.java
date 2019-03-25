@@ -1,7 +1,6 @@
 package frc.robot.commands.autonomousfunctions;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.subsystems.ElevatorSubsystem;
 
@@ -9,15 +8,13 @@ public class SetElevatorCommand extends Command {
 
     private ElevatorSubsystem c_elevator;
     private int desiredEncoderPos;
-    private int deadband;
 
     private boolean goingUp;
     private boolean isDone;
 
-    public SetElevatorCommand(int desiredEncoderPos, int deadband) {
+    public SetElevatorCommand(int desiredEncoderPos) {
         c_elevator = Robot.getElevatorSubsystem();
         requires(c_elevator);
-        this.deadband = deadband;
         this.desiredEncoderPos = desiredEncoderPos;
     }
 
