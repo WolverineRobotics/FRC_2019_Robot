@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.constants.JoystickMap;
 import frc.robot.constants.RobotConst;
+import frc.util.LimitDeadzoneCombo;
 
 /**
  * Driver Controller
@@ -54,7 +55,8 @@ public class OI {
      * @return double from -1 to 1
      */
     public static double getDriverTurn() {
-        return driver.getRawAxis(JoystickMap.RIGHT_STICK_X);
+        // return driver.getRawAxis(JoystickMap.RIGHT_STICK_X);
+        return LimitDeadzoneCombo.setDeadzoneLimits(driver.getRawAxis(JoystickMap.RIGHT_STICK_X), RobotConst.DRIVE_TURN_TRIGGER_VALUE);
     }
 
     /**
@@ -64,13 +66,14 @@ public class OI {
      * @return double from -1 to 1
      */
     public static double getDriverThrottle() {
-        double throttle = driver.getRawAxis(JoystickMap.LEFT_STICK_Y);
+ /*        double throttle = driver.getRawAxis(JoystickMap.LEFT_STICK_Y);
         if (throttle > 1) {
             throttle = 1;
         } else if(throttle < -1) {
             throttle = -1;
         }
-        return throttle;
+        return throttle; */
+        return LimitDeadzoneCombo.setDeadzoneLimits(driver.getRawAxis(JoystickMap.LEFT_STICK_Y), RobotConst.DRIVE_THORTTLE_TRIGGER_VALUE);
     }
 
     /**
@@ -115,7 +118,9 @@ public class OI {
      * @return double from 0 to 1
      */
     public static double getDriverClimbSpeedDown() {
-        return driver.getRawAxis(JoystickMap.LEFT_TRIGGER);
+        // return driver.getRawAxis(JoystickMap.LEFT_TRIGGER);
+        return LimitDeadzoneCombo.setDeadzoneLimits(driver.getRawAxis(JoystickMap.LEFT_TRIGGER), RobotConst.CLIMB_THROTTLE_TRIGGER_VALUE);
+
     }
     
     /**
@@ -124,7 +129,8 @@ public class OI {
      * @return double from 0 to 1
      */
     public static double getDriverClimbSpeedUp() {
-        return driver.getRawAxis(JoystickMap.RIGHT_TRIGGER);
+        // return driver.getRawAxis(JoystickMap.RIGHT_TRIGGER);
+        return LimitDeadzoneCombo.setDeadzoneLimits(driver.getRawAxis(JoystickMap.RIGHT_TRIGGER), RobotConst.CLIMB_THROTTLE_TRIGGER_VALUE);
     }
 
     /**
@@ -145,13 +151,15 @@ public class OI {
      * @return double from -1 to 1
      */
     public static double getOperatorElevatorSpeed() {
-        double val = operator.getRawAxis(JoystickMap.LEFT_STICK_Y);
+/*         double val = operator.getRawAxis(JoystickMap.LEFT_STICK_Y);
 
         if(Math.abs(val) > RobotConst.ELEVATOR_LEFT_STICK_Y_TRIGGER_VALUE){
             return val;
         } else {
             return 0;
-        }
+        } */    
+        return LimitDeadzoneCombo.setDeadzoneLimits(operator.getRawAxis(JoystickMap.LEFT_STICK_Y), RobotConst.ELEVATOR_LEFT_STICK_Y_TRIGGER_VALUE);
+
     }
 
     /**
@@ -160,7 +168,9 @@ public class OI {
      * @return double from -1 to 1
      */
     public static double getOperatorIntakeTilt() {
-        return -operator.getRawAxis(JoystickMap.RIGHT_STICK_Y);
+        // return -operator.getRawAxis(JoystickMap.RIGHT_STICK_Y);
+        return LimitDeadzoneCombo.setDeadzoneLimits(-operator.getRawAxis(JoystickMap.RIGHT_STICK_Y), RobotConst.ELEVATOR_RIGHT_STICK_Y_TRIGGER_VALUE);
+
     }
 
     /**
