@@ -11,7 +11,7 @@ import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 
-@SuppressWarnings("deprecation")
+// @SuppressWarnings("deprecation")
 public class Robot extends TimedRobot {
 	private static BlinkinSubsystem m_blinkin = new BlinkinSubsystem();
 	private static ClimbSubsystem m_climb = new ClimbSubsystem();
