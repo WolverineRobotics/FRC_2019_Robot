@@ -37,11 +37,16 @@ public class DefaultElevatorCommand extends Command {
         
         //Manual control
         double elevatorSpeed = OI.getOperatorElevatorSpeed();
-        if (Math.abs(elevatorSpeed) > RobotConst.ELEVATOR_LEFT_STICK_Y_TRIGGER_VALUE) {
+
+        // Redundant code, now done in OI
+        /* if (Math.abs(elevatorSpeed) > RobotConst.ELEVATOR_LEFT_STICK_Y_TRIGGER_VALUE) {
             c_elevator.setElevatorRawSpeed(elevatorSpeed * 0.7);
         } else {
             c_elevator.setElevatorRawSpeed(0);
-        }
+        } */
+
+        c_elevator.setElevatorRawSpeed(elevatorSpeed * 0.7);
+
 
         if (OI.getDriver().getRawButton(8)) {
             c_elevator.resetEncoder();

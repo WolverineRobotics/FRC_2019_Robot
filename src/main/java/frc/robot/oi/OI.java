@@ -142,6 +142,12 @@ public class OI {
         driver.setRumble(RumbleType.kRightRumble, rumble);
     }
 
+    //May want to remap fine control
+    //If held down, drive motor speed is reduced
+    public static boolean getFineControl(){
+        return driver.getRawButton(JoystickMap.BUTTON_RIGHT_BUMPER);
+    }
+
     //********************************************************************************** 
     // Operator controls
     //**********************************************************************************
