@@ -77,7 +77,7 @@ public enum GamePiece {
         }
     }
 
-    public int getIntakeElbowEncoderPos(int level) {
+    public int getIntakeRotateEncoderPos(int level) {
         switch (level) {
             case 1:
                 return this.intakeRotate_1;

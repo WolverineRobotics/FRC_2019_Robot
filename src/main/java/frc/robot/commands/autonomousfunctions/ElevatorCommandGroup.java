@@ -11,8 +11,7 @@ import frc.robot.constants.GamePiece;
 public class ElevatorCommandGroup extends CommandGroup {
 
     public ElevatorCommandGroup(GamePiece gamePiece, int level) {
-        addParallel(new SetIntakeRotateCommand(gamePiece.getElevatorEncoderPos(level)));
-        addSequential(new SetElevatorCommand(gamePiece.getIntakeElbowEncoderPos(level)));
+        addParallel(new SetIntakeRotateCommand(gamePiece.getIntakeRotateEncoderPos(level)));
+        addSequential(new SetElevatorCommand(gamePiece.getElevatorEncoderPos(level)));
     }
-
 }
