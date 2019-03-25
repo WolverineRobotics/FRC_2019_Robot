@@ -13,6 +13,7 @@ public class RobotConst {
     // Elevator constants
     //**********************************************************************************
     public static double ELEVATOR_LEFT_STICK_Y_TRIGGER_VALUE = 0.2;
+    public static double ELEVATOR_RIGHT_STICK_Y_TRIGGER_VALUE = 0.2;
     
     //********************************************************************************** 
     // Intake constants
