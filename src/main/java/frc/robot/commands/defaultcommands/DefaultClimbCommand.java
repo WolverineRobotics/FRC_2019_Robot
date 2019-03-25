@@ -1,7 +1,9 @@
 package frc.robot.commands.defaultcommands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.Robot;
+import frc.robot.commands.commandgroups.ClimbCommandGroup;
 import frc.robot.oi.OI;
 import frc.robot.subsystems.ClimbSubsystem;
 
@@ -22,7 +24,7 @@ public class DefaultClimbCommand extends Command {
     @Override
     protected void execute() {
         if (OI.getDriverClimbState()) {
-             
+            Scheduler.getInstance().add(new ClimbCommandGroup());
             c_climb.unlockLock(false);
 		}
 		
