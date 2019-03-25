@@ -3,16 +3,16 @@ package frc.robot.commands.autonomousfunctions;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.constants.GamePiece;
 
+/**
+ * For Operator Buttons: A (level 1), B (level 2), Y (level 3)
+ * GamePiece enum is determined by ball sensor. See DefaultElevatorCommand.java
+ */
+
 public class ElevatorCommandGroup extends CommandGroup {
 
-    private int desiredElevatorEncoderPos;
-    private int desiredIntakeRotateEncoderPos;
-
     public ElevatorCommandGroup(GamePiece gamePiece, int level) {
-        desiredElevatorEncoderPos = gamePiece.getElevatorEncoderPos(level);
-        desiredIntakeRotateEncoderPos = gamePiece.getIntakeElbowEncoderPos(level);
-        addParallel(new SetIntakeRotateCommand(desiredIntakeRotateEncoderPos, 10));
-        addSequential(new SetElevatorCommand(desiredElevatorEncoderPos, 10));
+        addParallel(new SetIntakeRotateCommand(gamePiece.getElevatorEncoderPos(level)));
+        addSequential(new SetElevatorCommand(gamePiece.getIntakeElbowEncoderPos(level)));
     }
 
 }
