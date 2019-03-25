@@ -127,6 +127,10 @@ public class OI {
         return driver.getRawAxis(JoystickMap.RIGHT_TRIGGER);
     }
 
+    public static boolean getAutoClimb(){
+        return driver.getRawButton(JoystickMap.BUTTON_SELECT);
+    }
+
     /**
      * Set driver controller rumble
      * @param rumble rumble intensity
