@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -28,8 +29,8 @@ public class ClimbSubsystem extends Subsystem {
         lock = new DoubleSolenoid(RobotMap.CLIMB_LOCK_PCM_ADDRESS, RobotMap.CLIMB_LOCK_FORWARD_ADDRESS,
                 RobotMap.CLIMB_LOCK_REVERSE_ADDRESS);
                 
-        //wheel.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
-        //lift.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+        wheel.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+        lift.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
         liftEncoder.reset();
         lock.set(Value.kOff);
     }
@@ -46,7 +47,7 @@ public class ClimbSubsystem extends Subsystem {
         wheel.set(ControlMode.PercentOutput, speed);
     }
 
-    public double getWheelSpeed() {
+    public double getWheelRawSpeed() {
         return wheel.getSelectedSensorVelocity(0);
     }
 
@@ -54,9 +55,9 @@ public class ClimbSubsystem extends Subsystem {
         lift.set(ControlMode.PercentOutput, speed);
     }
 
-    // public double getLiftSpeed() {
-    //     // return lift.getSelectedSensorVelocity(0);
-    // }
+    public double getLiftRawSpeed() {
+         return lift.getSelectedSensorVelocity(0);
+    }
 
     //****************************************************************
     // Encoder methods
@@ -85,17 +86,6 @@ public class ClimbSubsystem extends Subsystem {
             lock.set(Value.kForward);
         } else {
             lock.set(Value.kReverse);
-        }
-    }
-
-    public boolean getClimbActive() {
-        Value value = lock.get();
-        if (value.equals(Value.kForward)) {
-            return true;
-        } else if (value.equals(Value.kReverse)) {
-            return false;
-        } else {
-            return false;
         }
     }
 
