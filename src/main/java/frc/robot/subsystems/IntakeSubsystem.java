@@ -126,6 +126,14 @@ public class IntakeSubsystem extends Subsystem {
         }
     }
 
+    public boolean getShovelOpen() {
+        return !shovelToggle;
+    }
+
+    public void setShovel(boolean toOpen) {
+        shovelToggle = !toOpen;
+    }
+
     public void toggleClaw() {
         if (clawToggle) {
             clawToggle = false;
@@ -146,8 +154,8 @@ public class IntakeSubsystem extends Subsystem {
         return clawToggle;
     }
 
-    public boolean getShovelOpen() {
-        return !shovelToggle;
+    public void setClaw(boolean toOpen) {
+        clawToggle = toOpen;
     }
 
     // ***********************************************************

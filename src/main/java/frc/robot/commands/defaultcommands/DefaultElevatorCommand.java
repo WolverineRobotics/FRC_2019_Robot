@@ -2,7 +2,8 @@ package frc.robot.commands.defaultcommands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.commands.autonomouscommands.ElevatorCommandGroup;
+import frc.robot.commands.commandgroups.ElevatorLevelCommandGroup;
+import frc.robot.commands.commandgroups.PlayerStationCommandGroup;
 import frc.robot.constants.GamePiece;
 import frc.robot.constants.JoystickMap;
 import frc.robot.oi.OI;
@@ -28,13 +29,13 @@ public class DefaultElevatorCommand extends Command {
         //Operator A, B and Y Button controls
         GamePiece gamePiece = c_intake.getGamePiece();
         if(OI.getOperatorElevatorLevel1()) {
-            Util.addCommand(new ElevatorCommandGroup(gamePiece, 1));
+            Util.addCommand(new ElevatorLevelCommandGroup(gamePiece, 1));
         } else if (OI.getOperatorElevatorLevel2()) {
-            Util.addCommand(new ElevatorCommandGroup(gamePiece, 2));
+            Util.addCommand(new ElevatorLevelCommandGroup(gamePiece, 2));
         } else if (OI.getOperatorElevatorLevel3()) {
-            Util.addCommand(new ElevatorCommandGroup(gamePiece, 3));
+            Util.addCommand(new ElevatorLevelCommandGroup(gamePiece, 3));
         } else if(OI.getOperatorPlayerStationBall()) {
-            // Util.addCommand(new ElevatorCommandGroup(GamePiece.CARGO, 4));
+            Util.addCommand(new PlayerStationCommandGroup(GamePiece.CARGO));
         }
         
         //Manual control

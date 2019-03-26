@@ -1,6 +1,9 @@
-package frc.robot.commands.autonomouscommands;
+package frc.robot.commands.commandgroups;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import frc.robot.commands.autonomouscommands.SetElevatorCommand;
+import frc.robot.commands.autonomouscommands.SetIntakeRotateCommand;
+import frc.robot.commands.autonomouscommands.ClimbLockCommand;
 // import frc.robot.commands.autonomousfunctions.SetElevatorCommand;
 
 
@@ -15,8 +18,8 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class ClimbCommandGroup extends CommandGroup{
 
     public ClimbCommandGroup(){
-        addSequential(new SetElevatorCommand(0));
-        addSequential(new SetIntakeRotateCommand(0));
+        addSequential(new SetElevatorCommand(0, 0.4));  //TODO: Change speed to actual value
+        addSequential(new SetIntakeRotateCommand(0, 0.4)); //TODO: Change speed to actual value
         addSequential(new ClimbLockCommand(true));
 
         // addSequential(new SetIntakeRotateCommand(0)); // TODO:Change to encoder value

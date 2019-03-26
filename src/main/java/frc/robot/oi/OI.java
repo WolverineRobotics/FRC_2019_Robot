@@ -12,10 +12,10 @@ import frc.util.Util;
  * 		Right Stick X-axis 	= Drive Motor Turn
  * 		Left Stick Y-axis  	= Drive Motor Throttle
  * 	Buttons:
- *      A Button            = Requesting Cargo - Blink between ORANGE and WHITE
- *      B Button            = Default - Static RED; Disables Climbing Mode (Climb Wheel)
- *      X Button            = Requesting Hatch - Blink between YELLOW and WHITE 
- *      Y Button            = Climbing LEDs - Blink between AQUA and WHITE; Enables Climbing Mode (Climb Wheel)
+ *      A Button            = 
+ *      B Button            = Disables Climbing Mode (Climb Wheel Disabled, Unlocks Climb Lock)
+ *      X Button            = 
+ *      Y Button            = Enables Climbing Mode (Climb Wheel Enabled, Brings Elevator to 0, Locks Climb Lock)
  * 
  * 	Bumpers/Triggers:
  * 		Left Trigger 		= Climb Speed down (Manual Control)
@@ -30,7 +30,7 @@ import frc.util.Util;
  * 	Buttons:
  *      A Button            = 1st Elevator Level
  *      B Button            = 2nd Elevator Level
- *      X Button            = Auto Intake
+ *      X Button            = Player Station Cargo Level
  * 		Y Button			= 3rd Elevator Level
  * 	Bumpers/Triggers:
  * 		Left Bumper 		= Activate Shovel
