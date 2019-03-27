@@ -52,9 +52,9 @@ public class DefaultIntakeCommand extends Command {
         }
 
         // Auto Hatch ************************
-        if(OI.getOperatorAutoHatch()) {
-            Scheduler.getInstance().add(new AutoHatchCommand());
-        }
+        // if(OI.getOperatorAutoHatch()) {
+        //     Scheduler.getInstance().add(new AutoHatchCommand());
+        // }
         if (OI.getDriver().getRawButton(JoystickMap.BUTTON_START) && OI.getOperator().getRawButton(JoystickMap.BUTTON_START)) {
             c_intake.resetEncoders();
         }

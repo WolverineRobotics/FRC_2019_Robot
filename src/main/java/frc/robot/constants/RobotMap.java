@@ -4,7 +4,6 @@ public class RobotMap {
     //********************************************************************************** 
     // CAN Addresses
     //**********************************************************************************
-    public static final int TECHNICAL_PCM_EXTRA_ADDRESS             = 13;
     public static final int TECHNICAL_PCM_MAIN_ADDRESS              = 14;
     public static final int TECHNICAL_PDP_ADDRESS                   = 15;
 

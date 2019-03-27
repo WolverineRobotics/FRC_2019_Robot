@@ -146,7 +146,7 @@ public class CameraSubsystem extends Subsystem {
     	// Filter the array to only use the values that are closest to the middle
     	List<Double> xValues = new ArrayList<>();
     	for (int i=0; i<centerXArray.length; i++) {
-    		if (centerYArray[i] > 200) {
+    		if (centerYArray[i] > 0) {
     			xValues.add(centerXArray[i]);
     		}
     	}
