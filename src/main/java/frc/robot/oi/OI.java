@@ -20,8 +20,10 @@ import frc.util.Util;
  * 	Bumpers/Triggers:
  * 		Left Trigger 		= Climb Speed down (Manual Control)
  * 		Right Trigger		= Climb Speed up (Manual Control) 
+ *      Right Bumper        = Fine Control
  *  Extras:
  *      Rumble              = Operator is intaking
+ *      Select              = Cancel Command
  * 
  * Operator Controller
  * 	Sticks:
@@ -38,6 +40,8 @@ import frc.util.Util;
  *  POV:
  *      Forward (0)         = Manual outtake ball
  *      Backward (180)      = Manual intake ball
+ *  Extras:
+ *      Select              = Cancel Command
  */
 
 public class OI {
@@ -133,9 +137,13 @@ public class OI {
         return Util.setDeadzoneLimits(driver.getRawAxis(JoystickMap.RIGHT_TRIGGER), RobotConst.CLIMB_THROTTLE_TRIGGER_VALUE);
     }
 
-/*     public static boolean getAutoClimb(){
-        return driver.getRawButton(JoystickMap.BUTTON_SELECT);
-    } */
+
+    //TODO: Assign button to AutoClimb
+
+     public static boolean getAutoClimb(){
+        // return driver.getRawButton(JoystickMap.BUTTON_SELECT);
+        return false; //TEMP
+    } 
 
     /**
      * Set driver controller rumble

@@ -68,13 +68,15 @@ public class SetClimbCommand extends Command{
     @Override
     protected void execute() {
 
-        double speedUp = OI.getDriverClimbSpeedUp();
-        double speedDown = OI.getDriverClimbSpeedDown();
-        double speed = speedUp - speedDown;
+        if(allowManualOverride){
+            double speedUp = OI.getDriverClimbSpeedUp();
+            double speedDown = OI.getDriverClimbSpeedDown();
+            double speed = speedUp - speedDown;
 
-        //Allows for manual override if there is controller input.
-        if(speed != 0){
-            c_climb.setLiftRawSpeed(speed);
+            //Allows for manual override if there is controller input.
+            if(speed != 0){
+                c_climb.setLiftRawSpeed(speed);
+            }
         }
 
         double throttle = OI.getDriverThrottle();
