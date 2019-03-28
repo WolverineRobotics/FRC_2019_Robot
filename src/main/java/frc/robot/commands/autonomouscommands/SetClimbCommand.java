@@ -45,7 +45,6 @@ public class SetClimbCommand extends Command{
         this.allowManualOverride = allowManualOverride;
     }
 
-    //TODO: Add way to cancel command
 
     @Override
     protected boolean isFinished() {
@@ -80,6 +79,12 @@ public class SetClimbCommand extends Command{
 
         double throttle = OI.getDriverThrottle();
         c_climb.setWheelRawSpeed(-throttle * 0.9);  //TODO: Set intake wheel speed
+
+
+        //Allows the driver to cancel this command
+        if(OI.getCancelDriverCommand()){
+            isDone = true;
+        }
 
     }
 

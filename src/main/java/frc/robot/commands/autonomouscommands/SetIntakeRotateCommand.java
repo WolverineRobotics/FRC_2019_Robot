@@ -75,6 +75,11 @@ public class SetIntakeRotateCommand extends Command {
 
         }
 
+        //Allows for the operator to cancel the intake rotate 
+        if(OI.getCancelOperatorCommand()){
+            isDone = true;
+        }
+
     }
 
     @Override
@@ -82,7 +87,6 @@ public class SetIntakeRotateCommand extends Command {
         c_intake.setRotateRawSpeed(0);
     }
 
-    //TODO: Add way to cancel command
     
     @Override
     protected boolean isFinished() {

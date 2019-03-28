@@ -133,9 +133,9 @@ public class OI {
         return Util.setDeadzoneLimits(driver.getRawAxis(JoystickMap.RIGHT_TRIGGER), RobotConst.CLIMB_THROTTLE_TRIGGER_VALUE);
     }
 
-    public static boolean getAutoClimb(){
+/*     public static boolean getAutoClimb(){
         return driver.getRawButton(JoystickMap.BUTTON_SELECT);
-    }
+    } */
 
     /**
      * Set driver controller rumble
@@ -150,6 +150,12 @@ public class OI {
     //If held down, drive motor speed is reduced
     public static boolean getFineControl(){
         return driver.getRawButton(JoystickMap.BUTTON_RIGHT_BUMPER);
+    }
+
+
+    //Cancel Driver Commands
+    public static boolean getCancelDriverCommand(){
+        return (driver.getRawButton(JoystickMap.BUTTON_SELECT));
     }
 
     //********************************************************************************** 
@@ -256,6 +262,12 @@ public class OI {
         return operator.getRawButton(JoystickMap.BUTTON_Y);
     }
 
+    //Cancel Operator Commands
+    public static boolean getCancelOperatorCommand(){
+        return (operator.getRawButton(JoystickMap.BUTTON_SELECT));
+    }
+
+
     /**
      * @return instance of driver
      */
@@ -269,4 +281,12 @@ public class OI {
     public static Joystick getOperator() {
         return operator;
     }
+
+
+    //If either driver is able to cancel a command
+    public static boolean getCancelCommand(){
+        return (driver.getRawButton(JoystickMap.BUTTON_SELECT) || operator.getRawButton(JoystickMap.BUTTON_SELECT));
+    }
 }
+
+
