@@ -1,7 +1,6 @@
 package frc.robot.commands.autonomousfunctions;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.subsystems.IntakeSubsystem;
 
@@ -9,16 +8,14 @@ public class SetIntakeRotateCommand extends Command {
 
     private IntakeSubsystem c_intake;
     private int desiredEncoderPos;
-    private int deadband;
 
     private boolean goingUp;
     private boolean isDone;
 
-    public SetIntakeRotateCommand(int desiredEncoderPos, int deadband) {
+    public SetIntakeRotateCommand(int desiredEncoderPos) {
         c_intake = Robot.getIntakeSubsystem();
         requires(c_intake);
         this.desiredEncoderPos = desiredEncoderPos;
-        this.deadband = deadband;
     }
 
 

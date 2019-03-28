@@ -20,7 +20,7 @@ public class IntakeSubsystem extends Subsystem {
     private DoubleSolenoid shovel;
     private DoubleSolenoid claw;
 
-    private boolean shovelToggle;
+    private boolean shovelToggle; //true = forward, false = reverse.
     private boolean clawToggle;
 
     private Encoder rotateEncoder;
@@ -34,19 +34,17 @@ public class IntakeSubsystem extends Subsystem {
 
         shovel = new DoubleSolenoid(RobotMap.INTAKE_PISTON_SHOVEL_PCM_MODULE_ADDRESS,
                 RobotMap.INTAKE_PISTON_SHOVEL_FORWARD_ADDRESS, RobotMap.INTAKE_PISTON_SHOVEL_REVERSE_ADDRESS);
-        shovelToggle = true;
 
         claw = new DoubleSolenoid(RobotMap.INTAKE_PISTON_CLAW_PCM_MODULE_ADDRESS, RobotMap.INTAKE_CLAW_FORWARD_ADDRESS,
                 RobotMap.INTAKE_CLAW_REVERSE_ADDRESS);
-        clawToggle = false;
+
+        shovelToggle = true; // forward on default (shovel closed)
+        clawToggle = true; // forward on default (claw open)
 
         rotateEncoder = new Encoder(RobotMap.INTAKE_ROTATE_ENCODER_A, RobotMap.INTAKE_ROTATE_ENCODER_B);
 
         ballSensor = new DigitalInput(RobotMap.INTAKE_BALL_SENSOR_ADDRESS);
 
-
-        //rotate.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
-        //rollers.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
         shovel.set(Value.kOff);
         claw.set(Value.kOff);
         rotateEncoder.reset();
@@ -112,29 +110,17 @@ public class IntakeSubsystem extends Subsystem {
     // *********************************************
     // Solenoid methods
     // *********************************************
+    
 
-    /**
-     * @param activated
-     */
+    public void setShovel(boolean active){
+        shovelToggle = active;
+    }
+    
     public void toggleShovel() {
         if (shovelToggle) {
-            shovelToggle = false;
+            setShovel(false);
         } else {
-            shovelToggle = true;
-        }
-    }
-
-    /**
-     * @return if shovel pneumatic is active
-     */
-    public boolean getShovelActive() {
-        Value value = shovel.get();
-        if (value.equals(Value.kForward)) {
-            return true;
-        } else if (value.equals(Value.kReverse)) {
-            return false;
-        } else {
-            return false;
+            setShovel(true);
         }
     }
 
@@ -146,28 +132,15 @@ public class IntakeSubsystem extends Subsystem {
         }
     }
 
-    /**
-     * @param activated true - will push forward. false - will pull.
-     */
-    public void toggleClaw() {
-        if (clawToggle) {
-            clawToggle = false;
-        } else {
-            clawToggle = true;
-        }
+    public void setClaw(boolean active){
+        clawToggle = active;
     }
 
-    /**
-     * @return if the claw is active
-     */
-    public boolean getClawActive() {
-        Value val = claw.get();
-        if (val.equals(Value.kForward)) {
-            return true;
-        } else if (val.equals(Value.kReverse)) {
-            return false;
+    public void toggleClaw() {
+        if (clawToggle) {
+            setClaw(false);
         } else {
-            return false;
+            setClaw(true                                                                                                                                                                                                                                                                                                                        );
         }
     }
 
@@ -179,15 +152,26 @@ public class IntakeSubsystem extends Subsystem {
         }
     }
 
+    public boolean getClawOpen() {
+        return clawToggle;
+    }
+
+    public boolean getShovelOpen() {
+        return !shovelToggle;
+    }
+
+    // ***********************************************************
+    // Sensor methods
+    // ***********************************************************
     public GamePiece getGamePiece() {
-        if (ballDetected()) {
+        if (getBallDetected()) {
             return GamePiece.CARGO;
         } else {
             return GamePiece.HATCH;
         }
     }
 
-    public boolean ballDetected() {
+    public boolean getBallDetected() {
         return !ballSensor.get();
     }
 

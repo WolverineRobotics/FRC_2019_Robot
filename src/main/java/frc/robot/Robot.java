@@ -22,10 +22,7 @@ public class Robot extends TimedRobot {
 	@Override
 	
 	public void robotInit() {
-		// Scheduler.getInstance().enable();
 		CameraServer.getInstance().startAutomaticCapture();
-		m_intake.toggleClaw();
-		m_intake.toggleShovel();
 	}
 
 	@Override
@@ -38,8 +35,6 @@ public class Robot extends TimedRobot {
 		m_intake.resetEncoders();
 		m_elevator.resetEncoder();
 		m_climb.resetEncoders();
-		// CameraServer.getInstance().startAutomaticCapture();
-		// Scheduler.getInstance().add(new AutonomousCommandGroup());
 	}
 
 	@Override

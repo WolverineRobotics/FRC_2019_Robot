@@ -1,38 +1,34 @@
 package frc.robot.commands.autonomousfunctions;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.subsystems.ElevatorSubsystem;
 
 public class SetElevatorCommand extends Command {
 
     private ElevatorSubsystem c_elevator;
+
     private int desiredEncoderPos;
-    private int deadband;
 
     private boolean goingUp;
     private boolean isDone;
 
-    public SetElevatorCommand(int desiredEncoderPos, int deadband) {
+    public SetElevatorCommand(int desiredEncoderPos) {
         c_elevator = Robot.getElevatorSubsystem();
         requires(c_elevator);
-        this.deadband = deadband;
         this.desiredEncoderPos = desiredEncoderPos;
+        this.goingUp = false;
+        this.isDone = false;
     }
 
     @Override
     protected void initialize() {
-        if(c_elevator.getEncoderRawCounts() < desiredEncoderPos){
-            isDone = false;
+        int currentEncoderPos = c_elevator.getEncoderPosition();
+        if(currentEncoderPos < desiredEncoderPos) { //
             goingUp = false;
-
             c_elevator.setElevatorRawSpeed(-1);
-        } else
-        if(c_elevator.getEncoderRawCounts() > desiredEncoderPos){
-            isDone = false;
+        } else if(currentEncoderPos > desiredEncoderPos){
             goingUp = true;
-
             c_elevator.setElevatorRawSpeed(1);
         } else {
             isDone = true;
@@ -41,19 +37,16 @@ public class SetElevatorCommand extends Command {
 
     @Override
     protected void execute() {
-        int actual = c_elevator.getEncoderRawCounts();
+        int currentEncoderPos = c_elevator.getEncoderPosition();
         if(goingUp){
-            if(actual < desiredEncoderPos){
+            if(currentEncoderPos < desiredEncoderPos){
                 isDone = true;
             }
         } else {
-            if(actual > desiredEncoderPos){
+            if(currentEncoderPos > desiredEncoderPos){
                 isDone = true;
             }
         }
-
-        // SmartDashboard.putNumber("[Elevator] position error!", error);
-    
     }
 
     @Override
