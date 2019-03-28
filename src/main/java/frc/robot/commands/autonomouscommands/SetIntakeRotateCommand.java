@@ -2,6 +2,7 @@ package frc.robot.commands.autonomouscommands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.oi.OI;
 import frc.robot.subsystems.IntakeSubsystem;
 
 public class SetIntakeRotateCommand extends Command {
@@ -14,11 +15,20 @@ public class SetIntakeRotateCommand extends Command {
     private boolean goingUp;
     private boolean isDone;
 
+    private boolean allowManualOverride;
+
     public SetIntakeRotateCommand(int desiredEncoderPos, double rawSpeed) {
         c_intake = Robot.getIntakeSubsystem();
         requires(c_intake);
         this.desiredEncoderPos = desiredEncoderPos;
         this.rawSpeed = rawSpeed;
+        this.allowManualOverride = false;
+    }
+
+    //Second constructor to allow manual override of intake rotate. Calls the first constructor, then sets the corret allowManualOverride value.
+    public SetIntakeRotateCommand(int desiredEncoderPos, double rawSpeed, boolean allowManualOverride) {
+        this(desiredEncoderPos, rawSpeed);
+        this.allowManualOverride = allowManualOverride;
     }
 
 
@@ -52,12 +62,27 @@ public class SetIntakeRotateCommand extends Command {
                 isDone = true;
             }
         }
+
+        //If manual override enabled, checks if there is any input
+        if(allowManualOverride){
+            
+            double rotateSpeed = OI.getOperatorIntakeTilt();
+
+            //If there is input, use inputed value instead of default
+            if(rotateSpeed != 0){
+                c_intake.setRotateRawSpeed(rotateSpeed*0.6);
+            }
+
+        }
+
     }
 
     @Override
     protected void end() {
         c_intake.setRotateRawSpeed(0);
     }
+
+    //TODO: Add way to cancel command
     
     @Override
     protected boolean isFinished() {
