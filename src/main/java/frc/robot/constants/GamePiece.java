@@ -12,15 +12,13 @@ public enum GamePiece {
             1500, -130,  // Level 1
             6800, -130,  // Level 2
             12500, -130, // Level 3
-            0, 0,        // Hatch
-            0, 0         // Cargo
+            1500, -130   // Player Station (Same as level 1)
             ),
     CARGO(               // Elevator + IntakeRotate
             4600, -161,  // Level 1
             7900, -112,  // Level 2
             12800, -78,  // Level 3
-            0, 0,        // Hatch
-            0, 0         // Cargo
+            0, 0         // Player Station (TODO)
             );
 
     private int elevator_1;
@@ -32,11 +30,8 @@ public enum GamePiece {
     private int elevator_3;
     private int intakeRotate_3;
 
-    private int elevator_Hatch;
-    private int intakeRotate_Hatch;
-
-    private int elevator_Cargo;
-    private int intakeRotate_Cargo;
+    private int playerStationElevator;
+    private int playerStationIntakeRotate;
 
     GamePiece(  
                 /* Rocket Level 1 */
@@ -52,12 +47,8 @@ public enum GamePiece {
                 int intakeRotate_3, 
 
                 /* Player Station Hatch*/
-                int elevator_Hatch,
-                int intakeRotate_Hatch,
-
-                /* Player Station Cargo*/
-                int elevator_Cargo,
-                int intakeRotate_Cargo) {
+                int playerStationElevator,
+                int playerStationIntakeRotate) {
 
         this.elevator_1 = elevator_1;
         this.intakeRotate_1 = intakeRotate_1;
@@ -68,11 +59,9 @@ public enum GamePiece {
         this.elevator_3 = elevator_3;
         this.intakeRotate_3 = intakeRotate_3;
 
-        this.elevator_Hatch = elevator_Hatch;
-        this.intakeRotate_Hatch = intakeRotate_Hatch;
-
-        this.elevator_Cargo = elevator_Cargo;
-        this.intakeRotate_Cargo = intakeRotate_Cargo;
+        this.playerStationElevator = playerStationElevator;
+        this.playerStationIntakeRotate = playerStationIntakeRotate;
+        
     }
 
     public int getElevatorEncoderPos(int level) {
@@ -88,7 +77,7 @@ public enum GamePiece {
         }
     }
 
-    public int getIntakeElbowEncoderPos(int level) {
+    public int getIntakeRotateEncoderPos(int level) {
         switch (level) {
             case 1:
                 return this.intakeRotate_1;
@@ -104,23 +93,12 @@ public enum GamePiece {
     // ****************************************************************
     // Cargo
     // ****************************************************************
-    public int getElevatorCargo() {
-        return elevator_Cargo;
+    public int getElevatorPlayerStation() {
+        return playerStationElevator;
     }
 
-    public int getIntakeRotateCargo() {
-        return intakeRotate_Cargo;
-    }
-
-    // ****************************************************************
-    // Hatch
-    // ****************************************************************
-    public int getElevatorHatch() {
-        return elevator_Hatch;
-    }
-
-    public int getIntakeRotateHatch() {
-        return intakeRotate_Hatch;
+    public int getIntakeRotatePlayerStation() {
+        return playerStationIntakeRotate;
     }
     
     

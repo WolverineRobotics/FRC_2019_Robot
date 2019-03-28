@@ -111,11 +111,6 @@ public class IntakeSubsystem extends Subsystem {
     // Solenoid methods
     // *********************************************
     
-
-    public void setShovel(boolean active){
-        shovelToggle = active;
-    }
-    
     public void toggleShovel() {
         if (shovelToggle) {
             setShovel(false);
@@ -132,8 +127,12 @@ public class IntakeSubsystem extends Subsystem {
         }
     }
 
-    public void setClaw(boolean active){
-        clawToggle = active;
+    public boolean getShovelOpen() {
+        return !shovelToggle;
+    }
+
+    public void setShovel(boolean toOpen) {
+        shovelToggle = !toOpen;
     }
 
     public void toggleClaw() {
@@ -156,8 +155,8 @@ public class IntakeSubsystem extends Subsystem {
         return clawToggle;
     }
 
-    public boolean getShovelOpen() {
-        return !shovelToggle;
+    public void setClaw(boolean toOpen) {
+        clawToggle = toOpen;
     }
 
     // ***********************************************************

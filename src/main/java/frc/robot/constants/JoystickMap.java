@@ -26,6 +26,7 @@ public class JoystickMap {
     public static final int BUTTON_LEFT_BUMPER = 5;
     public static final int BUTTON_RIGHT_BUMPER = 6;
 
+    public static final int BUTTON_SELECT = 7;
     public static final int BUTTON_START = 8;
 
     //********************************************************************************** 

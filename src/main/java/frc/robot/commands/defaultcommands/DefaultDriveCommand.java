@@ -1,9 +1,12 @@
 package frc.robot.commands.defaultcommands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.Robot;
+import frc.robot.commands.autonomouscommands.RotateToHeadingCommand;
 import frc.robot.constants.RobotConst;
 import frc.robot.oi.OI;
+import frc.robot.subsystems.CameraSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 
 public class DefaultDriveCommand extends Command {
@@ -35,8 +38,18 @@ public class DefaultDriveCommand extends Command {
         rightSpeed = throttle + turn;
         
         c_drive.setRawSpeeds(leftSpeed*0.7, -rightSpeed*0.7);
-    }
 
+        if(OI.getDriver().getPOV() != -1){
+            System.out.println("Starting rotate command");
+            Scheduler.getInstance().add(new RotateToHeadingCommand(OI.getDriver().getPOV()));
+        }
+
+        if(OI.getDriverRequestionHatchLED()){
+            CameraSubsystem camera = Robot.m_camera;
+            Scheduler.getInstance().add(new RotateToHeadingCommand(c_drive.getPigeonHeading() - camera.getDegreesOff()));
+        }
+    }
+    
     @Override
     protected boolean isFinished() {
         return false;
