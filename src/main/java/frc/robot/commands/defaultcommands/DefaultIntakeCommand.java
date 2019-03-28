@@ -19,13 +19,15 @@ public class DefaultIntakeCommand extends Command {
 
     @Override
     protected void execute() {
-        // Rotate ***************************
-        double rotateSpeed = OI.getOperatorIntakeRotate();
+        //Rotate
+        double rotateSpeed = OI.getOperatorIntakeTilt();
         c_intake.setRotateRawSpeed(rotateSpeed*0.6);
 
-        // Rollers *************************
+        //Rollers
         boolean intakeIn = OI.getOperatorIntakeIn(); 
         boolean intakeOut = OI.getOperatorIntakeOut();
+        
+        //Intake in
         if(intakeIn) {
             c_intake.setRollersRawSpeed(1);
         } else if(intakeOut) {
@@ -34,27 +36,25 @@ public class DefaultIntakeCommand extends Command {
             c_intake.setRollersRawSpeed(0);
         }
 
-        // Claw *****************************
+        //Claw
         if (OI.getOperatorClaw()) {
             c_intake.toggleClaw();
         }
+
         c_intake.executeClaw();
 
-        // Shovel ***************************
+        //Shovel
         if (OI.getOperatorShovel()) {
             c_intake.toggleShovel();
         }
         c_intake.executeShovel();
 
-        // Encoders **************************
+        //zero intake tilt up
         if (c_intake.getUpperLimit()) {
             c_intake.resetEncoders();
         }
 
-        // Auto Hatch ************************
-        // if(OI.getOperatorAutoHatch()) {
-        //     Scheduler.getInstance().add(new AutoHatchCommand());
-        // }
+        //reset encoders
         if (OI.getDriver().getRawButton(JoystickMap.BUTTON_START) && OI.getOperator().getRawButton(JoystickMap.BUTTON_START)) {
             c_intake.resetEncoders();
         }

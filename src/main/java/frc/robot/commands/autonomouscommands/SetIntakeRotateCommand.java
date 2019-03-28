@@ -9,16 +9,16 @@ public class SetIntakeRotateCommand extends Command {
     private IntakeSubsystem c_intake;
 
     private int desiredEncoderPos;
-    private double rawSpeed;
+    private double speed;
 
     private boolean goingUp;
     private boolean isDone;
 
-    public SetIntakeRotateCommand(int desiredEncoderPos, double rawSpeed) {
+    public SetIntakeRotateCommand(int desiredEncoderPos, double speed) {
         c_intake = Robot.getIntakeSubsystem();
         requires(c_intake);
         this.desiredEncoderPos = desiredEncoderPos;
-        this.rawSpeed = rawSpeed;
+        this.speed = speed;
     }
 
 
@@ -28,13 +28,13 @@ public class SetIntakeRotateCommand extends Command {
             isDone = false;
             goingUp = false;
 
-            c_intake.setRotateRawSpeed(rawSpeed);
+            c_intake.setRotateRawSpeed(speed);
         } else
         if(c_intake.getRotateEncoderPosition() > desiredEncoderPos){
             isDone = false;
             goingUp = true;
 
-            c_intake.setRotateRawSpeed(-rawSpeed);
+            c_intake.setRotateRawSpeed(-speed);
         } else {
             isDone = true;
         }

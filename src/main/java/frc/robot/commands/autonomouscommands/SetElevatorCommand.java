@@ -7,35 +7,34 @@ import frc.robot.subsystems.ElevatorSubsystem;
 public class SetElevatorCommand extends Command {
 
     private ElevatorSubsystem c_elevator;
-
     private int desiredEncoderPos;
-    private double rawSpeed;
+    private double speed;
+    // private int deadband;
 
     private boolean goingUp;
     private boolean isDone;
 
-    /**
-     * @param desiredEncoderPos The desired encoder position
-     * @param rawSpeed 0 to 1
-     */
-    public SetElevatorCommand(int desiredEncoderPos, double rawSpeed) {
+    public SetElevatorCommand(int desiredEncoderPos, double speed) {
         c_elevator = Robot.getElevatorSubsystem();
         requires(c_elevator);
+        // this.deadband = deadband;
         this.desiredEncoderPos = desiredEncoderPos;
-        this.rawSpeed = rawSpeed;
-        this.goingUp = false;
-        this.isDone = false;
+        this.speed = speed;
     }
 
     @Override
     protected void initialize() {
-        int currentEncoderPos = c_elevator.getEncoderPosition();
-        if(currentEncoderPos < desiredEncoderPos) { //
+        if(c_elevator.getEncoderRawCounts() < desiredEncoderPos){
+            isDone = false;
             goingUp = false;
-            c_elevator.setElevatorRawSpeed(-rawSpeed);
-        } else if(currentEncoderPos > desiredEncoderPos){
+
+            c_elevator.setElevatorRawSpeed(-speed);
+        } else
+        if(c_elevator.getEncoderRawCounts() > desiredEncoderPos){
+            isDone = false;
             goingUp = true;
-            c_elevator.setElevatorRawSpeed(rawSpeed);
+
+            c_elevator.setElevatorRawSpeed(speed);
         } else {
             isDone = true;
         }
@@ -43,16 +42,19 @@ public class SetElevatorCommand extends Command {
 
     @Override
     protected void execute() {
-        int currentEncoderPos = c_elevator.getEncoderPosition();
+        int actual = c_elevator.getEncoderRawCounts();
         if(goingUp){
-            if(currentEncoderPos < desiredEncoderPos){
+            if(actual < desiredEncoderPos){
                 isDone = true;
             }
         } else {
-            if(currentEncoderPos > desiredEncoderPos){
+            if(actual > desiredEncoderPos){
                 isDone = true;
             }
         }
+
+        // SmartDashboard.putNumber("[Elevator] position error!", error);
+    
     }
 
     @Override
