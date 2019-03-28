@@ -1,28 +1,42 @@
 //Testing git
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.cscore.VideoMode.PixelFormat;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import frc.robot.constants.RobotMap;
 import frc.robot.oi.SDashboard;
 import frc.robot.subsystems.BlinkinSubsystem;
+import frc.robot.subsystems.CameraSubsystem;
 import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 
-@SuppressWarnings("deprecation")
+// @SuppressWarnings("deprecation")
 public class Robot extends TimedRobot {
 	private static BlinkinSubsystem m_blinkin = new BlinkinSubsystem();
 	private static ClimbSubsystem m_climb = new ClimbSubsystem();
 	private static DriveSubsystem m_drive = new DriveSubsystem();
 	private static ElevatorSubsystem m_elevator = new ElevatorSubsystem();
 	private static IntakeSubsystem m_intake = new IntakeSubsystem();
-	
+	public static CameraSubsystem m_camera = new CameraSubsystem();
+
 	@Override
-	
+
 	public void robotInit() {
-		CameraServer.getInstance().startAutomaticCapture();
+		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+		camera.setVideoMode(PixelFormat.kMJPEG, 320, 240, 15);
+		camera.setExposureManual(40);
+
+		// to clean up
+		VictorSPX ledring = new VictorSPX(RobotMap.VISION_LED_RING);
+		ledring.set(ControlMode.PercentOutput, -1);
 	}
 
 	@Override
@@ -48,6 +62,7 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopPeriodic() {
+		m_camera.updatePeriodic();
 		Scheduler.getInstance().run();
 	}
 

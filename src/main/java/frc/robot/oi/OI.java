@@ -11,10 +11,10 @@ import frc.robot.constants.RobotConst;
  * 		Right Stick X-axis 	= Drive Motor Turn
  * 		Left Stick Y-axis  	= Drive Motor Throttle
  * 	Buttons:
- *      A Button            = Requesting Cargo - Blink between ORANGE and WHITE
- *      B Button            = Default - Static RED; Disables Climbing Mode (Climb Wheel)
- *      X Button            = Requesting Hatch - Blink between YELLOW and WHITE 
- *      Y Button            = Climbing LEDs - Blink between AQUA and WHITE; Enables Climbing Mode (Climb Wheel)
+ *      A Button            = 
+ *      B Button            = Disables Climbing Mode (Climb Wheel Disabled, Unlocks Climb Lock)
+ *      X Button            = 
+ *      Y Button            = Enables Climbing Mode (Climb Wheel Enabled, Brings Elevator to 0, Locks Climb Lock)
  * 
  * 	Bumpers/Triggers:
  * 		Left Trigger 		= Climb Speed down (Manual Control)
@@ -29,7 +29,7 @@ import frc.robot.constants.RobotConst;
  * 	Buttons:
  *      A Button            = 1st Elevator Level
  *      B Button            = 2nd Elevator Level
- *      X Button            = Auto Intake
+ *      X Button            = Player Station Cargo Level
  * 		Y Button			= 3rd Elevator Level
  * 	Bumpers/Triggers:
  * 		Left Bumper 		= Activate Shovel
@@ -127,15 +127,6 @@ public class OI {
         return driver.getRawAxis(JoystickMap.RIGHT_TRIGGER);
     }
 
-    /**
-     * Set driver controller rumble
-     * @param rumble rumble intensity
-     */
-    public static void driverRumble(double rumble) {
-        driver.setRumble(RumbleType.kLeftRumble, rumble);
-        driver.setRumble(RumbleType.kRightRumble, rumble);
-    }
-
     //********************************************************************************** 
     // Operator controls
     //**********************************************************************************
@@ -159,7 +150,7 @@ public class OI {
      * Right stick y
      * @return double from -1 to 1
      */
-    public static double getOperatorIntakeTilt() {
+    public static double getOperatorIntakeRotate() {
         return -operator.getRawAxis(JoystickMap.RIGHT_STICK_Y);
     }
 
@@ -187,6 +178,10 @@ public class OI {
             operator.getPOV() == JoystickMap.POV_NORTH_EAST ||
             operator.getPOV() == JoystickMap.POV_NORTH_WEST
         );
+    }
+
+    public static boolean getOperatorAutoHatch() {
+        return operator.getRawButton(JoystickMap.BUTTON_SELECT);
     }
 
     /**

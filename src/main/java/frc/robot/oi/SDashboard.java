@@ -31,7 +31,8 @@ public class SDashboard {
         SmartDashboard.putNumber("[Drive] Right Speed", c_drive.getRightRawSpeed());
         SmartDashboard.putNumber("[Drive] Right Encoder", c_drive.getRawRightEncoder());
         SmartDashboard.putNumber("[Drive] Heading 1", c_drive.getHeading());
-        SmartDashboard.putNumber("[Drive] Heading 2", c_drive.getPigeonHeading());
+        SmartDashboard.putNumber("[Drive] Heading 2", c_drive.getPigeonHeading() % 360);
+        SmartDashboard.putData("[Drive] Gyro PID", c_drive.gyroPID);
 
         SmartDashboard.putNumber("[Elevator] Raw Speed", c_elevator.getElevatorRawSpeed());
         // SmartDashboard.putNumber("[Elevator] Encoder Distance", c_elevator.getEncoderDistance());
