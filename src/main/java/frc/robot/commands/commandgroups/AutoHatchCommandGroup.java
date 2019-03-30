@@ -23,7 +23,7 @@ public class AutoHatchCommandGroup extends CommandGroup {
     @Override
     protected void initialize() {
         addParallel(new OpenShovelCommand(true));
-        addParallel(new SetIntakeRotateCommand(0 /*TBD - Kissing floor Encoder Pos */, 0.9 /* 90% speed */));
+        addParallel(new SetIntakeRotateCommand(-50 /*TBD - Kissing floor Encoder Pos */, 0.9 /* 90% speed */));
     }
 
     @Override
