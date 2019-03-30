@@ -55,6 +55,8 @@ public class DefaultIntakeCommand extends Command {
         if(OI.getOperatorAutoHatch()) {
             Scheduler.getInstance().add(new AutoHatchCommandGroup());
         }
+
+        // Reset Encoders *******************
         if (OI.getDriver().getRawButton(JoystickMap.BUTTON_START) && OI.getOperator().getRawButton(JoystickMap.BUTTON_START)) {
             c_intake.resetEncoders();
         }

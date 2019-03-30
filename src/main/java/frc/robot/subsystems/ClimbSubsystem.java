@@ -81,15 +81,15 @@ public class ClimbSubsystem extends Subsystem {
     //****************************************************************
     // Solenoid methods
     //****************************************************************
-    public void unlockLock(boolean activate) {
-        if (activate) {
+    public void unlockLock(boolean toLock) {
+        if (toLock) {
             lock.set(Value.kForward);
         } else {
             lock.set(Value.kReverse);
         }
     }
 
-    public boolean getClimbLocked(){
+    public boolean getClimbLocked() {
         return lock.get() == Value.kReverse;
     }
 
