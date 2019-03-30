@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.sensors.PigeonIMU;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
@@ -15,6 +16,8 @@ public class ClimbSubsystem extends Subsystem {
 
     private TalonSRX wheel;
     private TalonSRX lift;
+    private PigeonIMU pigeon;
+
 
     private DoubleSolenoid lock;
 
@@ -22,12 +25,15 @@ public class ClimbSubsystem extends Subsystem {
 
     private boolean climbingMode;
 
+    private double[] gyroValues;
+
     public ClimbSubsystem() {
         wheel = new TalonSRX(RobotMap.CLIMB_MOTOR_WHEEL_ADDRESS);
         lift = new TalonSRX(RobotMap.CLIMB_MOTOR_LIFT_ADDRESS);
         liftEncoder = new Encoder(RobotMap.CLIMB_LIFT_ENCODER_A, RobotMap.CLIMB_LIFT_ENCODER_B);
         lock = new DoubleSolenoid(RobotMap.CLIMB_LOCK_PCM_ADDRESS, RobotMap.CLIMB_LOCK_FORWARD_ADDRESS,
                 RobotMap.CLIMB_LOCK_REVERSE_ADDRESS);
+        pigeon = new PigeonIMU(RobotMap.DRIVE_PIGEON_IMU_ADDRESS);
                 
         wheel.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
         lift.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
@@ -99,4 +105,15 @@ public class ClimbSubsystem extends Subsystem {
     public void setClimbingMode(boolean climbingMode) {
         this.climbingMode = climbingMode;
     }
+
+
+    //****************************************************************
+    // Gyro methods
+    //****************************************************************
+
+    public double getGyroTilt(){
+        pigeon.getRawGyro(gyroValues); 
+        return gyroValues[1]; //TODO: Ensure that axis is correct
+    }
+
 }
