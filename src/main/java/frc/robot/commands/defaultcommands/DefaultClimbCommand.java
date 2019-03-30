@@ -23,21 +23,22 @@ public class DefaultClimbCommand extends Command {
 
     @Override
     protected void execute() {
-        if (OI.getDriverClimbState()) {
-            Scheduler.getInstance().add(new ClimbCommandGroup());
-            c_climb.setClimbingMode(true);
+        if (OI.getDriverClimbState()) { // Driver Y
+            Scheduler.getInstance().add(new ClimbCommandGroup()); //will put elevator down, zero the intake and lock the climb lock.
+            c_climb.setClimbingMode(true); // enable climb lift and wheel controls
 		}
 		
-		if (OI.getDriverCancel()) {
-            c_climb.unlockLock(true);
+		if (OI.getDriverCancel()) { // Driver B
+            c_climb.setClimbingMode(false); // disable climb lift and wheel controls
+            c_climb.unlockLock(true); //unlock the lock
         }
 
+        // climb lift and wheel controls (only if in climbing mode)
         if(c_climb.getClimbingMode()){
             //climb lift
 		    double speedUp = OI.getDriverClimbSpeedUp();
             double speedDown = OI.getDriverClimbSpeedDown();
             double speed = speedUp - speedDown;
-                
             c_climb.setLiftRawSpeed(speed);
 
             //wheel lift
