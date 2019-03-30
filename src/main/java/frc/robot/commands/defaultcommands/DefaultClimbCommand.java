@@ -25,24 +25,22 @@ public class DefaultClimbCommand extends Command {
     protected void execute() {
         if (OI.getDriverClimbState()) {
             Scheduler.getInstance().add(new ClimbCommandGroup());
-            c_climb.setClimbingMode(true);
+            c_climb.unlockLock(false);
 		}
 		
 		if (OI.getDriverCancel()) {
             c_climb.unlockLock(true);
         }
-
-        if(c_climb.getClimbingMode()){
-            //climb lift
-		    double speedUp = OI.getDriverClimbSpeedUp();
-            double speedDown = OI.getDriverClimbSpeedDown();
-            double speed = speedUp - speedDown;
+        
+		//climb lift
+		double speedUp = OI.getDriverClimbSpeedUp();
+        double speedDown = OI.getDriverClimbSpeedDown();
+        double speed = speedUp - speedDown;
                 
-            c_climb.setLiftRawSpeed(speed);
+        c_climb.setLiftRawSpeed(speed);
 
-            //wheel lift
-            double throttle = OI.getDriverThrottle();
-            c_climb.setWheelRawSpeed(-throttle * 0.9);
-        }
+        //wheel lift
+        double throttle = OI.getDriverThrottle();
+        c_climb.setWheelRawSpeed(-throttle * 0.9);
     }
 }
