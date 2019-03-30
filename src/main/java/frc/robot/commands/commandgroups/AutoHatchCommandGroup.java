@@ -1,8 +1,11 @@
-package frc.robot.commands.autonomouscommands;
+package frc.robot.commands.commandgroups;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.Robot;
+import frc.robot.commands.autonomouscommands.OpenClawCommand;
+import frc.robot.commands.autonomouscommands.OpenShovelCommand;
+import frc.robot.commands.autonomouscommands.SetIntakeRotateCommand;
 import frc.robot.oi.OI;
 import frc.robot.subsystems.IntakeSubsystem;
 
