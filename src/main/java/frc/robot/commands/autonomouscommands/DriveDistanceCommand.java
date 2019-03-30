@@ -39,8 +39,8 @@ class DriveDistanceCommand extends Command {
         speed = distancePID.calcPID((c_drive.getDistanceLeftEncoder() + c_drive.getDistanceRightEncoder())/2);
         steering = gyroPID.calcPID(c_drive.getPigeonHeading());
 
-        leftSpeed = speed - steering;
-        rightSpeed = -(speed + steering);
+        leftSpeed = power + speed - steering;
+        rightSpeed = -(power + speed + steering);
     
         if(leftSpeed > power){
             leftSpeed = power;
