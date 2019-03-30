@@ -9,6 +9,7 @@ public class RobotConst {
 
     public static final double DRIVE_SPEED_REDUCTION_RATIO = 0.8;
     
+    public static final double DRIVE_ENCODER_COUNTS_PER_INCH = 0;
     //********************************************************************************** 
     // Elevator constants
     //**********************************************************************************

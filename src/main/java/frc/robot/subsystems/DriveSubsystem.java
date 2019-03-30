@@ -72,8 +72,8 @@ public class DriveSubsystem extends Subsystem {
             speed = 1;
         }
 
-        leftDrive01.set(speed * RobotConst.DRIVE_SPEED_REDUCTION_RATIO);
-        leftDrive02.set(speed * RobotConst.DRIVE_SPEED_REDUCTION_RATIO);
+        leftDrive01.set(speed);
+        leftDrive02.set(speed);
     }
 
     /**
@@ -87,8 +87,8 @@ public class DriveSubsystem extends Subsystem {
             speed = 1;
         }
 
-        rightDrive01.set(speed * RobotConst.DRIVE_SPEED_REDUCTION_RATIO);
-        rightDrive02.set(speed * RobotConst.DRIVE_SPEED_REDUCTION_RATIO);
+        rightDrive01.set(speed);
+        rightDrive02.set(speed);
     }
 
     /**
@@ -105,6 +105,14 @@ public class DriveSubsystem extends Subsystem {
      */
     public int getRawRightEncoder() {
         return rightEncoder.get();
+    }
+
+    public double getDistanceLeftEncoder(){
+        return leftEncoder.getDistance();
+    }
+
+    public double getDistanceRightEncoder(){
+        return rightEncoder.getDistance();
     }
 
     /**

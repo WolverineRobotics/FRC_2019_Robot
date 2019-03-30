@@ -37,7 +37,7 @@ public class DefaultDriveCommand extends Command {
         leftSpeed = throttle - turn;
         rightSpeed = throttle + turn;
         
-        c_drive.setRawSpeeds(leftSpeed*0.7, -rightSpeed*0.7);
+        c_drive.setRawSpeeds(leftSpeed*RobotConst.DRIVE_SPEED_REDUCTION_RATIO, -rightSpeed*RobotConst.DRIVE_SPEED_REDUCTION_RATIO);
 
         if(OI.getDriver().getPOV() != -1){
             System.out.println("Starting rotate command");
