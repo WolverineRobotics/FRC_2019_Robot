@@ -8,4 +8,19 @@ public class ClimbCommandGroup extends CommandGroup {
         
     }
 
+    @Override
+    protected void initialize() {
+        
+    }
+
+    @Override
+    protected void execute() {
+        
+    }
+
+    @Override
+    protected void end() {
+        
+    }
+
 }

@@ -37,7 +37,11 @@ public class DefaultDriveCommand extends Command {
         leftSpeed = throttle - turn;
         rightSpeed = throttle + turn;
         
-        c_drive.setRawSpeeds(leftSpeed*0.7, -rightSpeed*0.7);
+        if(Robot.getClimbSubsystem().getClimbLocked()){
+            c_drive.setRawSpeeds(leftSpeed*0.5, -rightSpeed*0.5);
+        } else {
+            c_drive.setRawSpeeds(leftSpeed*0.7, -rightSpeed*0.7);
+        }
 
         if(OI.getDriver().getPOV() != -1){
             System.out.println("Starting rotate command");

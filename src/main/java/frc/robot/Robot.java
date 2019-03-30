@@ -32,7 +32,7 @@ public class Robot extends TimedRobot {
 	public void robotInit() {
 		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
 		camera.setVideoMode(PixelFormat.kMJPEG, 320, 240, 15);
-		camera.setExposureManual(40);
+		camera.setExposureManual(20);
 
 		// to clean up
 		VictorSPX ledring = new VictorSPX(RobotMap.VISION_LED_RING);
