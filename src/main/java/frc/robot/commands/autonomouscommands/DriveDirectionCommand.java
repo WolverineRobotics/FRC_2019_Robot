@@ -9,17 +9,14 @@ import frc.util.PID;
 public class DriveDirectionCommand extends Command {
     double power, heading, speed;
 
-    boolean brakeWhenFinished;
-
     PID distancePID;
     GyroPID gyroPID;
 
     DriveSubsystem c_drive;
 
-    public DriveDirectionCommand(double power, double heading, boolean brakeWhenFinished){
+    public DriveDirectionCommand(double power, double heading){
         this.power = power;
         this.heading = heading;
-        this.brakeWhenFinished = brakeWhenFinished;
         this.speed = 0;
 
         c_drive = Robot.getDriveSubsystem();

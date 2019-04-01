@@ -6,12 +6,15 @@ import frc.util.PID;
 public class DriveDistanceCommand extends DriveDirectionCommand {
     double distance;
 
+    boolean brakeWhenFinished;
+
     PID distancePID;
 
     public DriveDistanceCommand(double power, double distance, double heading, boolean brakeWhenFinished){
-        super(power, heading, brakeWhenFinished);
+        super(power, heading);
 
         this.distance = distance;
+        this.brakeWhenFinished = brakeWhenFinished;
 
         distancePID = new PID(RobotPIDValues.DISTANCE_KP, RobotPIDValues.DISTANCE_KI, RobotPIDValues.DISTANCE_KD, RobotPIDValues.DISTANCE_EPS);
         distancePID.setDesiredValue(distance);
@@ -19,7 +22,9 @@ public class DriveDistanceCommand extends DriveDirectionCommand {
 
     @Override
     protected void execute() {
-        speed = distancePID.calcPID(c_drive.getDistance());
+        if(!brakeWhenFinished){
+            speed = distancePID.calcPID(c_drive.getDistance());
+        }
     }
 
     @Override
