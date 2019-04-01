@@ -21,6 +21,7 @@ public class SetIntakeRotateGyroCommand extends Command {
     private boolean goingUp; //Currently not implemented, likely not needed
     private boolean isDone;
     private boolean allowManualOverride;
+    private boolean secondStage;
 
 
     public SetIntakeRotateGyroCommand(double maxSpeed, double targetGyroValue, boolean allowManualOverride) {
@@ -33,6 +34,10 @@ public class SetIntakeRotateGyroCommand extends Command {
         this.allowManualOverride = allowManualOverride;
         this.desiredEncoderPos = 1;
         this.goingUp = true;
+
+        
+        //If true, allows driver to press A button to set targetGyro to 0        
+        this.secondStage = true;
         
     }
 
@@ -113,6 +118,14 @@ public class SetIntakeRotateGyroCommand extends Command {
         if(OI.getCancelOperatorCommand()){
             isDone = true;
         }
+
+        //When button pressed, set isDone = true, operator takes over
+        //A Button
+        if(secondStage){
+            if(OI.getDriverRequestCargoLED()){
+                this.isDone = true;
+           }  
+       }
 
     }
 

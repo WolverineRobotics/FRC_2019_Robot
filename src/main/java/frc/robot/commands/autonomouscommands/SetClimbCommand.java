@@ -83,7 +83,7 @@ public class SetClimbCommand extends Command{
             }
         }
 
-        c_climb.setLiftRawSpeed(rawSpeed);
+        c_climb.setLiftRawSpeed(-rawSpeed);
 
 
         double throttle = OI.getDriverThrottle();

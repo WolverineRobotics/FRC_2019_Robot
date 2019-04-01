@@ -27,6 +27,8 @@ public class SetClimbGyroCommand extends Command{
 
     private boolean allowManualOverride;
 
+    private boolean secondStage;
+
 
     public SetClimbGyroCommand(double maxSpeed, double targetGyroValue, boolean allowManualOverride){
         c_climb = Robot.getClimbSubsystem();
@@ -49,6 +51,9 @@ public class SetClimbGyroCommand extends Command{
         } */
 
         this.allowManualOverride = allowManualOverride;
+
+        //If true, allows driver to press A button to set targetGyro to 0
+        this.secondStage = true;
     }
 
 
@@ -96,7 +101,6 @@ public class SetClimbGyroCommand extends Command{
 
 
         //TODO: Check if positive gyro tilt means the robot is tilting forward
-        //TODO: Check if negative power means going down
         //This code is written assuming that it is
         //https://www.desmos.com/calculator/r9nw1x6she
         if(currentGyroValue < targetGyroValue){ 
@@ -127,7 +131,8 @@ public class SetClimbGyroCommand extends Command{
             }
         }
 
-        c_climb.setLiftRawSpeed(motorPower);
+        //TODO: Check if negative power means going down
+        c_climb.setLiftRawSpeed(-motorPower);
 
 
         double throttle = OI.getDriverThrottle();
@@ -139,12 +144,14 @@ public class SetClimbGyroCommand extends Command{
             isDone = true;
         }
 
-        //TODO: When button pressed, set, add self to scheduler with angle 0 and isDone = true
-/*         if(OI.getAutoClimb()){
-            Util.addCommand(new SetClimbGyroCommand(this.maxSpeed, 0, this.allowManualOverride));
-            this.isDone = true;
-        }  */
-
+        //When button pressed, set, add self to scheduler with angle 0 and isDone = true
+        //A Button
+        if(secondStage){
+             if(OI.getDriverRequestCargoLED()){
+                 Util.addCommand(new SetClimbGyroCommand(this.maxSpeed, 0, this.allowManualOverride));
+                 this.isDone = true;
+            }  
+        }
     }
 
     @Override

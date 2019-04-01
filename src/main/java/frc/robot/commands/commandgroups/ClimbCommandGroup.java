@@ -32,8 +32,8 @@ public class ClimbCommandGroup extends CommandGroup{
         addSequential(new SetIntakeRotateCommand(0, 0.4)); //TODO: Change speed to actual value
         addSequential(new ClimbLockCommand(true));
 
-        addParallel(new SetIntakeRotateGyroCommand(0.6, -10, true)); // TODO:Change to encoder value
-        addSequential(new SetClimbGyroCommand(0.6, -10, true)); //TODO:Change to encoder value
+        addParallel(new SetIntakeRotateGyroCommand(0.4, -1.1, true)); // TODO:Change to encoder value
+        addSequential(new SetClimbGyroCommand(0.4, -1.1, true)); //TODO:Change to encoder value
         
     }
 
