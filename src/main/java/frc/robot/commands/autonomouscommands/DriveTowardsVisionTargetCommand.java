@@ -10,12 +10,18 @@ public class DriveTowardsVisionTargetCommand extends DriveDirectionCommand {
 
     public DriveTowardsVisionTargetCommand(){
         super(0.2, 0);
+        setHeading(c_drive.getPigeonHeading() - camera.getDegreesOff());
     }
 
     @Override
     protected void execute() {
         setHeading(c_drive.getPigeonHeading() - camera.getDegreesOff());
         super.execute();
+    }
+
+    @Override
+    protected boolean isFinished() {
+        return false;
     }
     
 }
