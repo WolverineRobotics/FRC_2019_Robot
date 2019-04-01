@@ -23,6 +23,8 @@ public class DriveDirectionCommand extends Command {
 
         gyroPID = c_drive.gyroPID;
         gyroPID.setSetpoint(heading);
+
+        requires(c_drive);
     }
 
     @Override

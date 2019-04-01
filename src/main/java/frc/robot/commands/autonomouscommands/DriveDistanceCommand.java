@@ -24,6 +24,8 @@ public class DriveDistanceCommand extends DriveDirectionCommand {
     protected void execute() {
         if(!brakeWhenFinished){
             speed = distancePID.calcPID(c_drive.getDistance());
+        } else {
+            speed = power;
         }
     }
 
