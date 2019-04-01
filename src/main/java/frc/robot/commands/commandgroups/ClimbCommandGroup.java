@@ -23,6 +23,8 @@ public class ClimbCommandGroup extends CommandGroup{
     private double intakeSpeed;
     private double climbSpeed;
 
+
+    //Current button Y in climbDefaultCommand
     public ClimbCommandGroup(){
 
         intakeSpeed = 0.2; //TODO: Change auto intake rotate and climb speed

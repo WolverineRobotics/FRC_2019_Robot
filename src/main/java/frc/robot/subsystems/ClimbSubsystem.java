@@ -115,7 +115,7 @@ public class ClimbSubsystem extends Subsystem {
     public double getGyroTilt(){
         pigeon.getYawPitchRoll(gyroValues);
         SmartDashboard.putNumber("GYRO TILT", gyroValues[1]);
-        return gyroValues[1]; //TODO: Ensure that axis is correct
+        return gyroValues[1];
     }
 
 }
