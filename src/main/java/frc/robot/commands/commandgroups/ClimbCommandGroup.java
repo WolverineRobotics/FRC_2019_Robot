@@ -20,22 +20,26 @@ import frc.robot.commands.autonomouscommands.SetClimbGyroCommand;
 
 public class ClimbCommandGroup extends CommandGroup{
 
-    private double intakeSpeed;
-    private double climbSpeed;
+    private double intakeMaxSpeed;
+    private double climbMaxSpeed;
+
+    private double targetAngle;
 
 
     //Current button Y in climbDefaultCommand
     public ClimbCommandGroup(){
 
-        intakeSpeed = 0.2; //TODO: Change auto intake rotate and climb speed
-        climbSpeed = 0.2;
+        intakeMaxSpeed = 0.5; //TODO: Change auto intake rotate and climb speed
+        climbMaxSpeed = 0.36;
+
+        targetAngle = -1.5; //TODO: Tune angle
 
         addSequential(new SetElevatorCommand(0, 0.4));  //TODO: Change speed to actual value
         addSequential(new SetIntakeRotateCommand(0, 0.4)); //TODO: Change speed to actual value
         addSequential(new ClimbLockCommand(true));
 
-        addParallel(new SetIntakeRotateGyroCommand(0.4, -1.1, true)); // TODO:Change to encoder value
-        addSequential(new SetClimbGyroCommand(0.4, -1.1, true)); //TODO:Change to encoder value
+        addParallel(new SetIntakeRotateGyroCommand(intakeMaxSpeed, targetAngle, true)); // TODO:Change to encoder value
+        addSequential(new SetClimbGyroCommand(climbMaxSpeed, targetAngle, true)); //TODO:Change to encoder value
         
     }
 
