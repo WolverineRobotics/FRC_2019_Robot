@@ -11,17 +11,17 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.commands.defaultcommands.DefaultDriveCommand;
 import frc.robot.constants.RobotMap;
 import frc.robot.constants.RobotPIDValues;
+import frc.robot.pid.GyroPID;
 import frc.util.PID;
 
 public class DriveSubsystem extends Subsystem {
-    
+
     private CANSparkMax leftDrive01, leftDrive02, rightDrive01, rightDrive02;
     private Encoder leftEncoder, rightEncoder;
     private AHRS navX;
     public PigeonIMU pigeon;
 
-    
-    public PID gyroPID;
+    public GyroPID gyroPID;
 
     /**
      * Drive train subsystem
@@ -42,7 +42,7 @@ public class DriveSubsystem extends Subsystem {
         navX.reset();
         pigeon.setFusedHeadingToCompass();
     
-        gyroPID = new PID(RobotPIDValues.GYRO_KP, RobotPIDValues.GYRO_KI, RobotPIDValues.GYRO_KD, RobotPIDValues.GYRO_EPS);
+        gyroPID = new GyroPID(RobotPIDValues.GYRO_KP, RobotPIDValues.GYRO_KI, RobotPIDValues.GYRO_KD);
     }
     
     @Override
