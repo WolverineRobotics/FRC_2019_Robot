@@ -13,6 +13,7 @@ public class SetClimbCommand extends Command{
     private boolean goingUp;
     private int currentEncoderPos;
     private double rawSpeed;
+    private double desiredSpeed;
 
     private boolean allowManualOverride;
 
@@ -22,6 +23,7 @@ public class SetClimbCommand extends Command{
         requires(c_climb);
         this.desiredEncoderPos = desiredEncoderPos;
         this.rawSpeed = rawSpeed;
+        this.desiredSpeed = rawSpeed;
 
         currentEncoderPos = c_climb.getLiftEncoderPosition();
 
@@ -75,9 +77,14 @@ public class SetClimbCommand extends Command{
 
             //Allows for manual override if there is controller input.
             if(speed != 0){
-                c_climb.setLiftRawSpeed(speed);
+                rawSpeed = speed;
+            }else{
+                rawSpeed = desiredSpeed;
             }
         }
+
+        c_climb.setLiftRawSpeed(rawSpeed);
+
 
         double throttle = OI.getDriverThrottle();
         c_climb.setWheelRawSpeed(-throttle * 0.9);  //TODO: Set intake wheel speed

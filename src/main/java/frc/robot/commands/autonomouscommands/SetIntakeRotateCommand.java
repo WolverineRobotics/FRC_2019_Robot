@@ -11,6 +11,7 @@ public class SetIntakeRotateCommand extends Command {
 
     private int desiredEncoderPos;
     private double rawSpeed;
+    private double desiredSpeed;
 
     private boolean goingUp;
     private boolean isDone;
@@ -22,6 +23,7 @@ public class SetIntakeRotateCommand extends Command {
         requires(c_intake);
         this.desiredEncoderPos = desiredEncoderPos;
         this.rawSpeed = rawSpeed;
+        this.desiredSpeed = rawSpeed;
         this.allowManualOverride = false;
     }
 
@@ -70,10 +72,14 @@ public class SetIntakeRotateCommand extends Command {
 
             //If there is input, use inputed value instead of default
             if(rotateSpeed != 0){
-                c_intake.setRotateRawSpeed(rotateSpeed*0.6);
+                rawSpeed = (rotateSpeed*0.6);
+            }else{
+                rawSpeed = desiredSpeed;
             }
 
         }
+
+        c_intake.setRotateRawSpeed(rawSpeed);
 
         //Allows for the operator to cancel the intake rotate 
         if(OI.getCancelOperatorCommand()){

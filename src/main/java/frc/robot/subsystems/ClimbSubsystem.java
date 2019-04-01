@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.defaultcommands.DefaultClimbCommand;
 import frc.robot.constants.RobotMap;
 
@@ -112,7 +113,8 @@ public class ClimbSubsystem extends Subsystem {
     //****************************************************************
 
     public double getGyroTilt(){
-        pigeon.getRawGyro(gyroValues); 
+        pigeon.getYawPitchRoll(gyroValues);
+        SmartDashboard.putNumber("GYRO TILT", gyroValues[1]);
         return gyroValues[1]; //TODO: Ensure that axis is correct
     }
 
