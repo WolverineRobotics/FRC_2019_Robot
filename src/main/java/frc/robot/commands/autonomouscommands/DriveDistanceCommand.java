@@ -6,7 +6,7 @@ import frc.robot.constants.RobotPIDValues;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.util.PID;
 
-class DriveDistanceCommand extends Command {
+public class DriveDistanceCommand extends Command {
     double power, distance, heading;
 
     boolean brakeWhenFinished;
@@ -22,38 +22,35 @@ class DriveDistanceCommand extends Command {
         this.heading = heading;
         this.brakeWhenFinished = brakeWhenFinished;
 
+        c_drive = Robot.getDriveSubsystem();
+
         distancePID = new PID(RobotPIDValues.DISTANCE_KP, RobotPIDValues.DISTANCE_KI, RobotPIDValues.DISTANCE_KD, RobotPIDValues.DISTANCE_EPS);
         distancePID.setDesiredValue(distance);
 
-        gyroPID = new PID(RobotPIDValues.GYRO_KP, RobotPIDValues.GYRO_KI, RobotPIDValues.GYRO_KD, RobotPIDValues.GYRO_EPS);
+        gyroPID = c_drive.gyroPID;
         gyroPID.setDesiredValue(heading);
-
-        c_drive = Robot.getDriveSubsystem();
     }
 
     @Override
     protected void execute() {
         double leftSpeed, rightSpeed;
         double speed, steering;
-
-        speed = distancePID.calcPID((c_drive.getDistanceLeftEncoder() + c_drive.getDistanceRightEncoder())/2);
+ 
         steering = gyroPID.calcPID(c_drive.getPigeonHeading());
 
-        leftSpeed = power + speed - steering;
-        rightSpeed = -(power + speed + steering);
-    
-        if(leftSpeed > power){
-            leftSpeed = power;
-        } else if(leftSpeed < -power){
-            leftSpeed = -power;
+        speed = distancePID.calcPID(c_drive.getDistance());
+
+        if(!brakeWhenFinished){
+            speed = power;
         }
 
-        if(rightSpeed > power){
-            rightSpeed = power;
-        } else if(rightSpeed < -power){
-            rightSpeed = -power;
+        if(speed > Math.abs(power)){
+            speed = power;
         }
 
+        leftSpeed = speed - steering;
+        rightSpeed = -(speed + steering);
+        
         c_drive.setRawSpeeds(leftSpeed, rightSpeed);
     }
 
