@@ -14,10 +14,6 @@ public class SDashboard {
     private static ElevatorSubsystem c_elevator = Robot.getElevatorSubsystem();
     private static IntakeSubsystem c_intake = Robot.getIntakeSubsystem();
 
-    public SDashboard() {
-
-    }
-
     public static void execute() {
 
         SmartDashboard.putNumber("[Climb] Lift Speed", c_climb.getLiftRawSpeed());
@@ -50,5 +46,16 @@ public class SDashboard {
 
         SmartDashboard.putData(c_intake);
         SmartDashboard.putData(c_elevator);
+
+        //gyro pitch
+        double[] data = new double[3];
+        c_drive.pigeon.getYawPitchRoll(data);
+        SmartDashboard.putNumber("[Drive] Pigeon Pitch", data[1]);
+        SmartDashboard.putNumber("[Drive] Pigeon Yaw", data[0]);
+        SmartDashboard.putNumber("[Drive] Pigeon Roll", data[2]);
+        //intake rotate - power and encoder
+        //climb - power and encoder
+
+        // SmartDashboard
     }
 }

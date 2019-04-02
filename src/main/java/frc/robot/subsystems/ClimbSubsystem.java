@@ -56,7 +56,7 @@ public class ClimbSubsystem extends Subsystem {
     }
 
     public double getLiftRawSpeed() {
-         return lift.getSelectedSensorVelocity(0);
+         return lift.getMotorOutputPercent();
     }
 
     //****************************************************************

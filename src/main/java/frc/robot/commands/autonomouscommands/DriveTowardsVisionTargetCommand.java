@@ -6,7 +6,7 @@ import frc.robot.subsystems.CameraSubsystem;
  * DriveTowardsVisionTargetCommand
  */
 public class DriveTowardsVisionTargetCommand extends DriveDirectionCommand {
-    CameraSubsystem camera;
+    private CameraSubsystem camera;
 
     public DriveTowardsVisionTargetCommand(){
         super(0.2, 0);
