@@ -1,7 +1,6 @@
 package frc.robot.commands.autonomouscommands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.Robot;
 import frc.robot.subsystems.ClimbSubsystem;
 import frc.util.Util;
@@ -57,11 +56,11 @@ public class SetClimbGyroCommand extends Command{
     }
 
 
-    public SetClimbGyroCommand(double maxSpeed, double targetGyroValue, boolean allowManualOverride, int desiredEncoderPos){
+/*     public SetClimbGyroCommand(double maxSpeed, double targetGyroValue, boolean allowManualOverride, int desiredEncoderPos){
         this(maxSpeed, targetGyroValue, allowManualOverride);
         this.desiredEncoderPos = desiredEncoderPos;
     }
-
+ */
 
     @Override
     protected boolean isFinished() {
@@ -84,9 +83,9 @@ public class SetClimbGyroCommand extends Command{
 
     @Override
     protected void execute() {
-        int actual = c_climb.getLiftEncoderPosition();
+        // int actual = c_climb.getLiftEncoderPosition();
 
-        if(desiredEncoderPos != -1){
+/*         if(desiredEncoderPos != -1){
             if(goingUp){
                 if(actual < desiredEncoderPos){
                     isDone = true;
@@ -96,14 +95,15 @@ public class SetClimbGyroCommand extends Command{
                     isDone = true;
                 }
             }
-        } 
+        }  */
 
 
 
         //TODO: Check if positive gyro tilt means the robot is tilting forward
         //This code is written assuming that it is
+        //May need to invert currentGyroValue otherwise
         //https://www.desmos.com/calculator/r9nw1x6she
-        if(currentGyroValue < targetGyroValue){ 
+        if(currentGyroValue > targetGyroValue){ 
             //Robot is not tilted enough, decrease climb power (right side of desmos graph)
             if(Math.abs(currentGyroValue-targetGyroValue) < maxAllowedError){
                 motorPower = (((-maxSpeed/2)/Math.pow(maxAllowedError,2))*Math.pow((currentGyroValue-targetGyroValue),2)+ (maxSpeed/2));
@@ -136,8 +136,7 @@ public class SetClimbGyroCommand extends Command{
 
 
         double throttle = OI.getDriverThrottle();
-        c_climb.setWheelRawSpeed(-throttle * 0.6);  //TODO: Set intake wheel speed
-
+        c_climb.setWheelRawSpeed(-throttle * 0.6); 
 
         //Allows the driver to cancel this commands
         if(OI.getCancelDriverCommand()){

@@ -41,10 +41,10 @@ public class SetIntakeRotateGyroCommand extends Command {
         
     }
 
-    public SetIntakeRotateGyroCommand(double maxSpeed, double targetGyroValue, boolean allowManualOverride, int desiredEncoderPos){
+/*     public SetIntakeRotateGyroCommand(double maxSpeed, double targetGyroValue, boolean allowManualOverride, int desiredEncoderPos){
         this(maxSpeed, targetGyroValue, allowManualOverride);
         this.desiredEncoderPos = desiredEncoderPos;
-    }
+    } */
 
 /*     public SetIntakeRotateGyroCommand(double maxSpeed, double targetGyroValue, boolean allowManualOverride, int desiredEncoderPos, boolean goingUp){
         this(maxSpeed, targetGyroValue, allowManualOverride);
@@ -78,8 +78,9 @@ public class SetIntakeRotateGyroCommand extends Command {
 
         //TODO: Check if positive gyro tilt means the robot is tilting forward
         //This code is written assuming that it is
+        //May need to invert currentGyroValue otherwise
         //https://www.desmos.com/calculator/ppobiqd4pp
-        if(currentGyroValue < targetGyroValue){ 
+        if(currentGyroValue > targetGyroValue){ 
             //Robot is not tilted enough, increase tilt (right side of desmos graph)
             if(Math.abs(currentGyroValue-targetGyroValue) < maxAllowedError){
                 motorPower = (((maxSpeed/2)/Math.pow(maxAllowedError,2))*Math.pow((currentGyroValue-targetGyroValue),2)+ (maxSpeed/2));

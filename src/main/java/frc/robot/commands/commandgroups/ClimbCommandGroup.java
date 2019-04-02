@@ -5,7 +5,6 @@ import frc.robot.commands.autonomouscommands.SetElevatorCommand;
 import frc.robot.commands.autonomouscommands.SetIntakeRotateCommand;
 import frc.robot.commands.autonomouscommands.SetIntakeRotateGyroCommand;
 import frc.robot.commands.autonomouscommands.ClimbLockCommand;
-import frc.robot.commands.autonomouscommands.SetClimbCommand;
 // import frc.robot.commands.autonomousfunctions.SetElevatorCommand;
 import frc.robot.commands.autonomouscommands.SetClimbGyroCommand;
 
@@ -38,8 +37,10 @@ public class ClimbCommandGroup extends CommandGroup{
         addSequential(new SetIntakeRotateCommand(0, 0.4)); //TODO: Change speed to actual value
         addSequential(new ClimbLockCommand(true));
 
-        addParallel(new SetIntakeRotateGyroCommand(intakeMaxSpeed, targetAngle, true)); // TODO:Change to encoder value
-        addSequential(new SetClimbGyroCommand(climbMaxSpeed, targetAngle, true)); //TODO:Change to encoder value
+
+        //TODO: Add and implement encoder values
+        addParallel(new SetIntakeRotateGyroCommand(intakeMaxSpeed, targetAngle, true)); 
+        addSequential(new SetClimbGyroCommand(climbMaxSpeed, targetAngle, true)); 
         
     }
 
