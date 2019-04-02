@@ -91,7 +91,57 @@ public class AutoSelector {
         //********************************************************************************** 
         // autonomous choice overrides
         //**********************************************************************************
-        
+
+        //the nothing autonomous
+        if(firstAction == NONE){
+            secondAction = NONE;
+        }
+
+        //find duplicates
+        if(secondAction == firstAction){
+            switch(secondAction){
+                case CS_SIDE1:
+                secondAction = CS_SIDE2;
+                break; 
+
+                case CS_SIDE2:
+                secondAction = CS_SIDE3;
+                break; 
+
+                case CS_SIDE3:
+                firstAction = CS_SIDE2;
+                break; 
+
+                case RS_CLOSE1:
+                secondAction = RS_CLOSE2;
+                break;
+
+                case RS_CLOSE2:
+                firstAction = RS_CLOSE1;
+                break; 
+
+                case RS_CLOSE3:
+                firstAction = RS_CLOSE2;
+                break;  
+                
+                case RS_FAR1:
+                secondAction = RS_FAR2;
+                break;  
+                
+                case RS_FAR2:
+                firstAction = RS_FAR1;
+                break;  
+                
+                case RS_FAR3:
+                firstAction = RS_FAR2;
+                break;
+
+                default:
+                firstAction = NONE;
+                secondAction = NONE;
+                break;
+            }
+        }
     }
 
     public static String getPosition(){
