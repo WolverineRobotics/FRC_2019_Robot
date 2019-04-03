@@ -27,7 +27,7 @@ public class SetIntakeRotateGyroCommand extends Command {
     public SetIntakeRotateGyroCommand(double maxSpeed, double targetGyroValue, boolean allowManualOverride) {
         c_intake = Robot.getIntakeSubsystem();
         requires(c_intake);
-        this.maxAllowedError = 0.05; //May need tweaking, see desmos graph
+        this.maxAllowedError = 4; //May need tweaking, see desmos graph
 
         this.maxSpeed = maxSpeed;
         this.targetGyroValue = targetGyroValue;
@@ -61,10 +61,10 @@ public class SetIntakeRotateGyroCommand extends Command {
 
     @Override
     protected void execute() {
-        int actual = c_intake.getRotateEncoderPosition();
+        // int actual = c_intake.getRotateEncoderPosition();
         currentGyroValue = c_intake.getGyroTilt();
 
-        if(desiredEncoderPos != 1){
+/*         if(desiredEncoderPos != 1){
             if(goingUp){
                 if(actual < desiredEncoderPos){
                     isDone = true;
@@ -74,7 +74,7 @@ public class SetIntakeRotateGyroCommand extends Command {
                     isDone = true;
                 }
             }
-        } 
+        }  */
 
         //TODO: Check if positive gyro tilt means the robot is tilting forward
         //This code is written assuming that it is

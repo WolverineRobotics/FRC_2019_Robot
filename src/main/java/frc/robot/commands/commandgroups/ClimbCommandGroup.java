@@ -28,13 +28,13 @@ public class ClimbCommandGroup extends CommandGroup{
     //Current button Y in climbDefaultCommand
     public ClimbCommandGroup(){
 
-        intakeMaxSpeed = 0.5; //TODO: Change auto intake rotate and climb speed
-        climbMaxSpeed = 0.36;
+        intakeMaxSpeed = 0.5; //TODO: Tune auto intake rotate and climb speed
+        climbMaxSpeed = 0.4;
 
-        targetAngle = -1.5; //TODO: Tune angle
+        targetAngle = -10; //TODO: Tune angle
 
-        addSequential(new SetElevatorCommand(0, 0.4));  //TODO: Change speed to actual value
-        addSequential(new SetIntakeRotateCommand(0, 0.4)); //TODO: Change speed to actual value
+        addSequential(new SetElevatorCommand(0, 0.4));  
+        addSequential(new SetIntakeRotateCommand(0, 0.4)); 
         addSequential(new ClimbLockCommand(true));
 
 

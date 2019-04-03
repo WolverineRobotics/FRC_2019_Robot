@@ -33,6 +33,10 @@ public class SetClimbGyroCommand extends Command{
         c_climb = Robot.getClimbSubsystem();
         requires(c_climb);
         this.desiredEncoderPos = -1;
+
+        this.maxAllowedError = 4; //May need tweaking, see desmos graph
+
+
         this.maxSpeed = maxSpeed;
         this.targetGyroValue = targetGyroValue;
 
@@ -84,6 +88,7 @@ public class SetClimbGyroCommand extends Command{
     @Override
     protected void execute() {
         // int actual = c_climb.getLiftEncoderPosition();
+        currentGyroValue = c_climb.getGyroTilt();
 
 /*         if(desiredEncoderPos != -1){
             if(goingUp){

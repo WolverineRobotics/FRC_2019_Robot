@@ -183,7 +183,8 @@ public class IntakeSubsystem extends Subsystem {
 
     public double getGyroTilt(){
         pigeon.getRawGyro(gyroValues); 
-        return gyroValues[1]; //TODO: Ensure that axis is correct
+        //Roll is actually pitch with how the pigeon is mounted.
+        return gyroValues[2]; 
     }
 
 }
