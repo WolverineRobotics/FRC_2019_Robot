@@ -22,6 +22,9 @@ public class DefaultIntakeCommand extends Command {
         // Rotate ***************************
         double rotateSpeed = OI.getOperatorIntakeRotate();
         c_intake.setRotateRawSpeed(rotateSpeed*0.6);
+        if(c_intake.getRotateEncoderPosition() < -110 && rotateSpeed == 0) {
+            c_intake.setRotateRawSpeed(0.07);
+        }
 
         // Rollers *************************
         boolean intakeIn = OI.getOperatorIntakeIn(); 

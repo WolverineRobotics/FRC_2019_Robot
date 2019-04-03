@@ -1,9 +1,12 @@
 package frc.robot.commands.defaultcommands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.Robot;
+import frc.robot.commands.autonomouscommands.DriveDistanceCommand;
 import frc.robot.commands.autonomouscommands.RotateToHeadingCommand;
+import frc.robot.constants.JoystickMap;
 import frc.robot.constants.RobotConst;
 import frc.robot.oi.OI;
 import frc.robot.subsystems.CameraSubsystem;
@@ -34,6 +37,7 @@ public class DefaultDriveCommand extends Command {
             turn = 0;
         }
 
+
         leftSpeed = throttle - turn;
         rightSpeed = throttle + turn;
         
@@ -45,8 +49,13 @@ public class DefaultDriveCommand extends Command {
         }
 
         if(OI.getDriverRequestionHatchLED()){
+            Scheduler.getInstance().add(new TestAuto());
             CameraSubsystem camera = Robot.m_camera;
-            Scheduler.getInstance().add(new RotateToHeadingCommand(c_drive.getPigeonHeading() - camera.getDegreesOff()));
+        }
+        if(OI.getDriver().getRawButton(JoystickMap.BUTTON_LEFT_BUMPER)) {
+            c_drive.resetEncoders();
+            // c_drive.resetHeading();
+            c_drive.pigeon.setYaw(0);
         }
     }
     

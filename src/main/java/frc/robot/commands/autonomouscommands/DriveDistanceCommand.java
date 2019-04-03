@@ -8,34 +8,22 @@ public class DriveDistanceCommand extends DriveDirectionCommand {
 
     boolean brakeWhenFinished;
 
-    PID distancePID;
-
     public DriveDistanceCommand(double power, double distance, double heading, boolean brakeWhenFinished){
         super(power, heading);
 
         this.distance = distance;
         this.brakeWhenFinished = brakeWhenFinished;
-
-        distancePID = new PID(RobotPIDValues.DISTANCE_KP, RobotPIDValues.DISTANCE_KI, RobotPIDValues.DISTANCE_KD, RobotPIDValues.DISTANCE_EPS);
-        distancePID.setDesiredValue(distance);
     }
 
-    @Override
-    protected void execute() {
-        if(!brakeWhenFinished){
-            speed = distancePID.calcPID(c_drive.getDistance());
-        } else {
-            speed = power;
-        }
-    }
-
+    
     @Override
     protected boolean isFinished() {
-        return distancePID.isDone();
+        return c_drive.getDistance() > distance;
     }
 
     @Override
     protected void end() {
+        System.out.println("Finished drive distance command");
         if(brakeWhenFinished){
             c_drive.setRawSpeeds(0, 0);
         }
@@ -43,6 +31,5 @@ public class DriveDistanceCommand extends DriveDirectionCommand {
 
     public void setDistance(double distance){
         this.distance = distance;
-        distancePID.setDesiredValue(distance);
     }
 }

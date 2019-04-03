@@ -13,16 +13,18 @@ public class RotateToHeadingCommand extends Command {
     public RotateToHeadingCommand(double heading){
         c_drive = Robot.getDriveSubsystem();
         requires(c_drive);
+
         gyropid = c_drive.gyroPID;
-        gyropid.setSetpoint(heading);
         gyropid.reset();
+        gyropid.setSetpoint(heading);
+        gyropid.enable();
         System.out.println("Rotating to " + heading);
     }
 
     @Override
     protected void execute() {
         double steering = gyropid.calculate(c_drive.getPigeonHeading());
-
+        System.out.println(steering);
         c_drive.setRawLeftSpeed(steering);
         c_drive.setRawRightSpeed(steering);
     }
@@ -30,10 +32,12 @@ public class RotateToHeadingCommand extends Command {
     @Override
     protected void end() {
         System.out.println("finished at " + c_drive.getPigeonHeading());
+        gyropid.disable();
     }
 
     @Override
     protected boolean isFinished() {
-        return (Math.abs(gyropid.getError()) < 2);
+        return (Math.abs(gyropid.getError()) < 4);
+        // return false;
     }
 }

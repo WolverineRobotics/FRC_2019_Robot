@@ -55,7 +55,7 @@ public class SDashboard {
         SmartDashboard.putNumber("[Drive] Pigeon Roll", data[2]);
         //intake rotate - power and encoder
         //climb - power and encoder
-
+        SmartDashboard.putNumber("[Drive] Distance", c_drive.getDistance());
         // SmartDashboard
     }
 }

@@ -9,6 +9,7 @@ import edu.wpi.cscore.VideoMode.PixelFormat;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import frc.robot.commands.defaultcommands.TestAuto;
 import frc.robot.constants.RobotMap;
 import frc.robot.oi.SDashboard;
 import frc.robot.subsystems.BlinkinSubsystem;
@@ -32,7 +33,7 @@ public class Robot extends TimedRobot {
 	public void robotInit() {
 		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
 		camera.setVideoMode(PixelFormat.kMJPEG, 320, 240, 15);
-		camera.setExposureManual(40);
+		camera.setExposureManual(20);
 
 		// to clean up
 		VictorSPX ledring = new VictorSPX(RobotMap.VISION_LED_RING);
@@ -49,6 +50,10 @@ public class Robot extends TimedRobot {
 		m_intake.resetEncoders();
 		m_elevator.resetEncoder();
 		m_climb.resetEncoders();
+
+		// Scheduler.getInstance().add(new AutonomousCommandGroup());
+		
+		// Scheduler.getInstance().add(new TestAuto());
 	}
 
 	@Override

@@ -9,7 +9,6 @@ public class AutoSelector {
     private static SendableChooser<String> firstHatch;
     private static SendableChooser<String> secondHatch;
 
-
     //starting positions
     public static final String POS_LEFT = "Left";
     public static final String POS_RIGHT = "Right";
@@ -22,6 +21,7 @@ public class AutoSelector {
     public static final String RS_CLOSE1 = "Close level 1 rocket";
     public static final String RS_CLOSE2 = "Close level 2 rocket";
     public static final String RS_CLOSE3 = "Close level 3 rocket";
+
     public static final String RS_FAR1 = "Far level 1 rocket";
     public static final String RS_FAR2 = "Far level 2 rocket";
     public static final String RS_FAR3 = "Far level 3 rocket";

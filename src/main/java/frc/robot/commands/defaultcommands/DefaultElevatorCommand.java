@@ -27,11 +27,7 @@ public class DefaultElevatorCommand extends Command {
     protected void execute() {
         // Manual control
         double elevatorSpeed = OI.getOperatorElevatorSpeed();
-        if (Math.abs(elevatorSpeed) > RobotConst.ELEVATOR_LEFT_STICK_Y_TRIGGER_VALUE) {
-            c_elevator.setElevatorRawSpeed(elevatorSpeed * 0.7);
-        } else {
-            c_elevator.setElevatorRawSpeed(0);
-        }
+        c_elevator.setElevatorRawSpeed(elevatorSpeed * 0.7);
 
         //Operator A, B and Y Button controls
         GamePiece gamePiece = c_intake.getGamePiece();
