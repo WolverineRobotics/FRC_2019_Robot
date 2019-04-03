@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.Robot;
 import frc.robot.commands.autonomouscommands.DriveDistanceCommand;
+import frc.robot.commands.autonomouscommands.DriveTowardsVisionTargetCommand;
 import frc.robot.commands.autonomouscommands.RotateToHeadingCommand;
 import frc.robot.constants.JoystickMap;
 import frc.robot.constants.RobotConst;
@@ -49,8 +50,9 @@ public class DefaultDriveCommand extends Command {
         }
 
         if(OI.getDriverRequestionHatchLED()){
-            Scheduler.getInstance().add(new TestAuto());
-            CameraSubsystem camera = Robot.m_camera;
+            // Scheduler.getInstance().add(new TestAuto());
+            // Scheduler.getInstance().add(new DriveTowardsVisionTargetCommand(5));
+            Scheduler.getInstance().add(new RotateToHeadingCommand(c_drive.getPigeonHeading() - Robot.m_camera.getDegreesOff()));
         }
         if(OI.getDriver().getRawButton(JoystickMap.BUTTON_LEFT_BUMPER)) {
             c_drive.resetEncoders();

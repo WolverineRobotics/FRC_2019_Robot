@@ -54,7 +54,7 @@ public class CameraSubsystem extends Subsystem {
 		return (centerXArray[0] + centerXArray[1]) / 2.0;
 	}
 
-	double VISION_CENTER_X = 320;
+	double VISION_CENTER_X = 160;
 	
 	private double getRawDegreesOff() {
 		// Calculates degrees off and doesn't correct for error margins
@@ -72,7 +72,7 @@ public class CameraSubsystem extends Subsystem {
 		Microsoft Skype LifeCam HD 3000
 		*/
 
-		return Math.toDegrees(Math.atan((((getTargetAveragesX()- VISION_CENTER_X)/320) * 146.25) / 307));
+        return Math.toDegrees(Math.atan((((getTargetAveragesX()- VISION_CENTER_X)/160) * 146.25) / 307));
 	}
 
 	public double getDegreesOff() {

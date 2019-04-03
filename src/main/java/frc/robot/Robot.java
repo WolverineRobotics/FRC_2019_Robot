@@ -53,7 +53,7 @@ public class Robot extends TimedRobot {
 
 		// Scheduler.getInstance().add(new AutonomousCommandGroup());
 		
-		// Scheduler.getInstance().add(new TestAuto());
+		(new TestAuto()).start();
 	}
 
 	@Override

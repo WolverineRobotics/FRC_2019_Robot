@@ -1,5 +1,6 @@
 package frc.robot.commands.autonomouscommands;
 
+import frc.robot.Robot;
 import frc.robot.subsystems.CameraSubsystem;
 
 /**
@@ -11,8 +12,14 @@ public class DriveTowardsVisionTargetCommand extends DriveDirectionCommand {
     private CameraSubsystem camera;
 
     public DriveTowardsVisionTargetCommand(double timeoutSeconds){
-        super(0.2, 0);
+        super(0.15, 0);
         setTimeout(timeoutSeconds);
+        camera = Robot.m_camera;
+    }
+
+    @Override
+    protected void initialize() {
+        super.initialize();
         setHeading(c_drive.getPigeonHeading() - camera.getDegreesOff());
     }
 

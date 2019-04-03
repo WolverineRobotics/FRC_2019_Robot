@@ -144,7 +144,9 @@ public class DriveSubsystem extends Subsystem {
      * @return double value in degrees
      */
     public double getPigeonHeading() {
-        return pigeon.getFusedHeading();
+        double[] ypr = new double[3];
+        pigeon.getYawPitchRoll(ypr);
+        return ypr[0];
     }
     
     /**

@@ -32,7 +32,7 @@ public class DefaultIntakeCommand extends Command {
         if(intakeIn) {
             c_intake.setRollersRawSpeed(1);
         } else if(intakeOut) {
-            c_intake.setRollersRawSpeed(-0.75);
+            c_intake.setRollersRawSpeed(-0.9);
         } else {
             c_intake.setRollersRawSpeed(0);
         }

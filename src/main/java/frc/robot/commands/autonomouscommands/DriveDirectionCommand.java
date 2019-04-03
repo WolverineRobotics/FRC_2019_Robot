@@ -17,18 +17,26 @@ public class DriveDirectionCommand extends Command {
 
     public DriveDirectionCommand(double power, double heading){
         c_drive = Robot.getDriveSubsystem();
+        System.out.println("Requires Drivesubsytem " + c_drive);
         requires(c_drive);
+
+        gyroPID = c_drive.gyroPID;
 
         this.power = power;
         this.heading = heading;
         this.speed = 0;
 
-        gyroPID = c_drive.gyroPID;
-        gyroPID.setSetpoint(heading);
-
         setInterruptible(false);
     }
 
+    @Override 
+    protected void initialize() {
+    	
+        gyroPID.setSetpoint(heading);
+        gyroPID.setEnabled(true);
+
+    }
+    
     @Override
     protected void execute() {
         double leftSpeed, rightSpeed;
@@ -56,6 +64,7 @@ public class DriveDirectionCommand extends Command {
     @Override
     protected void end() {
         c_drive.setRawSpeeds(0, 0);
+        gyroPID.setEnabled(false);
     }
 
     public void setSpeed(double speed){
