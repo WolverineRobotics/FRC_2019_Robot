@@ -72,7 +72,7 @@ public class IntakeSubsystem extends Subsystem {
     }
 
     public double getRotateRawSpeed() {
-        return rotate.getSelectedSensorPosition(0);
+        return rotate.getMotorOutputPercent();
     }
 
     public void setRollersRawSpeed(double speed) {

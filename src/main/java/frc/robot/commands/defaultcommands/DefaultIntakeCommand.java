@@ -1,7 +1,9 @@
 package frc.robot.commands.defaultcommands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.Robot;
+import frc.robot.commands.autonomouscommands.AutoHatchCommand;
 import frc.robot.constants.JoystickMap;
 import frc.robot.oi.OI;
 import frc.robot.subsystems.IntakeSubsystem;
@@ -18,8 +20,11 @@ public class DefaultIntakeCommand extends Command {
     @Override
     protected void execute() {
         // Rotate ***************************
-        double rotateSpeed = OI.getOperatorIntakeTilt();
+        double rotateSpeed = OI.getOperatorIntakeRotate();
         c_intake.setRotateRawSpeed(rotateSpeed*0.6);
+        if(c_intake.getRotateEncoderPosition() < -110 && rotateSpeed == 0) {
+            c_intake.setRotateRawSpeed(0.07);
+        }
 
         // Rollers *************************
         boolean intakeIn = OI.getOperatorIntakeIn(); 
@@ -27,7 +32,7 @@ public class DefaultIntakeCommand extends Command {
         if(intakeIn) {
             c_intake.setRollersRawSpeed(1);
         } else if(intakeOut) {
-            c_intake.setRollersRawSpeed(-0.75);
+            c_intake.setRollersRawSpeed(-0.9);
         } else {
             c_intake.setRollersRawSpeed(0);
         }
@@ -48,6 +53,11 @@ public class DefaultIntakeCommand extends Command {
         if (c_intake.getUpperLimit()) {
             c_intake.resetEncoders();
         }
+
+        // Auto Hatch ************************
+        // if(OI.getOperatorAutoHatch()) {
+        //     Scheduler.getInstance().add(new AutoHatchCommand());
+        // }
         if (OI.getDriver().getRawButton(JoystickMap.BUTTON_START) && OI.getOperator().getRawButton(JoystickMap.BUTTON_START)) {
             c_intake.resetEncoders();
         }
