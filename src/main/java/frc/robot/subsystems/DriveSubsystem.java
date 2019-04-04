@@ -13,6 +13,7 @@ import frc.robot.constants.RobotConst;
 import frc.robot.constants.RobotMap;
 import frc.robot.constants.RobotPIDValues;
 import frc.robot.pid.GyroPID;
+import frc.util.MaxSonar;
 
 public class DriveSubsystem extends Subsystem {
 
@@ -20,6 +21,7 @@ public class DriveSubsystem extends Subsystem {
     private Encoder leftEncoder, rightEncoder;
     private AHRS navX;
     public PigeonIMU pigeon;
+    private MaxSonar maxSonar;
 
     public GyroPID gyroPID;
 
@@ -43,6 +45,7 @@ public class DriveSubsystem extends Subsystem {
 
         navX = new AHRS(Port.kMXP);
         pigeon = new PigeonIMU(RobotMap.DRIVE_PIGEON_IMU_ADDRESS);
+        maxSonar = new MaxSonar(RobotMap.)
 
         navX.reset();
         pigeon.setFusedHeadingToCompass();
@@ -176,4 +179,11 @@ public class DriveSubsystem extends Subsystem {
     // PID functions
     //**********************************************************************************
 
+
+
+
+    //Maxsonar
+    public double getRangeInches(){
+        return maxSonar.getRangeInches();
+    }
 }
