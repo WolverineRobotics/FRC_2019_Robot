@@ -24,7 +24,9 @@ public class DefaultElevatorCommand extends Command {
      
     @Override
     protected void execute() {
-
+        // Manual control
+        double elevatorSpeed = OI.getOperatorElevatorSpeed();
+        c_elevator.setElevatorRawSpeed(elevatorSpeed * 0.7);
 
         //Operator A, B and Y Button controls
         GamePiece gamePiece = c_intake.getGamePiece();

@@ -11,13 +11,18 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.commands.defaultcommands.DefaultDriveCommand;
 import frc.robot.constants.RobotConst;
 import frc.robot.constants.RobotMap;
+import frc.robot.constants.RobotPIDValues;
+import frc.robot.pid.GyroPID;
 
 public class DriveSubsystem extends Subsystem {
-    
+
     private CANSparkMax leftDrive01, leftDrive02, rightDrive01, rightDrive02;
     private Encoder leftEncoder, rightEncoder;
     private AHRS navX;
-    private PigeonIMU pigeon;
+    public PigeonIMU pigeon;
+
+    public GyroPID gyroPID;
+
     /**
      * Drive train subsystem
      * include drive motors, gyro, and encoders
@@ -31,11 +36,18 @@ public class DriveSubsystem extends Subsystem {
         leftEncoder = new Encoder(RobotMap.DRIVE_LEFT_ENCODER_A, RobotMap.DRIVE_LEFT_ENCODER_B);
         rightEncoder = new Encoder(RobotMap.DRIVE_RIGHT_ENCODER_A, RobotMap.DRIVE_RIGHT_ENCODER_B);
 
+        rightEncoder.setDistancePerPulse(1/RobotConst.DRIVE_ENCODER_COUNTS_PER_INCH);
+        leftEncoder.setDistancePerPulse(1/RobotConst.DRIVE_ENCODER_COUNTS_PER_INCH);
+
+        leftEncoder.setReverseDirection(true);
+
         navX = new AHRS(Port.kMXP);
         pigeon = new PigeonIMU(RobotMap.DRIVE_PIGEON_IMU_ADDRESS);
 
         navX.reset();
         pigeon.setFusedHeadingToCompass();
+    
+        gyroPID = new GyroPID(RobotPIDValues.GYRO_KP, RobotPIDValues.GYRO_KI, RobotPIDValues.GYRO_KD);
     }
     
     @Override
@@ -64,8 +76,8 @@ public class DriveSubsystem extends Subsystem {
             speed = 1;
         }
 
-        leftDrive01.set(speed * RobotConst.DRIVE_SPEED_REDUCTION_RATIO);
-        leftDrive02.set(speed * RobotConst.DRIVE_SPEED_REDUCTION_RATIO);
+        leftDrive01.set(speed);
+        leftDrive02.set(speed);
     }
 
     /**
@@ -79,8 +91,8 @@ public class DriveSubsystem extends Subsystem {
             speed = 1;
         }
 
-        rightDrive01.set(speed * RobotConst.DRIVE_SPEED_REDUCTION_RATIO);
-        rightDrive02.set(speed * RobotConst.DRIVE_SPEED_REDUCTION_RATIO);
+        rightDrive01.set(speed);
+        rightDrive02.set(speed);
     }
 
     /**
@@ -97,6 +109,18 @@ public class DriveSubsystem extends Subsystem {
      */
     public int getRawRightEncoder() {
         return rightEncoder.get();
+    }
+
+    public double getDistanceLeftEncoder(){
+        return leftEncoder.getDistance();
+    }
+
+    public double getDistanceRightEncoder(){
+        return rightEncoder.getDistance();
+    }
+
+    public double getDistance(){
+        return (getDistanceLeftEncoder() + getDistanceRightEncoder())/2;
     }
 
     /**
@@ -120,7 +144,9 @@ public class DriveSubsystem extends Subsystem {
      * @return double value in degrees
      */
     public double getPigeonHeading() {
-        return pigeon.getFusedHeading();
+        double[] ypr = new double[3];
+        pigeon.getYawPitchRoll(ypr);
+        return ypr[0];
     }
     
     /**
@@ -145,4 +171,9 @@ public class DriveSubsystem extends Subsystem {
     public double getRightRawSpeed() {
         return (rightDrive01.get() + rightDrive02.get()) / 2;
     }
+    
+    //********************************************************************************** 
+    // PID functions
+    //**********************************************************************************
+
 }

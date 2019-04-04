@@ -137,7 +137,6 @@ public class OI {
         return Util.setDeadzoneLimits(driver.getRawAxis(JoystickMap.RIGHT_TRIGGER), RobotConst.CLIMB_THROTTLE_TRIGGER_VALUE);
     }
 
-
     //TODO: Assign button to AutoClimb
 
      public static boolean getAutoClimb(){
@@ -176,7 +175,6 @@ public class OI {
      */
     public static double getOperatorElevatorSpeed() {
         return Util.setDeadzoneLimits(operator.getRawAxis(JoystickMap.LEFT_STICK_Y), RobotConst.ELEVATOR_LEFT_STICK_Y_TRIGGER_VALUE);
-
     }
 
     /**
@@ -184,10 +182,8 @@ public class OI {
      * Right stick y
      * @return double from -1 to 1
      */
-    public static double getOperatorIntakeTilt() {
-        // return -operator.getRawAxis(JoystickMap.RIGHT_STICK_Y);
+    public static double getOperatorIntakeRotate() {
         return Util.setDeadzoneLimits(-operator.getRawAxis(JoystickMap.RIGHT_STICK_Y), RobotConst.ELEVATOR_RIGHT_STICK_Y_TRIGGER_VALUE);
-
     }
 
     /**
@@ -214,6 +210,10 @@ public class OI {
             operator.getPOV() == JoystickMap.POV_NORTH_EAST ||
             operator.getPOV() == JoystickMap.POV_NORTH_WEST
         );
+    }
+
+    public static boolean getOperatorAutoHatch() {
+        return operator.getRawButton(JoystickMap.BUTTON_SELECT);
     }
 
     /**
@@ -274,8 +274,21 @@ public class OI {
     public static boolean getCancelOperatorCommand(){
         return (operator.getRawButton(JoystickMap.BUTTON_SELECT));
     }
-
-
+  
+    public static void driverRumble(boolean toRumble) {
+        if(toRumble) {
+            driver.setRumble(RumbleType.kLeftRumble, RobotConst.RUMBLE_INTENSITY);
+            driver.setRumble(RumbleType.kRightRumble, RobotConst.RUMBLE_INTENSITY);
+            operator.setRumble(RumbleType.kLeftRumble, RobotConst.RUMBLE_INTENSITY);
+            operator.setRumble(RumbleType.kRightRumble, RobotConst.RUMBLE_INTENSITY);
+        } else {
+            driver.setRumble(RumbleType.kLeftRumble, 0);
+            driver.setRumble(RumbleType.kRightRumble, 0);
+            operator.setRumble(RumbleType.kLeftRumble, 0);
+            operator.setRumble(RumbleType.kRightRumble, 0);
+        }
+    }
+  
     /**
      * @return instance of driver
      */
