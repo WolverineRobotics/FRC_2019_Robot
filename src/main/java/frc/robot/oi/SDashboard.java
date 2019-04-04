@@ -14,6 +14,8 @@ public class SDashboard {
     private static ElevatorSubsystem c_elevator = Robot.getElevatorSubsystem();
     private static IntakeSubsystem c_intake = Robot.getIntakeSubsystem();
 
+    private static double[] xyz_dps = new double[3];
+
     public static void execute() {
 
         SmartDashboard.putNumber("[Climb] Lift Speed", c_climb.getLiftRawSpeed());
@@ -55,7 +57,14 @@ public class SDashboard {
         SmartDashboard.putNumber("[Drive] Pigeon Roll", data[2]);
         //intake rotate - power and encoder
         //climb - power and encoder
-
+        SmartDashboard.putNumber("[Drive] Distance", c_drive.getDistance());
         // SmartDashboard
+
+
+        c_drive.pigeon.getRawGyro(xyz_dps);
+
+        SmartDashboard.putNumber("x", xyz_dps[0]);
+        SmartDashboard.putNumber("y", xyz_dps[1]);
+        SmartDashboard.putNumber("z", xyz_dps[2]);
     }
 }

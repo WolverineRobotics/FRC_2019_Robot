@@ -141,7 +141,7 @@ public class OI {
         if(Math.abs(val) > RobotConst.ELEVATOR_LEFT_STICK_Y_TRIGGER_VALUE){
             return val;
         } else {
-            return 0;
+            return -0.07;
         }
     }
 
@@ -236,6 +236,20 @@ public class OI {
      */
     public static boolean getOperatorElevatorLevel3() {
         return operator.getRawButton(JoystickMap.BUTTON_Y);
+    }
+
+    public static void driverRumble(boolean toRumble) {
+        if(toRumble) {
+            driver.setRumble(RumbleType.kLeftRumble, RobotConst.RUMBLE_INTENSITY);
+            driver.setRumble(RumbleType.kRightRumble, RobotConst.RUMBLE_INTENSITY);
+            operator.setRumble(RumbleType.kLeftRumble, RobotConst.RUMBLE_INTENSITY);
+            operator.setRumble(RumbleType.kRightRumble, RobotConst.RUMBLE_INTENSITY);
+        } else {
+            driver.setRumble(RumbleType.kLeftRumble, 0);
+            driver.setRumble(RumbleType.kRightRumble, 0);
+            operator.setRumble(RumbleType.kLeftRumble, 0);
+            operator.setRumble(RumbleType.kRightRumble, 0);
+        }
     }
 
     /**

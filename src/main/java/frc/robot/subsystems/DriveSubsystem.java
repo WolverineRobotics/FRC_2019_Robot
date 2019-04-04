@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.commands.defaultcommands.DefaultDriveCommand;
+import frc.robot.constants.RobotConst;
 import frc.robot.constants.RobotMap;
 import frc.robot.constants.RobotPIDValues;
 import frc.robot.pid.GyroPID;
@@ -34,6 +35,11 @@ public class DriveSubsystem extends Subsystem {
 
         leftEncoder = new Encoder(RobotMap.DRIVE_LEFT_ENCODER_A, RobotMap.DRIVE_LEFT_ENCODER_B);
         rightEncoder = new Encoder(RobotMap.DRIVE_RIGHT_ENCODER_A, RobotMap.DRIVE_RIGHT_ENCODER_B);
+
+        rightEncoder.setDistancePerPulse(1/RobotConst.DRIVE_ENCODER_COUNTS_PER_INCH);
+        leftEncoder.setDistancePerPulse(1/RobotConst.DRIVE_ENCODER_COUNTS_PER_INCH);
+
+        leftEncoder.setReverseDirection(true);
 
         navX = new AHRS(Port.kMXP);
         pigeon = new PigeonIMU(RobotMap.DRIVE_PIGEON_IMU_ADDRESS);
@@ -138,7 +144,9 @@ public class DriveSubsystem extends Subsystem {
      * @return double value in degrees
      */
     public double getPigeonHeading() {
-        return pigeon.getFusedHeading();
+        double[] ypr = new double[3];
+        pigeon.getYawPitchRoll(ypr);
+        return ypr[0];
     }
     
     /**

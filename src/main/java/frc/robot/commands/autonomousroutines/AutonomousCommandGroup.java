@@ -1,11 +1,20 @@
 package frc.robot.commands.autonomousroutines;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import frc.robot.commands.autonomouscommands.AutoHatchDeliverCommand;
+import frc.robot.commands.autonomouscommands.DriveDistanceCommand;
+import frc.robot.commands.autonomouscommands.ExecuteAfterWaitCommand;
+import frc.robot.commands.autonomouscommands.OpenClawCommand;
+import frc.robot.commands.autonomouscommands.OpenShovelCommand;
+import frc.robot.commands.autonomouscommands.SimpleBackawayCommand;
+import frc.robot.commands.commandgroups.ElevatorLevelCommandGroup;
+import frc.robot.constants.GamePiece;
 import frc.robot.oi.AutoSelector;
 
 /**
- * AutonomousCommandGroup
+ * Handles full sandstorm (autonomous)
  */
+
 public class AutonomousCommandGroup extends CommandGroup{
     private String pos, action1, action2;
 
@@ -19,6 +28,9 @@ public class AutonomousCommandGroup extends CommandGroup{
         System.out.println("1st action  : " + action1);
         System.out.println("2nd action  : " + action1);
         System.out.println("===============================================");
+        
+        addSequential(new OpenShovelCommand(false)); //close shovel
+        addSequential(new ExecuteAfterWaitCommand(5, new OpenClawCommand(true))); //after 5 seconds, open claw
 
         if(pos == AutoSelector.POS_LEFT){
             switch(action1){
@@ -246,7 +258,32 @@ public class AutonomousCommandGroup extends CommandGroup{
     // first action right
     //**********************************************************************************
     private void rightCS1(int pos){
+        if(pos == 0){
+            /* 
+             * front hatch
+             */
+        } else if(pos == 1 || pos == 2 || pos == 3){ //if 1 2 or 3
+            System.out.println("driving towards cargo ship position " + pos);
+            addParallel(new ElevatorLevelCommandGroup(GamePiece.HATCH, 1));
+            if(pos == 1){
+                addSequential(new DriveDistanceCommand(0.5, 188.8, 0, false));
+            } else if(pos == 2){
+                addSequential(new DriveDistanceCommand(0.5, 210.55, 0, false));
+            } else if(pos ==3){
+                addSequential(new DriveDistanceCommand(0.5, 210.55, 0, false));
+            }
+            
+            System.out.println("rotating to cargoship");
+            addParallel(new DriveDistanceCommand(0.5, 10, 90, true));
+            addSequential(new ElevatorLevelCommandGroup(GamePiece.HATCH, 1));
 
+            System.out.println("delivering hatch");
+            addSequential(new AutoHatchDeliverCommand()); //already contains drive
+
+            System.out.println("backing away");
+            addSequential(new ExecuteAfterWaitCommand(1, new SimpleBackawayCommand(1, 0.5)));
+
+        }
     }
 
     private void rightRSC1(int level){

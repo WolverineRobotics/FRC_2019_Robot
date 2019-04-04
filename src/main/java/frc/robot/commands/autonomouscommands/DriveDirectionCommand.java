@@ -2,31 +2,41 @@ package frc.robot.commands.autonomouscommands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.constants.JoystickMap;
+import frc.robot.oi.OI;
 import frc.robot.pid.GyroPID;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.util.PID;
 
 public class DriveDirectionCommand extends Command {
-    double power, heading, speed;
+    protected double power, heading, speed;
 
-    PID distancePID;
-    GyroPID gyroPID;
+    protected GyroPID gyroPID;
 
-    DriveSubsystem c_drive;
+    protected DriveSubsystem c_drive;
 
     public DriveDirectionCommand(double power, double heading){
+        c_drive = Robot.getDriveSubsystem();
+        System.out.println("Requires Drivesubsytem " + c_drive);
+        requires(c_drive);
+
+        gyroPID = c_drive.gyroPID;
+
         this.power = power;
         this.heading = heading;
         this.speed = 0;
 
-        c_drive = Robot.getDriveSubsystem();
-
-        gyroPID = c_drive.gyroPID;
-        gyroPID.setSetpoint(heading);
-
-        requires(c_drive);
+        setInterruptible(false);
     }
 
+    @Override 
+    protected void initialize() {
+    	
+        gyroPID.setSetpoint(heading);
+        gyroPID.setEnabled(true);
+
+    }
+    
     @Override
     protected void execute() {
         double leftSpeed, rightSpeed;
@@ -34,24 +44,27 @@ public class DriveDirectionCommand extends Command {
  
         steering = gyroPID.calculate(c_drive.getPigeonHeading());
 
-        if(speed > Math.abs(power)){
-            speed = power;
-        }
+        // if(speed > Math.abs(power)){
+        //     speed = power;
+        // }
 
-        leftSpeed = speed - steering;
-        rightSpeed = -(speed + steering);
+        speed = power;
+
+        leftSpeed = -(speed - steering);
+        rightSpeed = speed + steering;
         
         c_drive.setRawSpeeds(leftSpeed, rightSpeed);
     }
 
     @Override
     protected boolean isFinished() {
-        return distancePID.isDone();
+        return OI.getDriver().getRawButton(JoystickMap.BUTTON_SELECT);
     }
 
     @Override
     protected void end() {
         c_drive.setRawSpeeds(0, 0);
+        gyroPID.setEnabled(false);
     }
 
     public void setSpeed(double speed){
