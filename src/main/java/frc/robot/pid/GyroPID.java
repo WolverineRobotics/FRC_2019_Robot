@@ -37,6 +37,14 @@ public class GyroPID extends PIDController {
     }
 
     /**
+     * Construct a TGyroPid using the supplied proportional, integral, and differential gain
+     */
+    public GyroPID(double kP, double kI, double kD) {
+        super(kP, kI, kD, 0.0d, new NullPIDSource(), new NullPIDOutput());
+        reset();
+    }
+
+    /**
      * Calculate the PID output.
      * <p>
      * In order to generate proper PID behaviour, this routine must be called at a
