@@ -6,6 +6,7 @@ import frc.robot.Robot;
 import frc.robot.commands.commandgroups.ClimbCommandGroup;
 import frc.robot.oi.OI;
 import frc.robot.subsystems.ClimbSubsystem;
+import frc.util.Util;
 
 public class DefaultClimbCommand extends Command {
 
@@ -23,13 +24,17 @@ public class DefaultClimbCommand extends Command {
 
     @Override
     protected void execute() {
-        if (OI.getDriverClimbState()) {
+/*         if (OI.getDriverClimbState()) {
             Scheduler.getInstance().add(new ClimbCommandGroup());
             c_climb.unlockLock(false);
-		}
+		} */
 		
 		if (OI.getDriverCancel()) {
             c_climb.unlockLock(true);
+        }
+
+        if(OI.getDriverClimbState()){
+            Util.addCommand(new ClimbCommandGroup());
         }
         
 		//climb lift

@@ -30,18 +30,26 @@ public class DefaultDriveCommand extends Command {
         double leftSpeed = 0;
         double rightSpeed = 0;
 
-        if (Math.abs(throttle) < RobotConst.DRIVE_THORTTLE_TRIGGER_VALUE) {
+        // Redundant code, now done in OI.
+/*         if (Math.abs(throttle) < RobotConst.DRIVE_THORTTLE_TRIGGER_VALUE) {
             throttle = 0;
         }
 
         if (Math.abs(turn) < RobotConst.DRIVE_TURN_TRIGGER_VALUE) {
             turn = 0;
-        }
+        } */
 
 
         leftSpeed = throttle - turn;
         rightSpeed = throttle + turn;
-        
+
+        if(OI.getFineControl()){
+            //If fine control is active.
+            c_drive.setRawSpeeds(leftSpeed*0.3, -rightSpeed*0.3);
+        }else{
+            c_drive.setRawSpeeds(leftSpeed*0.7, -rightSpeed*0.7);
+        }
+    }
         c_drive.setRawSpeeds(leftSpeed*RobotConst.DRIVE_SPEED_REDUCTION_RATIO, -rightSpeed*RobotConst.DRIVE_SPEED_REDUCTION_RATIO);
 
         if(OI.getDriver().getPOV() != -1){

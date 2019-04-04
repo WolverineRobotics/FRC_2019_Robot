@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.sensors.PigeonIMU;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -16,6 +17,8 @@ public class IntakeSubsystem extends Subsystem {
 
     private TalonSRX rotate;
     private TalonSRX rollers;
+    private PigeonIMU pigeon;
+
 
     private DoubleSolenoid shovel;
     private DoubleSolenoid claw;
@@ -27,6 +30,7 @@ public class IntakeSubsystem extends Subsystem {
 
     private DigitalInput ballSensor;
 
+    private double[] gyroValues;
 
     public IntakeSubsystem() {
         rotate = new TalonSRX(RobotMap.INTAKE_MOTOR_ROTATE_ADDRESS);
@@ -173,5 +177,13 @@ public class IntakeSubsystem extends Subsystem {
         return !ballSensor.get();
     }
 
+    //****************************************************************
+    // Gyro methods
+    //****************************************************************
+
+    public double getGyroTilt(){
+        pigeon.getRawGyro(gyroValues); 
+        return gyroValues[1]; //TODO: Ensure that axis is correct
+    }
 
 }
