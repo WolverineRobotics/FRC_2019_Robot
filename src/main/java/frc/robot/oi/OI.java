@@ -270,6 +270,7 @@ public class OI {
         return operator.getRawButton(JoystickMap.BUTTON_Y);
     }
 
+    //TODO: getOperatorAutoHatch currently uses same button as operator calcelCommand
     //Cancel Operator Commands
     public static boolean getCancelOperatorCommand(){
         return (operator.getRawButton(JoystickMap.BUTTON_SELECT));
