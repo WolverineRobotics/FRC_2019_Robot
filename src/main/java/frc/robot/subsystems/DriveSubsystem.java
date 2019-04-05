@@ -45,7 +45,8 @@ public class DriveSubsystem extends Subsystem {
 
         navX = new AHRS(Port.kMXP);
         pigeon = new PigeonIMU(RobotMap.DRIVE_PIGEON_IMU_ADDRESS);
-        maxSonar = new MaxSonar(RobotMap.)
+        //TODO: Move value to robotmap
+        maxSonar = new MaxSonar(0);
 
         navX.reset();
         pigeon.setFusedHeadingToCompass();
@@ -184,6 +185,11 @@ public class DriveSubsystem extends Subsystem {
 
     //Maxsonar
     public double getRangeInches(){
-        return maxSonar.getRangeInches();
+        return maxSonar.getAverageRangeInches();
     }
+
+    public double getRangeMM(){
+        return maxSonar.getAverageRangeMM();
+    }
+
 }

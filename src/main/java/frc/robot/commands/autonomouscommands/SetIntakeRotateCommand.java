@@ -68,7 +68,7 @@ public class SetIntakeRotateCommand extends Command {
         //If manual override enabled, checks if there is any input
         if(allowManualOverride){
             
-            double rotateSpeed = OI.getOperatorIntakeTilt();
+            double rotateSpeed = OI.getOperatorIntakeRotate();
 
             //If there is input, use inputed value instead of default
             if(rotateSpeed != 0){
