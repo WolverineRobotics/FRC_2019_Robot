@@ -6,7 +6,6 @@ import frc.robot.constants.JoystickMap;
 import frc.robot.oi.OI;
 import frc.robot.pid.GyroPID;
 import frc.robot.subsystems.DriveSubsystem;
-import frc.util.PID;
 
 public class DriveDirectionCommand extends Command {
     protected double power, heading, speed;

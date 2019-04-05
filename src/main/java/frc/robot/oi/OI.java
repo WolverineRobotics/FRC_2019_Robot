@@ -104,7 +104,7 @@ public class OI {
      * @return True when button released (toggle)
      */
     public static boolean getDriverCancel() {
-        return driver.getRawButton(JoystickMap.BUTTON_B);
+        return driver.getRawButtonPressed(JoystickMap.BUTTON_B);
     }
     
     /**
@@ -113,7 +113,7 @@ public class OI {
      * @return True when button released (toggle)
      */
     public static boolean getDriverClimbState() {
-        return driver.getRawButton(JoystickMap.BUTTON_Y);
+        return driver.getRawButtonPressed(JoystickMap.BUTTON_Y);
     }
 
     /**
@@ -140,7 +140,6 @@ public class OI {
     //TODO: Assign button to AutoClimb
 
      public static boolean getAutoClimb(){
-        // return driver.getRawButton(JoystickMap.BUTTON_SELECT);
         return false; //TEMP
     } 
 
@@ -162,7 +161,7 @@ public class OI {
 
     //Cancel Driver Commands
     public static boolean getCancelDriverCommand(){
-        return (driver.getRawButton(JoystickMap.BUTTON_SELECT));
+        return false;
     }
 
     //********************************************************************************** 
@@ -212,8 +211,13 @@ public class OI {
         );
     }
 
+    /**
+     * Operator auto ground hatch
+     * Right trigger
+     * @return True when being pressed
+     */
     public static boolean getOperatorAutoHatch() {
-        return operator.getRawButton(JoystickMap.BUTTON_SELECT);
+        return operator.getRawAxis(JoystickMap.RIGHT_TRIGGER) > 0.2;
     }
 
     /**
@@ -272,7 +276,7 @@ public class OI {
 
     //Cancel Operator Commands
     public static boolean getCancelOperatorCommand(){
-        return (operator.getRawButton(JoystickMap.BUTTON_SELECT));
+        return false;
     }
   
     public static void driverRumble(boolean toRumble) {
@@ -306,7 +310,7 @@ public class OI {
 
     //If either driver is able to cancel a command
     public static boolean getCancelCommand(){
-        return (driver.getRawButton(JoystickMap.BUTTON_SELECT) || operator.getRawButton(JoystickMap.BUTTON_SELECT));
+        return false;
     }
 }
 

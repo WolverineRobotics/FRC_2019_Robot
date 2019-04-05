@@ -171,9 +171,4 @@ public class DriveSubsystem extends Subsystem {
     public double getRightRawSpeed() {
         return (rightDrive01.get() + rightDrive02.get()) / 2;
     }
-    
-    //********************************************************************************** 
-    // PID functions
-    //**********************************************************************************
-
 }

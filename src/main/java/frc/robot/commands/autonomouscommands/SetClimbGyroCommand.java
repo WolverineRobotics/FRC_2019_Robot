@@ -13,7 +13,6 @@ public class SetClimbGyroCommand extends Command{
     private boolean isDone;
 
     //If -1, then disabled
-    //TODO: Implement desired encoder position, right now continues until canceled.
     private int desiredEncoderPos;
 
     private boolean goingUp;

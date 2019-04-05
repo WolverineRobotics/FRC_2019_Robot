@@ -7,10 +7,16 @@ import frc.robot.subsystems.IntakeSubsystem;
 public class OpenClawCommand extends Command {
 
     private IntakeSubsystem c_intake;
+    boolean toOpen;
 
     public OpenClawCommand(boolean toOpen) {
         c_intake = Robot.getIntakeSubsystem();
         requires(c_intake);
+        this.toOpen = toOpen;
+    }
+
+    @Override
+    protected void initialize() {
         c_intake.setClaw(toOpen);
     }
 

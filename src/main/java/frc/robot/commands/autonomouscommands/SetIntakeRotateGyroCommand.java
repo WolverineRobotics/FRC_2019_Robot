@@ -86,7 +86,7 @@ public class SetIntakeRotateGyroCommand extends Command {
             }else{
                 motorPower = maxSpeed;
             }
-        }else{
+        } else {
             //Robot is tilted too much, decrease tilt (left side of desmos graph)
             if(Math.abs(currentGyroValue-targetGyroValue) < maxAllowedError){
                 motorPower = (((-maxSpeed/2)/Math.pow(maxAllowedError,2))*Math.pow((currentGyroValue-targetGyroValue),2) + (maxSpeed/2));
@@ -94,15 +94,10 @@ public class SetIntakeRotateGyroCommand extends Command {
                 motorPower = 0;
             }
         }
-        
-
-
-
-
-            
+         
         //Manual Override
         if(allowManualOverride){
-            double rotateSpeed = OI.getOperatorIntakeTilt();
+            double rotateSpeed = OI.getOperatorIntakeRotate();
             if(rotateSpeed != 0){
                 motorPower = (rotateSpeed*maxSpeed);
             }

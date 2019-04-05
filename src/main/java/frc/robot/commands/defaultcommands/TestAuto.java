@@ -22,7 +22,7 @@ public class TestAuto extends CommandGroup{
 
         addSequential(new DriveDistanceCommand(0.4, 191, 0, true));
         addSequential(new RotateToHeadingCommand(90));
-        
+        addSequential(new RotateToHeadingCommand(c_drive.getPigeonHeading() - c_camera.getDegreesOff()));
         addSequential(new DriveDistanceCommand(0.1, 5, c_drive.getPigeonHeading(), true));
     }
 }

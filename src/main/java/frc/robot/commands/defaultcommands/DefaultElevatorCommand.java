@@ -26,7 +26,11 @@ public class DefaultElevatorCommand extends Command {
     protected void execute() {
         // Manual control
         double elevatorSpeed = OI.getOperatorElevatorSpeed();
-        c_elevator.setElevatorRawSpeed(elevatorSpeed * 0.7);
+        if(elevatorSpeed == 0){
+            c_elevator.setElevatorRawSpeed(-0.07);
+        } else {
+            c_elevator.setElevatorRawSpeed(elevatorSpeed * 0.7);
+        }
 
         //Operator A, B and Y Button controls
         GamePiece gamePiece = c_intake.getGamePiece();
@@ -39,12 +43,6 @@ public class DefaultElevatorCommand extends Command {
         } else if(OI.getOperatorPlayerStationBall()) {
             Util.addCommand(new PlayerStationCommandGroup(GamePiece.CARGO));
         }
-        
-        //Manual control
-        double elevatorSpeed = OI.getOperatorElevatorSpeed();
-
-        
-        c_elevator.setElevatorRawSpeed(elevatorSpeed * 0.7);
 
         // Reset Encoder
         if (OI.getDriver().getRawButton(JoystickMap.BUTTON_START)) {
