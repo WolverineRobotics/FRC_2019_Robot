@@ -301,6 +301,7 @@ public class AutonomousCommandGroup extends CommandGroup{
     //**********************************************************************************
     private void rightCS2(int pos){
 
+        System.out.println("backing up from player station " );
         addSequential(new DriveDistanceCommand(-0.5, -10, 0, false));
         double angle1;
         double distanceDiagonal;
@@ -317,9 +318,10 @@ public class AutonomousCommandGroup extends CommandGroup{
             distanceDiagonal = 295.0;
         }
 
+        System.out.println("rotating");
         addSequential(new RotateToHeadingCommand(angle1));
 
-        System.out.println("driving towards cargo ship position " + pos);
+        System.out.println("reversing towards cargo ship position " + pos);
         addSequential(new DriveDistanceCommand(-0.5, -distanceDiagonal, 0, false));
 
         System.out.println("rotating to cargoship");
