@@ -3,11 +3,11 @@ package frc.robot.commands.autonomousroutines;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.Robot;
 import frc.robot.commands.autonomouscommands.AutoHatchDeliverCommand;
-import frc.robot.commands.autonomouscommands.DriveDirectionCommand;
 import frc.robot.commands.autonomouscommands.DriveDistanceCommand;
 import frc.robot.commands.autonomouscommands.ExecuteAfterWaitCommand;
 import frc.robot.commands.autonomouscommands.OpenClawCommand;
 import frc.robot.commands.autonomouscommands.OpenShovelCommand;
+import frc.robot.commands.autonomouscommands.ReverseDriveDistanceCommand;
 import frc.robot.commands.autonomouscommands.RotateToHeadingCommand;
 import frc.robot.commands.autonomouscommands.SetIntakeRotateCommand;
 import frc.robot.commands.autonomouscommands.SimpleBackawayCommand;
@@ -285,14 +285,27 @@ public class AutonomousCommandGroup extends CommandGroup{
              * front hatch
              */
         } else if(pos == 1 || pos == 2 || pos == 3){
+            double dist1;
+
+            double angle2;
+            double dist2;
+
             System.out.println("Driving towards cargo ship position " + pos);
             if(pos == 1){
-                addSequential(new DriveDistanceCommand(0.5, 188.8, 0, false));
+                dist1 = 188.8;//approach cargoship distance
+                dist2 = 255;//approach player station distance
+                angle2 = 201.23;//approach player station angle
             } else if(pos == 2){
-                addSequential(new DriveDistanceCommand(0.5, 210.55, 0, false));
-            } else if(pos ==3){
-                addSequential(new DriveDistanceCommand(0.5, 210.55, 0, false));
+                dist1 = 210.55;
+                dist2 = 285;
+                angle2 = 199.67;
+            } else{
+                dist1 = 255.10;
+                dist2 = 295; 
+                angle2 = 198.25;
             }
+            
+            addSequential(new DriveDistanceCommand(0.5, dist1, 0, false));
             
             System.out.println("Rotating to cargoship");
             addSequential(new RotateToHeadingCommand(270));
@@ -307,13 +320,7 @@ public class AutonomousCommandGroup extends CommandGroup{
             addSequential(new DriveDistanceCommand(0.5, -12, 90, false));
 
             System.out.println("Returning to alliance station");
-            if(pos == 1){
-                addSequential(new DriveDistanceCommand(0.5, 255, 201.23, true));
-            } else if(pos == 2){
-                addSequential(new DriveDistanceCommand(0.5, 285, 199.67, true));
-            } else if(pos ==3){
-                addSequential(new DriveDistanceCommand(0.5, 295, 198.25, true));
-            }
+            addSequential(new DriveDistanceCommand(05, dist2, angle2, true));
 
             System.out.println("Finding player station");
             addSequential(new RotateToHeadingCommand(180));
@@ -343,7 +350,6 @@ public class AutonomousCommandGroup extends CommandGroup{
         double angle1;
         double distanceDiagonal;
 
-
         if (pos==1){
             angle1 = 197.4;
             distanceDiagonal = 253.7;
@@ -359,18 +365,17 @@ public class AutonomousCommandGroup extends CommandGroup{
         addSequential(new RotateToHeadingCommand(angle1));
 
         System.out.println("reversing towards cargo ship position " + pos);
-        addSequential(new DriveDistanceCommand(-0.5, -distanceDiagonal, 0, false));
+        addSequential(new ReverseDriveDistanceCommand(0.5, distanceDiagonal, 0, false));
 
         System.out.println("rotating to cargoship");
         addSequential(new RotateToHeadingCommand(90));
+        addSequential(new RotateToHeadingCommand(c_drive.getPigeonHeading() - c_camera.getDegreesOff()));
 
         System.out.println("delivering hatch");
         addSequential(new AutoHatchDeliverCommand());
 
         System.out.println("backing away");
         addSequential(new ExecuteAfterWaitCommand(1, new SimpleBackawayCommand(1, 0.5)));
-
-
     }
 
     private void rightRSC2(int level){
