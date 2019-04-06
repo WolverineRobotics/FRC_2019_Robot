@@ -3,10 +3,16 @@ package frc.robot.commands.autonomousroutines;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.commands.autonomouscommands.AutoHatchDeliverCommand;
 import frc.robot.commands.autonomouscommands.DriveDistanceCommand;
+import frc.robot.commands.autonomouscommands.DriveTowardsVisionTargetCommand;
 import frc.robot.commands.autonomouscommands.ExecuteAfterWaitCommand;
 import frc.robot.commands.autonomouscommands.OpenClawCommand;
 import frc.robot.commands.autonomouscommands.OpenShovelCommand;
+import frc.robot.commands.autonomouscommands.RotateToHeadingCommand;
+import frc.robot.commands.autonomouscommands.RotateToVisionTargetCommand;
+import frc.robot.commands.autonomouscommands.SetElevatorCommand;
+import frc.robot.commands.autonomouscommands.SetIntakeRotateCommand;
 import frc.robot.commands.autonomouscommands.SimpleBackawayCommand;
+import frc.robot.commands.commandgroups.AutomaticZeroCommandGroup;
 import frc.robot.commands.commandgroups.ElevatorLevelCommandGroup;
 import frc.robot.constants.GamePiece;
 import frc.robot.oi.AutoSelector;
@@ -278,7 +284,7 @@ public class AutonomousCommandGroup extends CommandGroup{
             addSequential(new ElevatorLevelCommandGroup(GamePiece.HATCH, 1));
 
             System.out.println("delivering hatch");
-            addSequential(new AutoHatchDeliverCommand()); //already contains drive
+            addSequential(new AutoHatchDeliverCommand()); //already contains drive towards vision
 
             System.out.println("backing away");
             addSequential(new ExecuteAfterWaitCommand(1, new SimpleBackawayCommand(1, 0.5)));
@@ -286,26 +292,90 @@ public class AutonomousCommandGroup extends CommandGroup{
         }
     }
 
+    /**
+     * Right Rocket ship close hatch 1
+     */
     private void rightRSC1(int level){
+        if(level == 1 || level == 2 || level == 3) {
+            // Drive up to the rocket
+            addSequential(new DriveDistanceCommand(0.5, 50, 0, false));
+            addSequential(new RotateToHeadingCommand(315)); //(45 degrees on a clock)
+            addSequential(new DriveDistanceCommand(0.6, 137.2, 45, false));
+            if(level == 1) {
+                addSequential(new ElevatorLevelCommandGroup(GamePiece.HATCH, 1));
+            } else if (level == 2) {
+                addSequential(new ElevatorLevelCommandGroup(GamePiece.HATCH, 2));
+            } else if (level == 3) {
+                //danger zone don't wanna do anything here yet. :)
+            }
+            // deliver hatch, contains drive to vision targets
+            addSequential(new AutoHatchDeliverCommand());
 
+            //go to player station
+            addSequential(new SimpleBackawayCommand(10, 0.4));
+            addSequential(new RotateToHeadingCommand(180));
+            addSequential(new DriveDistanceCommand(0.5, 195, 180, true));
+            addParallel(new OpenClawCommand(true));
+            addParallel(new OpenShovelCommand(true));
+            addParallel(new ElevatorLevelCommandGroup(GamePiece.HATCH, 1));
+            addSequential(new DriveTowardsVisionTargetCommand(2));
+        }
     }
 
     private void rightRSF1(int level){
-
+        if(level == 1 || level == 2 || level == 3) {
+            //Drive up to rocket
+            addSequential(new DriveDistanceCommand(0.5, 212.80 + 10, 0, false)); //drive towards rocket
+            addSequential(new RotateToHeadingCommand(270)); //rotate 90 degrees to right
+            addParallel(new SetElevatorCommand(6000, 0.40)); //make space for camera to get targets
+            addParallel(new SetIntakeRotateCommand(20, 0.40)); //make space for camera to get targets
+            addSequential(new RotateToHeadingCommand(225)); //look towards far side hatch
+            addSequential(new DriveDistanceCommand(0.3, 55.95 + 5, 225, true)); //drve a little towards  rocket
+            addSequential(new RotateToVisionTargetCommand());
+            if(level == 1)  {
+                addSequential(new ElevatorLevelCommandGroup(GamePiece.HATCH, 1));
+            } else if(level == 2) {
+                //semi danger zone
+            } else {
+                //danger zone
+            }
+            addSequential(new AutoHatchDeliverCommand()); //contains driving towarsd vision target
+            
+            //going back to player station
+            addSequential(new SimpleBackawayCommand(27, 0.50)); //back away so the hatch is applied
+            addSequential(new AutomaticZeroCommandGroup()); //zero intake and elevator
+            addParallel(new OpenShovelCommand(true)); //open shovel
+            addParallel(new OpenClawCommand(true)); //open claw
+            addParallel(new ElevatorLevelCommandGroup(GamePiece.HATCH, 1)); //ready to get hatch from player station
+            addSequential(new DriveDistanceCommand(0.60, 201.13 + 5, 180, false)); //drive distance to player station
+            addSequential(new DriveTowardsVisionTargetCommand(3)); //at right side player station
+        }
     }
 
     //********************************************************************************** 
     // second action right
     //**********************************************************************************
+    
     private void rightCS2(int pos){
 
     }
 
+    /**
+     * Assuming from player station ready to grab hatch
+     */
     private void rightRSC2(int level){
-
+        addSequential(new OpenClawCommand(false)); //close claw to latch hatch
+        addSequential(new SimpleBackawayCommand(10, 0.45)); //back away from player station
+        addSequential(new OpenShovelCommand(false)); //latch hatch
     }
 
+    /**
+     * Assuming from player station ready to grab hatch
+     */
     private void rightRSF2(int level){
+        addSequential(new OpenClawCommand(false)); //close claw to latch hatch
+        addSequential(new SimpleBackawayCommand(10, 0.45)); //back away from player station
+        addSequential(new OpenShovelCommand(false)); //grab hatch even more
 
     }
 }
