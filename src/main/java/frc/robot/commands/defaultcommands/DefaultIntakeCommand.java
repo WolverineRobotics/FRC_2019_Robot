@@ -64,13 +64,14 @@ public class DefaultIntakeCommand extends Command {
             Scheduler.getInstance().add(new AutoHatch());
         }
 
+        // Reset Encoders ********************
         if (OI.getDriver().getRawButton(JoystickMap.BUTTON_START) && OI.getOperator().getRawButton(JoystickMap.BUTTON_START)) {
             c_intake.resetEncoders();
         }
     }
 
     private class AutoHatch extends CommandGroup {
-        AutoHatch(){
+        public AutoHatch(){
             addSequential(new OpenClawCommand(true));
             addSequential(new OpenShovelCommand(true));
             addParallel(new SetElevatorCommand(100, 0.8));
