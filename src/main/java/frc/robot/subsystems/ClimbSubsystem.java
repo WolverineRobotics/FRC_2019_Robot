@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.defaultcommands.DefaultClimbCommand;
+import frc.robot.constants.RobotConst;
 import frc.robot.constants.RobotMap;
 
 public class ClimbSubsystem extends Subsystem {
@@ -59,6 +60,18 @@ public class ClimbSubsystem extends Subsystem {
     }
 
     public void setLiftRawSpeed(double speed) {
+        //Assumes positive encoder distance
+        int currentEncoderPos = getLiftEncoderPosition();
+        int softMax = RobotConst.CLIMB_SOFT_MAX_ENCODER_DISTANCE;
+        int softMin = RobotConst.CLIMB_SOFT_MIN_ENCODER_DISTANCE;
+        double softLimitMultiple = RobotConst.CLIMB_SOFT_LIMIT_MULTIPLE;
+
+  
+        if( currentEncoderPos > softMax && speed > 0 ){
+            speed = speed * softLimitMultiple;
+        }else if(currentEncoderPos < softMin && speed < 0){
+            speed = speed * softLimitMultiple;
+        }
         lift.set(ControlMode.PercentOutput, speed);
     }
 
