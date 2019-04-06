@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.autonomousroutines.AutonomousCommandGroup;
 import frc.robot.constants.RobotMap;
 import frc.robot.oi.AutoSelector;
 import frc.robot.oi.SDashboard;
@@ -55,8 +56,10 @@ public class Robot extends TimedRobot {
 		m_intake.resetEncoders();
 		m_elevator.resetEncoder();
 		m_climb.resetEncoders();
+		m_drive.resetEncoders();
+		m_drive.pigeon.setYaw(0);
 
-		// Scheduler.getInstance().add(new AutonomousCommandGroup());
+		Scheduler.getInstance().add(new AutonomousCommandGroup());
 		
 		// (new TestAuto()).start();
 	}
