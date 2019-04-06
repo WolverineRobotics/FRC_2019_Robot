@@ -307,15 +307,16 @@ public class AutonomousCommandGroup extends CommandGroup{
 
 
         if (pos==1){
-            angle1 = 201.23;
-            distanceDiagonal = 259.6;
+            angle1 = 197.4;
+            distanceDiagonal = 253.7;
         }else if(pos==2){
-            angle1 = 199.67;
-            distanceDiagonal = 279.3;
+            angle1 = 196.1;
+            distanceDiagonal = 273.8;
         }else{
-            angle1 = 198.25;
-            distanceDiagonal = 300.1;
+            angle1 = 194.9;
+            distanceDiagonal = 295.0;
         }
+
         addSequential(new RotateToHeadingCommand(angle1));
 
         System.out.println("driving towards cargo ship position " + pos);
