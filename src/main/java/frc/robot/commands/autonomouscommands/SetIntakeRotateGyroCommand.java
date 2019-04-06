@@ -46,13 +46,6 @@ public class SetIntakeRotateGyroCommand extends Command {
         this.desiredEncoderPos = desiredEncoderPos;
     }
 
-/*     public SetIntakeRotateGyroCommand(double maxSpeed, double targetGyroValue, boolean allowManualOverride, int desiredEncoderPos, boolean goingUp){
-        this(maxSpeed, targetGyroValue, allowManualOverride);
-        this.desiredEncoderPos = desiredEncoderPos;
-        this.goingUp = false;
-    } */
-
-
 
     @Override
     protected void initialize() {
@@ -108,11 +101,6 @@ public class SetIntakeRotateGyroCommand extends Command {
 
         //Actually sets the speed
         c_intake.setRotateRawSpeed(motorPower);
-
-        //Allows for the operator to cancel the intake rotate 
-        if(OI.getCancelOperatorCommand()){
-            isDone = true;
-        }
 
         //When button pressed, set isDone = true, operator takes over
         //A Button
