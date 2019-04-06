@@ -26,7 +26,9 @@ public class DefaultElevatorCommand extends Command {
     protected void execute() {
         // Manual control
         double elevatorSpeed = OI.getOperatorElevatorSpeed();
-        if(elevatorSpeed == 0){
+        if(Robot.getClimbSubsystem().getLock() == false){
+            c_elevator.setElevatorRawSpeed(0);
+        } else if(elevatorSpeed == 0){
             c_elevator.setElevatorRawSpeed(-0.07);
         } else {
             c_elevator.setElevatorRawSpeed(elevatorSpeed * 0.7);

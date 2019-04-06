@@ -96,6 +96,14 @@ public class ClimbSubsystem extends Subsystem {
         }
     }
 
+    public boolean getLock(){
+        if(lock.get() == Value.kForward){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     //****************************************************************
     // Climbing Mode methods
     //****************************************************************

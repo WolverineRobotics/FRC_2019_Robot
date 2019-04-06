@@ -1,13 +1,12 @@
 package frc.robot.oi;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 @SuppressWarnings("deprecation")
 public class AutoSelector {
-    private static SendableChooser<String> startPosition;
-    private static SendableChooser<String> firstHatch;
-    private static SendableChooser<String> secondHatch;
+    public static SendableChooser<String> startPosition;
+    public static SendableChooser<String> firstHatch;
+    public static SendableChooser<String> secondHatch;
 
     //starting positions
     public static final String POS_LEFT = "Left";
@@ -46,7 +45,7 @@ public class AutoSelector {
         //********************************************************************************** 
         // first hatch
         //**********************************************************************************
-        firstHatch.addDefault(NONE, NONE);
+        firstHatch.addDefault(NONE + " (First hatch)", NONE);
         firstHatch.addObject(CS_FRONT, CS_FRONT);
         firstHatch.addObject(CS_SIDE1, CS_SIDE1);
         firstHatch.addObject(CS_SIDE2, CS_SIDE2);
@@ -63,7 +62,7 @@ public class AutoSelector {
         //********************************************************************************** 
         // second hatch
         //**********************************************************************************
-        secondHatch.addDefault(NONE, NONE);
+        secondHatch.addDefault(NONE + " (Second hatch)", NONE);
         secondHatch.addObject(CS_FRONT, CS_FRONT);
         secondHatch.addObject(CS_SIDE1, CS_SIDE1);
         secondHatch.addObject(CS_SIDE2, CS_SIDE2);
@@ -80,14 +79,10 @@ public class AutoSelector {
         //********************************************************************************** 
         // put on smartdashboard
         //**********************************************************************************
-        SmartDashboard.putData(startPosition);
-        SmartDashboard.putData(firstHatch);
-        SmartDashboard.putData(secondHatch);
         
         position = startPosition.getSelected();
         firstAction = firstHatch.getSelected();
         secondAction = secondHatch.getSelected();
-
         //********************************************************************************** 
         // autonomous choice overrides
         //**********************************************************************************

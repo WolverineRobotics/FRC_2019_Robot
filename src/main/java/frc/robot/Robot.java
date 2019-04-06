@@ -9,8 +9,9 @@ import edu.wpi.cscore.VideoMode.PixelFormat;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import frc.robot.commands.defaultcommands.TestAuto;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.constants.RobotMap;
+import frc.robot.oi.AutoSelector;
 import frc.robot.oi.SDashboard;
 import frc.robot.subsystems.BlinkinSubsystem;
 import frc.robot.subsystems.CameraSubsystem;
@@ -38,6 +39,10 @@ public class Robot extends TimedRobot {
 		// to clean up
 		VictorSPX ledring = new VictorSPX(RobotMap.VISION_LED_RING);
 		ledring.set(ControlMode.PercentOutput, -1);
+
+        SmartDashboard.putData("start position", AutoSelector.startPosition);
+        SmartDashboard.putData("first hatch", AutoSelector.firstHatch);
+        SmartDashboard.putData("second hatch", AutoSelector.secondHatch);
 	}
 
 	@Override
@@ -53,7 +58,7 @@ public class Robot extends TimedRobot {
 
 		// Scheduler.getInstance().add(new AutonomousCommandGroup());
 		
-		(new TestAuto()).start();
+		// (new TestAuto()).start();
 	}
 
 	@Override

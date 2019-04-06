@@ -65,5 +65,6 @@ public class SDashboard {
 
         SmartDashboard.putNumber("x", xyz_dps[0]);
         SmartDashboard.putNumber("y", xyz_dps[1]);
-        SmartDashboard.putNumber("z", xyz_dps[2]);    }
+        SmartDashboard.putNumber("z", xyz_dps[2]);
+    }
 }
