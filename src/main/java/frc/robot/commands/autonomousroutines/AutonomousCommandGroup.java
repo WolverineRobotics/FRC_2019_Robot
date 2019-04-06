@@ -2,10 +2,12 @@ package frc.robot.commands.autonomousroutines;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.commands.autonomouscommands.AutoHatchDeliverCommand;
+import frc.robot.commands.autonomouscommands.DriveDirectionCommand;
 import frc.robot.commands.autonomouscommands.DriveDistanceCommand;
 import frc.robot.commands.autonomouscommands.ExecuteAfterWaitCommand;
 import frc.robot.commands.autonomouscommands.OpenClawCommand;
 import frc.robot.commands.autonomouscommands.OpenShovelCommand;
+import frc.robot.commands.autonomouscommands.RotateToHeadingCommand;
 import frc.robot.commands.autonomouscommands.SimpleBackawayCommand;
 import frc.robot.commands.commandgroups.ElevatorLevelCommandGroup;
 import frc.robot.constants.GamePiece;
@@ -298,6 +300,36 @@ public class AutonomousCommandGroup extends CommandGroup{
     // second action right
     //**********************************************************************************
     private void rightCS2(int pos){
+
+        addSequential(new DriveDistanceCommand(-0.5, -10, 0, false));
+        double angle1;
+        double distanceDiagonal;
+
+
+        if (pos==1){
+            angle1 = 201.23;
+            distanceDiagonal = 259.6;
+        }else if(pos==2){
+            angle1 = 199.67;
+            distanceDiagonal = 279.3;
+        }else{
+            angle1 = 198.25;
+            distanceDiagonal = 300.1;
+        }
+        addSequential(new RotateToHeadingCommand(angle1));
+
+        System.out.println("driving towards cargo ship position " + pos);
+        addSequential(new DriveDistanceCommand(-0.5, -distanceDiagonal, 0, false));
+
+        System.out.println("rotating to cargoship");
+        addSequential(new RotateToHeadingCommand(90));
+
+        System.out.println("delivering hatch");
+        addSequential(new AutoHatchDeliverCommand());
+
+        System.out.println("backing away");
+        addSequential(new ExecuteAfterWaitCommand(1, new SimpleBackawayCommand(1, 0.5)));
+
 
     }
 
