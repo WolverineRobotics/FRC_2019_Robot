@@ -16,7 +16,6 @@ public class SetClimbGyroCommand extends Command{
     private int desiredEncoderPos;
 
     private boolean goingUp;
-    private int currentEncoderPos;
 
     private double maxSpeed;
     private double targetGyroValue;
@@ -35,19 +34,6 @@ public class SetClimbGyroCommand extends Command{
         this.desiredEncoderPos = -1;
         this.maxSpeed = maxSpeed;
         this.targetGyroValue = targetGyroValue;
-
-        currentEncoderPos = c_climb.getLiftEncoderPosition();
-
-
-/*         if(currentEncoderPos < desiredEncoderPos) { //
-            goingUp = false;
-            c_climb.setLiftRawSpeed(-this.rawSpeed); 
-        } else if(currentEncoderPos > desiredEncoderPos){
-            goingUp = true;
-            c_climb.setLiftRawSpeed(this.rawSpeed);
-        } else {
-            isDone = true;
-        } */
 
         this.allowManualOverride = allowManualOverride;
 
@@ -136,12 +122,6 @@ public class SetClimbGyroCommand extends Command{
 
         double throttle = OI.getDriverThrottle();
         c_climb.setWheelRawSpeed(-throttle * 0.6);  //TODO: Set intake wheel speed
-
-
-        //Allows the driver to cancel this commands
-        if(OI.getCancelDriverCommand()){
-            isDone = true;
-        }
 
         //When button pressed, set, add self to scheduler with angle 0 and isDone = true
         //A Button
