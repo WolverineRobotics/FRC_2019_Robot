@@ -29,8 +29,7 @@ public class DriveDirectionCommand extends Command {
     }
 
     @Override 
-    protected void initialize() {
-    	
+    protected void initialize() {	
         gyroPID.setSetpoint(heading);
         gyroPID.setEnabled(true);
 

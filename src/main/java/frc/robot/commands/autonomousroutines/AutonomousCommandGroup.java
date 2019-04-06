@@ -1,6 +1,7 @@
 package frc.robot.commands.autonomousroutines;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import frc.robot.Robot;
 import frc.robot.commands.autonomouscommands.AutoHatchDeliverCommand;
 import frc.robot.commands.autonomouscommands.DriveDirectionCommand;
 import frc.robot.commands.autonomouscommands.DriveDistanceCommand;
@@ -8,10 +9,16 @@ import frc.robot.commands.autonomouscommands.ExecuteAfterWaitCommand;
 import frc.robot.commands.autonomouscommands.OpenClawCommand;
 import frc.robot.commands.autonomouscommands.OpenShovelCommand;
 import frc.robot.commands.autonomouscommands.RotateToHeadingCommand;
+import frc.robot.commands.autonomouscommands.SetIntakeRotateCommand;
 import frc.robot.commands.autonomouscommands.SimpleBackawayCommand;
 import frc.robot.commands.commandgroups.ElevatorLevelCommandGroup;
 import frc.robot.constants.GamePiece;
 import frc.robot.oi.AutoSelector;
+import frc.robot.subsystems.CameraSubsystem;
+import frc.robot.subsystems.ClimbSubsystem;
+import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.ElevatorSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
 
 /**
  * Handles full sandstorm (autonomous)
@@ -20,10 +27,22 @@ import frc.robot.oi.AutoSelector;
 public class AutonomousCommandGroup extends CommandGroup{
     private String pos, action1, action2;
 
+    private DriveSubsystem c_drive;
+    private CameraSubsystem c_camera;
+    private ElevatorSubsystem c_elevator;
+    private IntakeSubsystem c_intake;
+    private ClimbSubsystem c_climb;
+
     public AutonomousCommandGroup(){
         pos = AutoSelector.getPosition();
         action1 = AutoSelector.getFirstAction();
         action2 = AutoSelector.getSecondAction();
+
+        c_drive = Robot.getDriveSubsystem();
+        c_camera = Robot.m_camera;
+        c_elevator = Robot.getElevatorSubsystem();
+        c_intake = Robot.getIntakeSubsystem();
+        c_climb = Robot.getClimbSubsystem();
 
         System.out.println("=================Starting Auto=================");
         System.out.println("position    : " + pos);
@@ -31,8 +50,9 @@ public class AutonomousCommandGroup extends CommandGroup{
         System.out.println("2nd action  : " + action1);
         System.out.println("===============================================");
         
-        addSequential(new OpenShovelCommand(false)); //close shovel
-        addSequential(new ExecuteAfterWaitCommand(5, new OpenClawCommand(true))); //after 5 seconds, open claw
+        addParallel(new SetIntakeRotateCommand(10, 1));
+        addParallel(new OpenShovelCommand(false));
+        addParallel(new ExecuteAfterWaitCommand(2, new OpenClawCommand(true)));
 
         if(pos == AutoSelector.POS_LEFT){
             switch(action1){
@@ -264,9 +284,8 @@ public class AutonomousCommandGroup extends CommandGroup{
             /* 
              * front hatch
              */
-        } else if(pos == 1 || pos == 2 || pos == 3){ //if 1 2 or 3
-            System.out.println("driving towards cargo ship position " + pos);
-            addParallel(new ElevatorLevelCommandGroup(GamePiece.HATCH, 1));
+        } else if(pos == 1 || pos == 2 || pos == 3){
+            System.out.println("Driving towards cargo ship position " + pos);
             if(pos == 1){
                 addSequential(new DriveDistanceCommand(0.5, 188.8, 0, false));
             } else if(pos == 2){
@@ -275,16 +294,34 @@ public class AutonomousCommandGroup extends CommandGroup{
                 addSequential(new DriveDistanceCommand(0.5, 210.55, 0, false));
             }
             
-            System.out.println("rotating to cargoship");
-            addParallel(new DriveDistanceCommand(0.5, 10, 90, true));
+            System.out.println("Rotating to cargoship");
+            addSequential(new RotateToHeadingCommand(270));
             addSequential(new ElevatorLevelCommandGroup(GamePiece.HATCH, 1));
 
-            System.out.println("delivering hatch");
-            addSequential(new AutoHatchDeliverCommand()); //already contains drive
+            System.out.println("Delivering hatch");
+            addSequential(new RotateToHeadingCommand(c_drive.getPigeonHeading() - c_camera.getDegreesOff()));
+            addSequential(new AutoHatchDeliverCommand());
 
-            System.out.println("backing away");
-            addSequential(new ExecuteAfterWaitCommand(1, new SimpleBackawayCommand(1, 0.5)));
+            System.out.println("Backing away");
+            addParallel(new SetIntakeRotateCommand(0, 1));
+            addSequential(new DriveDistanceCommand(0.5, -12, 90, false));
 
+            System.out.println("Returning to alliance station");
+            if(pos == 1){
+                addSequential(new DriveDistanceCommand(0.5, 255, 201.23, true));
+            } else if(pos == 2){
+                addSequential(new DriveDistanceCommand(0.5, 285, 199.67, true));
+            } else if(pos ==3){
+                addSequential(new DriveDistanceCommand(0.5, 295, 198.25, true));
+            }
+
+            System.out.println("Finding player station");
+            addSequential(new RotateToHeadingCommand(180));
+            addSequential(new RotateToHeadingCommand(c_drive.getPigeonHeading() - c_camera.getDegreesOff()));
+
+            System.out.println("retrieving hatch");
+            addSequential(new AutoHatchDeliverCommand());
+            addSequential(new OpenClawCommand(false));
         }
     }
 

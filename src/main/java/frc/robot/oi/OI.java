@@ -40,7 +40,7 @@ import frc.util.Util;
  *  POV:
  *      Forward (0)         = Manual outtake ball
  *      Backward (180)      = Manual intake ball
- *  Extras:
+ *      Extras:
  *      Select              = Cancel Command
  */
 
@@ -59,7 +59,6 @@ public class OI {
      * @return double from -1 to 1
      */
     public static double getDriverTurn() {
-        // return driver.getRawAxis(JoystickMap.RIGHT_STICK_X);
         return Util.setDeadzoneLimits(driver.getRawAxis(JoystickMap.RIGHT_STICK_X), RobotConst.DRIVE_TURN_TRIGGER_VALUE);
     }
 
@@ -70,13 +69,6 @@ public class OI {
      * @return double from -1 to 1
      */
     public static double getDriverThrottle() {
- /*        double throttle = driver.getRawAxis(JoystickMap.LEFT_STICK_Y);
-        if (throttle > 1) {
-            throttle = 1;
-        } else if(throttle < -1) {
-            throttle = -1;
-        }
-        return throttle; */
         return Util.setDeadzoneLimits(driver.getRawAxis(JoystickMap.LEFT_STICK_Y), RobotConst.DRIVE_THORTTLE_TRIGGER_VALUE);
     }
 
@@ -94,7 +86,7 @@ public class OI {
      * X Button
      * @return True when button released (toggle)
      */
-    public static boolean getDriverRequestionHatchLED() {
+    public static boolean getDriverAutoAlign() {
         return driver.getRawButton(JoystickMap.BUTTON_X);
     }
     
@@ -122,7 +114,6 @@ public class OI {
      * @return double from 0 to 1
      */
     public static double getDriverClimbSpeedDown() {
-        // return driver.getRawAxis(JoystickMap.LEFT_TRIGGER);
         return Util.setDeadzoneLimits(driver.getRawAxis(JoystickMap.LEFT_TRIGGER), RobotConst.CLIMB_THROTTLE_TRIGGER_VALUE);
 
     }
@@ -133,15 +124,8 @@ public class OI {
      * @return double from 0 to 1
      */
     public static double getDriverClimbSpeedUp() {
-        // return driver.getRawAxis(JoystickMap.RIGHT_TRIGGER);
         return Util.setDeadzoneLimits(driver.getRawAxis(JoystickMap.RIGHT_TRIGGER), RobotConst.CLIMB_THROTTLE_TRIGGER_VALUE);
     }
-
-    //TODO: Assign button to AutoClimb
-
-     public static boolean getAutoClimb(){
-        return false; //TEMP
-    } 
 
     /**
      * Set driver controller rumble
@@ -152,16 +136,13 @@ public class OI {
         driver.setRumble(RumbleType.kRightRumble, rumble);
     }
 
-    //May want to remap fine control
-    //If held down, drive motor speed is reduced
+    /**
+     * Get driver fine control
+     * Right bumper
+     * @return button press
+     */
     public static boolean getFineControl(){
         return driver.getRawButton(JoystickMap.BUTTON_RIGHT_BUMPER);
-    }
-
-
-    //Cancel Driver Commands
-    public static boolean getCancelDriverCommand(){
-        return false;
     }
 
     //********************************************************************************** 
@@ -273,11 +254,6 @@ public class OI {
     public static boolean getOperatorElevatorLevel3() {
         return operator.getRawButton(JoystickMap.BUTTON_Y);
     }
-
-    //Cancel Operator Commands
-    public static boolean getCancelOperatorCommand(){
-        return false;
-    }
   
     public static void driverRumble(boolean toRumble) {
         if(toRumble) {
@@ -306,12 +282,4 @@ public class OI {
     public static Joystick getOperator() {
         return operator;
     }
-
-
-    //If either driver is able to cancel a command
-    public static boolean getCancelCommand(){
-        return false;
-    }
 }
-
-

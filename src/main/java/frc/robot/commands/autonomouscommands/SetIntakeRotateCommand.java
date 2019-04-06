@@ -54,11 +54,6 @@ public class SetIntakeRotateCommand extends Command {
                 isDone = true;
             }
         }
-
-        if(OI.getCancelOperatorCommand()){
-            isDone = true;
-        }
-
     }
 
     @Override

@@ -43,7 +43,7 @@ public class DefaultDriveCommand extends Command {
             Scheduler.getInstance().add(new RotateToHeadingCommand(OI.getDriver().getPOV()));
         }
 
-        if(OI.getDriverRequestionHatchLED()){ //Button X
+        if(OI.getDriverAutoAlign()){
             Scheduler.getInstance().add(new RotateToHeadingCommand(c_drive.getPigeonHeading() - Robot.m_camera.getDegreesOff()));
         }
 
