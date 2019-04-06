@@ -40,7 +40,7 @@ public class DefaultDriveCommand extends Command {
 
         if(OI.getDriver().getPOV() != -1){
             System.out.println("Starting rotate command");
-            Scheduler.getInstance().add(new RotateToHeadingCommand(OI.getDriver().getPOV()));
+            Scheduler.getInstance().add(new RotateToHeadingCommand(-OI.getDriver().getPOV()));
         }
 
         if(OI.getDriverAutoAlign()){

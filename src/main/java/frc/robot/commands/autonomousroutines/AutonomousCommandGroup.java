@@ -50,7 +50,7 @@ public class AutonomousCommandGroup extends CommandGroup{
         System.out.println("2nd action  : " + action1);
         System.out.println("===============================================");
         
-        addParallel(new SetIntakeRotateCommand(10, 1));
+        addParallel(new SetIntakeRotateCommand(-10, 1));
         addParallel(new OpenShovelCommand(false));
         addParallel(new ExecuteAfterWaitCommand(2, new OpenClawCommand(true)));
 
