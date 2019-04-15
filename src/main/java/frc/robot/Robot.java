@@ -10,9 +10,13 @@ import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.autonomousroutines.AutonomousCommandGroup;
+import frc.robot.commands.autonomouscommands.ClimbLockCommand;
+import frc.robot.commands.commandgroups.FinalsAutoWestern;
+import frc.robot.commands.commandgroups.TestAuto;
+import frc.robot.constants.JoystickMap;
 import frc.robot.constants.RobotMap;
 import frc.robot.oi.AutoSelector;
+import frc.robot.oi.OI;
 import frc.robot.oi.SDashboard;
 import frc.robot.subsystems.BlinkinSubsystem;
 import frc.robot.subsystems.CameraSubsystem;
@@ -29,13 +33,14 @@ public class Robot extends TimedRobot {
 	private static ElevatorSubsystem m_elevator = new ElevatorSubsystem();
 	private static IntakeSubsystem m_intake = new IntakeSubsystem();
 	public static CameraSubsystem m_camera = new CameraSubsystem();
+	public static UsbCamera camera;
 
 	@Override
 
 	public void robotInit() {
-		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+		camera = CameraServer.getInstance().startAutomaticCapture();
 		camera.setVideoMode(PixelFormat.kMJPEG, 320, 240, 15);
-		camera.setExposureManual(20);
+		camera.setExposureManual(70);
 
 		// to clean up
 		VictorSPX ledring = new VictorSPX(RobotMap.VISION_LED_RING);
@@ -59,9 +64,13 @@ public class Robot extends TimedRobot {
 		m_drive.resetEncoders();
 		m_drive.pigeon.setYaw(0);
 
-		Scheduler.getInstance().add(new AutonomousCommandGroup());
-		
-		// (new TestAuto()).start();
+		// Scheduler.getInstance().add(new AutonomousCommandGroup());
+		// (new AutonomousCommandGroup()).start();
+		// Util.addCommand(new TestAuto(1));
+		(new ClimbLockCommand(true)).start();
+		// (new TestAuto(1)).start();
+		(new FinalsAutoWestern()).start();
+		Scheduler.getInstance().run();
 	}
 
 	@Override
@@ -71,12 +80,18 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopInit() {
+		(new ClimbLockCommand(true)).start();
+		Scheduler.getInstance().removeAll();
 	}
 
 	@Override
 	public void teleopPeriodic() {
 		m_camera.updatePeriodic();
 		Scheduler.getInstance().run();
+
+		if(OI.getOperator().getRawButton(JoystickMap.BUTTON_X)){
+			Scheduler.getInstance().removeAll();
+		}
 	}
 
 	@Override

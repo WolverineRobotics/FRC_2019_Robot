@@ -2,7 +2,6 @@ package frc.robot.commands.defaultcommands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.Robot;
 import frc.robot.commands.autonomouscommands.AutoHatchCommand;
 import frc.robot.commands.autonomouscommands.OpenClawCommand;
@@ -12,6 +11,7 @@ import frc.robot.commands.autonomouscommands.SetIntakeRotateCommand;
 import frc.robot.constants.JoystickMap;
 import frc.robot.oi.OI;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.util.Util;
 
 public class DefaultIntakeCommand extends Command {
 
@@ -25,11 +25,11 @@ public class DefaultIntakeCommand extends Command {
     @Override
     protected void execute() {
         // Rotate ***************************
-        double rotateSpeed = OI.getOperatorIntakeRotate();
-        c_intake.setRotateRawSpeed(rotateSpeed*0.6);
+        double rotateSpeed = OI.getOperatorIntakeRotate() * 0.70;
         if(c_intake.getRotateEncoderPosition() < -110 && rotateSpeed == 0) {
-            c_intake.setRotateRawSpeed(0.07);
+            rotateSpeed = 0.07;
         }
+        c_intake.setRotateRawSpeed(rotateSpeed);
 
         // Rollers *************************
         boolean intakeIn = OI.getOperatorIntakeIn(); 
@@ -55,19 +55,26 @@ public class DefaultIntakeCommand extends Command {
         c_intake.executeShovel();
 
         // Encoders **************************
-        if (c_intake.getUpperLimit()) {
-            c_intake.resetEncoders();
-        }
+        // if (c_intake.getUpperLimit()) {
+        //     c_intake.resetEncoders();
+        // }
 
         // Auto Hatch ************************
         if(OI.getOperatorAutoHatch()) {
-            Scheduler.getInstance().add(new AutoHatch());
+            Util.addCommand(new AutoHatch());
+        }
+
+        // Auto Ball *************************
+        if(OI.getOperatorAutoBall()) {
+            if(!c_intake.getBallDetected()) {
+                Util.addCommand(new AutoBall());
+            }
         }
 
         // Reset Encoders ********************
-        if (OI.getDriver().getRawButton(JoystickMap.BUTTON_START) && OI.getOperator().getRawButton(JoystickMap.BUTTON_START)) {
-            c_intake.resetEncoders();
-        }
+        // if (OI.getTest().getRawButton(JoystickMap.BUTTON_START)) {
+        //     c_intake.resetEncoders();
+        // }
     }
 
     private class AutoHatch extends CommandGroup {
@@ -75,8 +82,45 @@ public class DefaultIntakeCommand extends Command {
             addSequential(new OpenClawCommand(true));
             addSequential(new OpenShovelCommand(true));
             addParallel(new SetElevatorCommand(100, 0.8));
-            addSequential(new SetIntakeRotateCommand(-175, 1));
+            addSequential(new SetIntakeRotateCommand(-165, 1));
             addSequential(new AutoHatchCommand());
+        }
+    }
+
+    private class AutoBall extends Command {
+        private boolean isDone;
+        public AutoBall() {
+        }
+
+        @Override
+        protected void initialize() {
+            // Util.addCommand(new AutoBallRotateDown()); //rotate down, open shovel and claw.
+        }
+
+        @Override
+        protected void execute() {
+            c_intake.setRotateRawSpeed(1); //intaking ball
+            if(c_intake.getBallDetected() || !OI.getOperatorAutoBall()) { //if the ball is detected or if the operator lets go off the button
+                isDone = true;
+            }
+        }
+
+        @Override
+        protected void end() {
+            Util.addCommand(new SetIntakeRotateCommand(-175, 0.8));
+        }
+
+        @Override
+        protected boolean isFinished() {
+            return isDone;
+        }
+    }
+
+    private class AutoBallRotateDown extends CommandGroup {
+        public AutoBallRotateDown() {
+            addParallel(new OpenShovelCommand(true));
+            addParallel(new OpenClawCommand(true));
+            addSequential(new SetIntakeRotateCommand(-175, 0.8));
         }
     }
 

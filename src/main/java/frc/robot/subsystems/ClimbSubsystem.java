@@ -25,7 +25,7 @@ public class ClimbSubsystem extends Subsystem {
 
     private Encoder liftEncoder;
 
-    private boolean climbingMode;
+    // private boolean climbingMode;
 
     private double[] gyroValues;
 
@@ -64,19 +64,27 @@ public class ClimbSubsystem extends Subsystem {
         int currentEncoderPos = getLiftEncoderPosition();
         int softMax = RobotConst.CLIMB_SOFT_MAX_ENCODER_DISTANCE;
         int softMin = RobotConst.CLIMB_SOFT_MIN_ENCODER_DISTANCE;
-        double softLimitMultiple = RobotConst.CLIMB_SOFT_LIMIT_MULTIPLE;
+        int hardMax = RobotConst.CLIMB_HARD_MAX_ENCODER_DISTANCE;
+        int hardMin = RobotConst.CLIMB_HARD_MIN_ENCODER_DISTANCE;
 
+        double softLimitMultiple = RobotConst.CLIMB_SOFT_LIMIT_MULTIPLE;
+        double speedf = speed;
   
-        if( currentEncoderPos > softMax && speed > 0 ){
-            speed = speed * softLimitMultiple;
-        }else if(currentEncoderPos < softMin && speed < 0){
-            speed = speed * softLimitMultiple;
+        if(currentEncoderPos > hardMin && speed > 0){
+            speedf = 0;
+        }else if( currentEncoderPos > softMax && speed > 0 ){
+            speedf = speed * softLimitMultiple;
+        }/*else if(currentEncoderPos < softMin && speed < 0){
+            speedf = speed * softLimitMultiple;
         }
-        lift.set(ControlMode.PercentOutput, speed);
+ */
+        lift.set(ControlMode.PercentOutput, speedf);
+
+
     }
 
     public double getLiftRawSpeed() {
-         return lift.getMotorOutputPercent();
+        return lift.getMotorOutputPercent();
     }
 
     //****************************************************************
@@ -111,21 +119,10 @@ public class ClimbSubsystem extends Subsystem {
 
     public boolean getLock(){
         if(lock.get() == Value.kForward){
-            return true;
-        } else {
             return false;
+        } else {
+            return true;
         }
-    }
-
-    //****************************************************************
-    // Climbing Mode methods
-    //****************************************************************
-    public boolean getClimbingMode() {
-        return climbingMode;
-    }
-
-    public void setClimbingMode(boolean climbingMode) {
-        this.climbingMode = climbingMode;
     }
 
 

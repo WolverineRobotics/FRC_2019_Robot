@@ -2,6 +2,7 @@ package frc.robot.commands.defaultcommands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.constants.blinkin.Colour;
 import frc.robot.subsystems.BlinkinSubsystem;
 
 public class DefaultBlinkinCommand extends Command {
@@ -15,6 +16,11 @@ public class DefaultBlinkinCommand extends Command {
 
     @Override
     protected void execute() {
+        if(Robot.getClimbSubsystem().getLock()) {
+            c_blinkin.setColour(Colour.GREEN);
+        } else {
+            c_blinkin.setColour(Colour.RED);
+        }
     }
 
     /**

@@ -29,7 +29,7 @@ public class DefaultElevatorCommand extends Command {
         if(!Robot.getClimbSubsystem().getLock()){
             c_elevator.setElevatorRawSpeed(0);
         } else if(elevatorSpeed == 0){
-            c_elevator.setElevatorRawSpeed(-0.07);
+            c_elevator.setElevatorRawSpeed(-0.05);
         } else {
             c_elevator.setElevatorRawSpeed(elevatorSpeed * 0.7);
         }
@@ -42,12 +42,10 @@ public class DefaultElevatorCommand extends Command {
             Util.addCommand(new ElevatorLevelCommandGroup(gamePiece, 2));
         } else if (OI.getOperatorElevatorLevel3()) {
             Util.addCommand(new ElevatorLevelCommandGroup(gamePiece, 3));
-        } else if(OI.getOperatorPlayerStationBall()) {
-            Util.addCommand(new PlayerStationCommandGroup(GamePiece.CARGO));
         }
 
         // Reset Encoder
-        if (OI.getDriver().getRawButton(JoystickMap.BUTTON_START)) {
+        if (OI.getTest().getRawButton(JoystickMap.BUTTON_START)) {
             c_elevator.resetEncoder();
         }
     }

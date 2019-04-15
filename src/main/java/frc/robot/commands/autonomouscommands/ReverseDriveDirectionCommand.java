@@ -19,7 +19,7 @@ public class ReverseDriveDirectionCommand extends Command{
 
     public ReverseDriveDirectionCommand(double power, double heading){
         c_drive = Robot.getDriveSubsystem();
-        System.out.println("Requires Drivesubsytem " + c_drive);
+        System.out.println("Requires Drivesubsytem " + c_drive.getSubsystem());
         requires(c_drive);
 
         gyroPID = c_drive.gyroPID;

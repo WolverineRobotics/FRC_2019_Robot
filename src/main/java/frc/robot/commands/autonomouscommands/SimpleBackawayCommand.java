@@ -16,7 +16,7 @@ public class SimpleBackawayCommand extends Command {
     public SimpleBackawayCommand(double distance, double speed){
         c_drive = Robot.getDriveSubsystem();
         requires(c_drive);
-        this.distance = distance;
+        this.distance = -distance;
         this.speed = speed;
         this.isDone = false;
     }
@@ -24,12 +24,12 @@ public class SimpleBackawayCommand extends Command {
     @Override
     protected void initialize() {
         c_drive.resetEncoders();
-        c_drive.setRawSpeeds(-speed, speed);
+        c_drive.setRawSpeeds(speed, -speed);
     }
 
     @Override
     protected void execute() {
-        if(c_drive.getDistance() > distance) {
+        if(c_drive.getDistance() <   distance) {
             isDone = true;
         }
     }

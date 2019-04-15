@@ -23,6 +23,8 @@ public class DriveSubsystem extends Subsystem {
 
     public GyroPID gyroPID;
 
+    private double[] xyz_dps;
+
     /**
      * Drive train subsystem
      * include drive motors, gyro, and encoders
@@ -170,5 +172,10 @@ public class DriveSubsystem extends Subsystem {
 
     public double getRightRawSpeed() {
         return (rightDrive01.get() + rightDrive02.get()) / 2;
+    }
+    
+    public double getRate(){
+        pigeon.getRawGyro(xyz_dps);
+        return xyz_dps[1];
     }
 }

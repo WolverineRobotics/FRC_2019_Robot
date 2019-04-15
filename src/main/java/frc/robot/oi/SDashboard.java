@@ -22,7 +22,6 @@ public class SDashboard {
         SmartDashboard.putNumber("[Climb] Lift Encoder Position", c_climb.getLiftEncoderPosition());
         // SmartDashboard.putNumber("[Climb] Lift Encoder Distance", c_climb.getLiftEncoderDistance());
         SmartDashboard.putNumber("[Climb] Wheel Speed", c_climb.getWheelRawSpeed());
-        SmartDashboard.putBoolean("[Climb] Climb Mode", c_climb.getClimbingMode());
 
         SmartDashboard.putNumber("[Drive] Left Speed", c_drive.getLeftRawSpeed());
         SmartDashboard.putNumber("[Drive] Left Encoder", c_drive.getRawLeftEncoder());

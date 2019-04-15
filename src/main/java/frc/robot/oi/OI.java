@@ -47,6 +47,7 @@ import frc.util.Util;
 public class OI {
     private static Joystick driver = new Joystick(JoystickMap.DRIVER_PORT);
     private static Joystick operator = new Joystick(JoystickMap.OPERATOR_PORT);
+    private static Joystick test = new Joystick(3);
 
     //********************************************************************************** 
     // Driver control
@@ -198,7 +199,13 @@ public class OI {
      * @return True when being pressed
      */
     public static boolean getOperatorAutoHatch() {
-        return operator.getRawAxis(JoystickMap.RIGHT_TRIGGER) > 0.2;
+        // return operator.getRawAxis(JoystickMap.RIGHT_TRIGGER) > 0.2;
+        return false;
+    }
+
+    public static boolean getOperatorAutoBall() {
+        // return operator.getRawAxis(JoystickMap.LEFT_TRIGGER) > 0.20;
+        return false;
     }
 
     /**
@@ -226,6 +233,7 @@ public class OI {
      */
     public static boolean getOperatorElevatorLevel1() {
         return operator.getRawButton(JoystickMap.BUTTON_A);
+        // return false;
     }
 
     /**
@@ -235,6 +243,7 @@ public class OI {
      */
     public static boolean getOperatorElevatorLevel2() {
         return operator.getRawButton(JoystickMap.BUTTON_B);
+        // return false;
     }
 
     /**
@@ -243,7 +252,8 @@ public class OI {
      * @return True once pressed
      */
     public static boolean getOperatorPlayerStationBall() {
-        return operator.getRawButton(JoystickMap.BUTTON_X);
+        // return operator.getRawButton(JoystickMap.BUTTON_X);
+        return false;
     }
 
     /**
@@ -252,7 +262,8 @@ public class OI {
      * @return True once pressed
      */
     public static boolean getOperatorElevatorLevel3() {
-        return operator.getRawButton(JoystickMap.BUTTON_Y);
+        // return operator.getRawButton(JoystickMap.BUTTON_Y);
+        return false;
     }
   
     public static void driverRumble(boolean toRumble) {
@@ -282,4 +293,11 @@ public class OI {
     public static Joystick getOperator() {
         return operator;
     }
+
+
+    //TEST CONTROLLER
+    public static Joystick getTest(){
+        return test;
+    }
+
 }
