@@ -40,13 +40,14 @@ import frc.util.Util;
  *  POV:
  *      Forward (0)         = Manual outtake ball
  *      Backward (180)      = Manual intake ball
- *  Extras:
+ *      Extras:
  *      Select              = Cancel Command
  */
 
 public class OI {
     private static Joystick driver = new Joystick(JoystickMap.DRIVER_PORT);
     private static Joystick operator = new Joystick(JoystickMap.OPERATOR_PORT);
+    private static Joystick test = new Joystick(3);
 
     //********************************************************************************** 
     // Driver control
@@ -59,7 +60,6 @@ public class OI {
      * @return double from -1 to 1
      */
     public static double getDriverTurn() {
-        // return driver.getRawAxis(JoystickMap.RIGHT_STICK_X);
         return Util.setDeadzoneLimits(driver.getRawAxis(JoystickMap.RIGHT_STICK_X), RobotConst.DRIVE_TURN_TRIGGER_VALUE);
     }
 
@@ -70,13 +70,6 @@ public class OI {
      * @return double from -1 to 1
      */
     public static double getDriverThrottle() {
- /*        double throttle = driver.getRawAxis(JoystickMap.LEFT_STICK_Y);
-        if (throttle > 1) {
-            throttle = 1;
-        } else if(throttle < -1) {
-            throttle = -1;
-        }
-        return throttle; */
         return Util.setDeadzoneLimits(driver.getRawAxis(JoystickMap.LEFT_STICK_Y), RobotConst.DRIVE_THORTTLE_TRIGGER_VALUE);
     }
 
@@ -94,7 +87,7 @@ public class OI {
      * X Button
      * @return True when button released (toggle)
      */
-    public static boolean getDriverRequestionHatchLED() {
+    public static boolean getDriverAutoAlign() {
         return driver.getRawButton(JoystickMap.BUTTON_X);
     }
     
@@ -104,7 +97,7 @@ public class OI {
      * @return True when button released (toggle)
      */
     public static boolean getDriverCancel() {
-        return driver.getRawButton(JoystickMap.BUTTON_B);
+        return driver.getRawButtonPressed(JoystickMap.BUTTON_B);
     }
     
     /**
@@ -113,7 +106,7 @@ public class OI {
      * @return True when button released (toggle)
      */
     public static boolean getDriverClimbState() {
-        return driver.getRawButton(JoystickMap.BUTTON_Y);
+        return driver.getRawButtonPressed(JoystickMap.BUTTON_Y);
     }
 
     /**
@@ -122,7 +115,6 @@ public class OI {
      * @return double from 0 to 1
      */
     public static double getDriverClimbSpeedDown() {
-        // return driver.getRawAxis(JoystickMap.LEFT_TRIGGER);
         return Util.setDeadzoneLimits(driver.getRawAxis(JoystickMap.LEFT_TRIGGER), RobotConst.CLIMB_THROTTLE_TRIGGER_VALUE);
 
     }
@@ -133,16 +125,8 @@ public class OI {
      * @return double from 0 to 1
      */
     public static double getDriverClimbSpeedUp() {
-        // return driver.getRawAxis(JoystickMap.RIGHT_TRIGGER);
         return Util.setDeadzoneLimits(driver.getRawAxis(JoystickMap.RIGHT_TRIGGER), RobotConst.CLIMB_THROTTLE_TRIGGER_VALUE);
     }
-
-    //TODO: Assign button to AutoClimb
-
-     public static boolean getAutoClimb(){
-        // return driver.getRawButton(JoystickMap.BUTTON_SELECT);
-        return false; //TEMP
-    } 
 
     /**
      * Set driver controller rumble
@@ -153,16 +137,13 @@ public class OI {
         driver.setRumble(RumbleType.kRightRumble, rumble);
     }
 
-    //May want to remap fine control
-    //If held down, drive motor speed is reduced
+    /**
+     * Get driver fine control
+     * Right bumper
+     * @return button press
+     */
     public static boolean getFineControl(){
         return driver.getRawButton(JoystickMap.BUTTON_RIGHT_BUMPER);
-    }
-
-
-    //Cancel Driver Commands
-    public static boolean getCancelDriverCommand(){
-        return (driver.getRawButton(JoystickMap.BUTTON_SELECT));
     }
 
     //********************************************************************************** 
@@ -212,8 +193,19 @@ public class OI {
         );
     }
 
+    /**
+     * Operator auto ground hatch
+     * Right trigger
+     * @return True when being pressed
+     */
     public static boolean getOperatorAutoHatch() {
-        return operator.getRawButton(JoystickMap.BUTTON_SELECT);
+        // return operator.getRawAxis(JoystickMap.RIGHT_TRIGGER) > 0.2;
+        return false;
+    }
+
+    public static boolean getOperatorAutoBall() {
+        // return operator.getRawAxis(JoystickMap.LEFT_TRIGGER) > 0.20;
+        return false;
     }
 
     /**
@@ -241,6 +233,7 @@ public class OI {
      */
     public static boolean getOperatorElevatorLevel1() {
         return operator.getRawButton(JoystickMap.BUTTON_A);
+        // return false;
     }
 
     /**
@@ -250,6 +243,7 @@ public class OI {
      */
     public static boolean getOperatorElevatorLevel2() {
         return operator.getRawButton(JoystickMap.BUTTON_B);
+        // return false;
     }
 
     /**
@@ -258,7 +252,8 @@ public class OI {
      * @return True once pressed
      */
     public static boolean getOperatorPlayerStationBall() {
-        return operator.getRawButton(JoystickMap.BUTTON_X);
+        // return operator.getRawButton(JoystickMap.BUTTON_X);
+        return false;
     }
 
     /**
@@ -267,12 +262,8 @@ public class OI {
      * @return True once pressed
      */
     public static boolean getOperatorElevatorLevel3() {
-        return operator.getRawButton(JoystickMap.BUTTON_Y);
-    }
-
-    //Cancel Operator Commands
-    public static boolean getCancelOperatorCommand(){
-        return (operator.getRawButton(JoystickMap.BUTTON_SELECT));
+        // return operator.getRawButton(JoystickMap.BUTTON_Y);
+        return false;
     }
   
     public static void driverRumble(boolean toRumble) {
@@ -304,10 +295,9 @@ public class OI {
     }
 
 
-    //If either driver is able to cancel a command
-    public static boolean getCancelCommand(){
-        return (driver.getRawButton(JoystickMap.BUTTON_SELECT) || operator.getRawButton(JoystickMap.BUTTON_SELECT));
+    //TEST CONTROLLER
+    public static Joystick getTest(){
+        return test;
     }
+
 }
-
-

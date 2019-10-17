@@ -12,11 +12,9 @@ public class SetClimbGyroCommand extends Command{
     private boolean isDone;
 
     //If -1, then disabled
-    //TODO: Implement desired encoder position, right now continues until canceled.
     private int desiredEncoderPos;
 
     private boolean goingUp;
-    private int currentEncoderPos;
 
     private double maxSpeed;
     private double targetGyroValue;
@@ -39,19 +37,6 @@ public class SetClimbGyroCommand extends Command{
 
         this.maxSpeed = maxSpeed;
         this.targetGyroValue = targetGyroValue;
-
-        currentEncoderPos = c_climb.getLiftEncoderPosition();
-
-
-/*         if(currentEncoderPos < desiredEncoderPos) { //
-            goingUp = false;
-            c_climb.setLiftRawSpeed(-this.rawSpeed); 
-        } else if(currentEncoderPos > desiredEncoderPos){
-            goingUp = true;
-            c_climb.setLiftRawSpeed(this.rawSpeed);
-        } else {
-            isDone = true;
-        } */
 
         this.allowManualOverride = allowManualOverride;
 

@@ -49,6 +49,7 @@ public class RotateToHeadingCommand extends Command {
     @Override
     protected boolean isFinished() {
         return (Math.abs(gyropid.getError()) < 2);
+        // return (Math.abs(gyropid.getError()) < 12) && (c_drive.getRate() <= 5);
         // return false;
     }
 }

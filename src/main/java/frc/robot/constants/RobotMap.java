@@ -80,6 +80,8 @@ public class RobotMap {
     public static final int CLIMB_LIFT_ENCODER_B                    = 9; 
 
     public static final int INTAKE_BALL_SENSOR_ADDRESS              = 10;
+
+    public static final int ULTRASONIC                              = 0;
     
     //**********************************************************************************
     // PWM Addresses

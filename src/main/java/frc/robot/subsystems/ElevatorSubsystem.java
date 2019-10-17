@@ -9,6 +9,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.commands.defaultcommands.DefaultElevatorCommand;
+import frc.robot.constants.RobotConst;
 import frc.robot.constants.RobotMap;
 
 public class ElevatorSubsystem extends Subsystem {
@@ -37,14 +38,22 @@ public class ElevatorSubsystem extends Subsystem {
     // Motor functions
     //********************************************************************************** 
     public void setElevatorRawSpeed(double speed) {
-        if (speed > 1) {
-            speed = 1;
+
+        int currentEncoderPos = getEncoderPosition();
+        int softMax = RobotConst.ELEVATOR_SOFT_MAX_ENCODER_DISTANCE;
+        int softMin = RobotConst.ELEVATOR_SOFT_MIN_ENCODER_DISTANCE;
+        double softLimitMultiple = RobotConst.ELEVATOR_SOFT_LIMIT_MULTIPLE;
+        double speedf = speed;
+
+        if( currentEncoderPos > softMax && speed > 0 ){
+            speedf = speed * softLimitMultiple;
+        }else if(currentEncoderPos < softMin && speed < 0){
+            speedf = speed * softLimitMultiple;
         }
-        if (speed < -1) {
-            speed = -1;
-        }
-        elevatorMotor1.set(speed);
-        elevatorMotor2.set(speed);
+
+
+        elevatorMotor1.set(speedf);
+        elevatorMotor2.set(speedf);
     }
 
     public double getElevatorRawSpeed() {

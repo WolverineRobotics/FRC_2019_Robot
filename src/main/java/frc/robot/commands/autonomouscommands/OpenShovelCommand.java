@@ -7,10 +7,16 @@ import frc.robot.subsystems.IntakeSubsystem;
 public class OpenShovelCommand extends Command {
 
     private IntakeSubsystem c_intake;
+    boolean toOpen;
 
     public OpenShovelCommand(boolean toOpen) {
         c_intake = Robot.getIntakeSubsystem();
         requires(c_intake);
+        this.toOpen = toOpen;
+    }
+
+    @Override
+    protected void initialize() {
         c_intake.setShovel(toOpen);
     }
 

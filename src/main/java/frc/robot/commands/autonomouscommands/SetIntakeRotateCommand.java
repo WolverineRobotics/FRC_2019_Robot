@@ -11,26 +11,16 @@ public class SetIntakeRotateCommand extends Command {
 
     private int desiredEncoderPos;
     private double rawSpeed;
-    private double desiredSpeed;
 
     private boolean goingUp;
     private boolean isDone;
 
-    private boolean allowManualOverride;
 
     public SetIntakeRotateCommand(int desiredEncoderPos, double rawSpeed) {
         c_intake = Robot.getIntakeSubsystem();
         requires(c_intake);
         this.desiredEncoderPos = desiredEncoderPos;
         this.rawSpeed = rawSpeed;
-        this.desiredSpeed = rawSpeed;
-        this.allowManualOverride = false;
-    }
-
-    //Second constructor to allow manual override of intake rotate. Calls the first constructor, then sets the corret allowManualOverride value.
-    public SetIntakeRotateCommand(int desiredEncoderPos, double rawSpeed, boolean allowManualOverride) {
-        this(desiredEncoderPos, rawSpeed);
-        this.allowManualOverride = allowManualOverride;
     }
 
 
@@ -64,28 +54,6 @@ public class SetIntakeRotateCommand extends Command {
                 isDone = true;
             }
         }
-
-        //If manual override enabled, checks if there is any input
-        if(allowManualOverride){
-            
-            double rotateSpeed = OI.getOperatorIntakeTilt();
-
-            //If there is input, use inputed value instead of default
-            if(rotateSpeed != 0){
-                rawSpeed = (rotateSpeed*0.6);
-            }else{
-                rawSpeed = desiredSpeed;
-            }
-
-        }
-
-        c_intake.setRotateRawSpeed(rawSpeed);
-
-        //Allows for the operator to cancel the intake rotate 
-        if(OI.getCancelOperatorCommand()){
-            isDone = true;
-        }
-
     }
 
     @Override

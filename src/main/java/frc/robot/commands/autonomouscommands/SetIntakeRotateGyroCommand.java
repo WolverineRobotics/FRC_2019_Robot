@@ -46,13 +46,6 @@ public class SetIntakeRotateGyroCommand extends Command {
         this.desiredEncoderPos = desiredEncoderPos;
     } */
 
-/*     public SetIntakeRotateGyroCommand(double maxSpeed, double targetGyroValue, boolean allowManualOverride, int desiredEncoderPos, boolean goingUp){
-        this(maxSpeed, targetGyroValue, allowManualOverride);
-        this.desiredEncoderPos = desiredEncoderPos;
-        this.goingUp = false;
-    } */
-
-
 
     @Override
     protected void initialize() {
@@ -87,7 +80,7 @@ public class SetIntakeRotateGyroCommand extends Command {
             }else{
                 motorPower = maxSpeed;
             }
-        }else{
+        } else {
             //Robot is tilted too much, decrease tilt (left side of desmos graph)
             if(Math.abs(currentGyroValue-targetGyroValue) < maxAllowedError){
                 motorPower = (((-maxSpeed/2)/Math.pow(maxAllowedError,2))*Math.pow((currentGyroValue-targetGyroValue),2) + (maxSpeed/2));
@@ -95,15 +88,10 @@ public class SetIntakeRotateGyroCommand extends Command {
                 motorPower = 0;
             }
         }
-        
-
-
-
-
-            
+         
         //Manual Override
         if(allowManualOverride){
-            double rotateSpeed = OI.getOperatorIntakeTilt();
+            double rotateSpeed = OI.getOperatorIntakeRotate();
             if(rotateSpeed != 0){
                 motorPower = (rotateSpeed*maxSpeed);
             }
@@ -114,11 +102,6 @@ public class SetIntakeRotateGyroCommand extends Command {
 
         //Actually sets the speed
         c_intake.setRotateRawSpeed(motorPower);
-
-        //Allows for the operator to cancel the intake rotate 
-        if(OI.getCancelOperatorCommand()){
-            isDone = true;
-        }
 
         //When button pressed, set isDone = true, operator takes over
         //A Button

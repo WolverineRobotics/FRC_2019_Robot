@@ -19,7 +19,7 @@ public class Util{
 
         if(Math.abs(controlInput) < deadzoneAmount){
             controlInput = 0;
-        }else {
+        } else {
             if(controlInput>0){
                 controlInput = ((controlInput - deadzoneAmount)/(1-deadzoneAmount));
             }else{
@@ -33,7 +33,6 @@ public class Util{
 
     //Ensures motor power values are between -1 and 1
     public static double getMotorLimits(double motorPower){
-
         if (motorPower < -1){
             motorPower = -1;
         }else if(motorPower > 1){
@@ -52,7 +51,5 @@ public class Util{
         
 
     }
-
-    
 
 }

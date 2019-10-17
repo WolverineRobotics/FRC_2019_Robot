@@ -1,12 +1,10 @@
 package frc.robot.commands.defaultcommands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.Robot;
-import frc.robot.commands.commandgroups.ClimbCommandGroup;
+import frc.robot.constants.JoystickMap;
 import frc.robot.oi.OI;
 import frc.robot.subsystems.ClimbSubsystem;
-import frc.util.Util;
 
 public class DefaultClimbCommand extends Command {
 
@@ -24,17 +22,12 @@ public class DefaultClimbCommand extends Command {
 
     @Override
     protected void execute() {
-/*         if (OI.getDriverClimbState()) {
-            Scheduler.getInstance().add(new ClimbCommandGroup());
+        if (OI.getDriverClimbState()) {
             c_climb.unlockLock(false);
-		} */
+		}
 		
 		if (OI.getDriverCancel()) {
             c_climb.unlockLock(true);
-        }
-
-        if(OI.getDriverClimbState()){
-            Util.addCommand(new ClimbCommandGroup());
         }
         
 		//climb lift
@@ -47,5 +40,9 @@ public class DefaultClimbCommand extends Command {
         //wheel lift
         double throttle = OI.getDriverThrottle();
         c_climb.setWheelRawSpeed(-throttle * 0.9);
+
+        if(OI.getTest().getRawButton(JoystickMap.BUTTON_SELECT)){
+            c_climb.resetEncoders();
+        }
     }
 }

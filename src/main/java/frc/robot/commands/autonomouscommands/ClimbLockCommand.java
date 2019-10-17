@@ -13,7 +13,7 @@ public class ClimbLockCommand extends Command{
     public ClimbLockCommand(final boolean lock){
         c_climb = Robot.getClimbSubsystem();
         requires(c_climb);
-        this.lock = lock;
+        this.lock = !lock;
     }
 
     @Override

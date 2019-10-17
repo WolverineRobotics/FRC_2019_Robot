@@ -14,14 +14,12 @@ public class AutoHatchCommand extends Command {
 
     public AutoHatchCommand() {
         c_intake = Robot.getIntakeSubsystem();
-        requires(c_intake);
+        // requires(c_intake);
         isDone = false;
     }
 
     @Override
     protected void initialize() {
-        Scheduler.getInstance().add(new SetIntakeRotateCommand(-170, 0.5));
-        Scheduler.getInstance().add(new SetElevatorCommand(0, 0.99));
         c_intake.setRollersRawSpeed(-1);
     }
 
@@ -34,7 +32,7 @@ public class AutoHatchCommand extends Command {
 
     @Override
     protected void end() {
-        c_intake.setRollersRawSpeed(0);
+        System.out.println("engaging claw thingy");
         Scheduler.getInstance().add(new LatchHatchCommandGroup());
     }
 
@@ -45,10 +43,11 @@ public class AutoHatchCommand extends Command {
 
     private class LatchHatchCommandGroup extends CommandGroup {
         public LatchHatchCommandGroup() {
+            c_intake.setRollersRawSpeed(0);
             addSequential(new OpenShovelCommand(false)); //close shovel
-            addSequential(new SetIntakeRotateCommand(-140, 0.9)); //rotate up for momentum
-            addParallel(new OpenClawCommand(false)); //close claw
-            addSequential(new OpenShovelCommand(true)); //open the shovel
+            addSequential(new SetIntakeRotateCommand(-120, 0.9)); //rotate up for momentum
+            addSequential(new WaitCommand(0.5));
+            addSequential(new OpenClawCommand(false));
         }
     }
 

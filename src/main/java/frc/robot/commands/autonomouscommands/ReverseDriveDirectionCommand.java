@@ -7,16 +7,19 @@ import frc.robot.oi.OI;
 import frc.robot.pid.GyroPID;
 import frc.robot.subsystems.DriveSubsystem;
 
-public class DriveDirectionCommand extends Command {
+/**
+ * ReverseDriveCommand
+ */
+public class ReverseDriveDirectionCommand extends Command{
     protected double power, heading, speed;
 
     protected GyroPID gyroPID;
 
     protected DriveSubsystem c_drive;
 
-    public DriveDirectionCommand(double power, double heading){
+    public ReverseDriveDirectionCommand(double power, double heading){
         c_drive = Robot.getDriveSubsystem();
-        System.out.println("Requires Drivesubsytem " + c_drive);
+        System.out.println("Requires Drivesubsytem " + c_drive.getSubsystem());
         requires(c_drive);
 
         gyroPID = c_drive.gyroPID;
@@ -42,14 +45,10 @@ public class DriveDirectionCommand extends Command {
  
         steering = gyroPID.calculate(c_drive.getPigeonHeading());
 
-        // if(speed > Math.abs(power)){
-        //     speed = power;
-        // }
+        speed = -power;
 
-        speed = power;
-
-        leftSpeed = -(speed - steering);
-        rightSpeed = speed + steering;
+        leftSpeed = -(speed + steering);
+        rightSpeed = (speed - steering);
         
         c_drive.setRawSpeeds(leftSpeed, rightSpeed);
     }
@@ -73,4 +72,5 @@ public class DriveDirectionCommand extends Command {
         c_drive.gyroPID.setSetpoint(heading);
         this.heading = heading;
     }
+    
 }
