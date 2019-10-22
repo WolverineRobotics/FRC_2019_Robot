@@ -25,14 +25,14 @@ public class DefaultElevatorCommand extends Command {
     @Override
     protected void execute() {
         // Manual control
-        double elevatorSpeed = OI.getOperatorElevatorSpeed();
-        if(!Robot.getClimbSubsystem().getLock()){
-            c_elevator.setElevatorRawSpeed(0);
-        } else if(elevatorSpeed == 0){
-            c_elevator.setElevatorRawSpeed(-0.05);
-        } else {
-            c_elevator.setElevatorRawSpeed(elevatorSpeed * 0.7);
-        }
+        // double elevatorSpeed = OI.getOperatorElevatorSpeed();
+        // if(!Robot.getClimbSubsystem().getLock()){
+        //     c_elevator.setElevatorRawSpeed(0);
+        // } else if(elevatorSpeed == 0){
+        //     c_elevator.setElevatorRawSpeed(-0.05);
+        // } else {
+        //     c_elevator.setElevatorRawSpeed(elevatorSpeed * 0.7);
+        // }
 
         //Operator A, B and Y Button controls
         GamePiece gamePiece = c_intake.getGamePiece();

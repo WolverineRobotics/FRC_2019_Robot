@@ -22,7 +22,13 @@ public class DriveDistanceCommand extends DriveDirectionCommand {
     @Override
     protected boolean isFinished() {
         // System.out.println("Distance: " + c_drive.getDistance());
-        return c_drive.getDistance() > distance;
+        if (this.power > 0){
+            return c_drive.getDistance() > distance;
+        } else if (this.power < 0){
+            return c_drive.getDistance() < distance;
+        }
+        return true;
+        
     }
 
     @Override
