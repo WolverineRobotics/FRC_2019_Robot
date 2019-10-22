@@ -6,7 +6,6 @@ import frc.robot.Robot;
 import frc.robot.commands.autonomouscommands.DriveDistanceCommand;
 import frc.robot.commands.autonomouscommands.OpenClawCommand;
 import frc.robot.commands.autonomouscommands.OpenShovelCommand;
-import frc.robot.commands.autonomouscommands.RotateToVisionTargetCommand;
 import frc.robot.commands.autonomouscommands.SetIntakeRotateCommand;
 import frc.robot.commands.autonomouscommands.WaitCommand;
 import frc.robot.constants.GamePiece;
@@ -61,45 +60,32 @@ public class TestAndResetCommandGroup extends CommandGroup{
 
 
     public TestAndResetCommandGroup(){
-        // addSequential(new OpenClawCommand(true));
-        // addSequential(new OpenShovelCommand(true));
-
-        // addSequential(new SetIntakeRotateCommand(-60,0.5));
-
-        // addSequential(new SetIntakeRotateCommand(-120,0.5));
-        // addParallel(new OpenClawCommand(false));
-        // addParallel(new OpenShovelCommand(false));
+        autoDropHatchFromCenter();
+        autoReturnToHome();
+        }
 
 
+    // Code assumes hatch is in the robot. Places hatch on center cargo ship and lets go.
+    private void autoDropHatchFromCenter(){
         addSequential(new SetIntakeRotateCommand(this.intakeEncoderPos1, this.INTAKE_POWER));
         addSequential(new OpenShovelCommand(this.REVERSE_SHOVEL)); //2
         addSequential(new OpenClawCommand(this.REVERSE_CLAW)); //3
        
-        // // addSequential(new SetIntakeRotateCommand(this.intakeEncoderPos2, this.INTAKE_POWER));
-        // // addSequential(new SetElevatorCommand(100, this.ELEVATOR_SPEED));
+        
         addSequential(new DriveDistanceCommand(0.12,this.DRIVE_DISTANCE/2, 0,true)); //6
-        // addParallel(new ElevatorLevelCommandGroup(GamePiece.HATCH, 1)); //4 & 5
+        addParallel(new ElevatorLevelCommandGroup(GamePiece.HATCH, 1)); //4 & 5
 
         addSequential(new DriveDistanceCommand(this.DRIVE_POWER,this.DRIVE_DISTANCE/2, 0,true)); //6
         addSequential(new WaitCommand(1));
-        // addSequential(new RotateToVisionTargetCommand());
         addSequential(new OpenShovelCommand(!this.REVERSE_SHOVEL)); //7
         addSequential(new OpenClawCommand(!this.REVERSE_CLAW)); //7
-    //     addSequential(new WaitCommand(1));
+        addSequential(new WaitCommand(1));
+    }
 
-    //     addParallel(new SetIntakeRotateCommand(-130 - 10, this.INTAKE_POWER)); //-130 from GamePiece
-    //     // addSequential(new DriveDistanceCommand(-this.DRIVE_POWER, -1, 0, true)); //Negative distance with negative power?
+    // Returns to starting position after autoDropHatchFromCenter.
+    private void autoReturnToHome(){
+            addSequential(new DriveDistanceCommand(- this.DRIVE_POWER,( -this.DRIVE_DISTANCE ), 0, true)); //Negative distance with negative power?
 
-    //     // addSequential(new WaitCommand(3));
+    }
 
-    //     // // Resets itself
-        addSequential(new DriveDistanceCommand(- this.DRIVE_POWER,( -this.DRIVE_DISTANCE ), 0, true)); //Negative distance with negative power?
-    // //     addSequential(new OpenClawCommand(!this.REVERSE_CLAW));
-    // //     addSequential(new OpenShovelCommand(!this.REVERSE_SHOVEL)); 
-    //     addSequential(new SetIntakeRotateCommand(0, this.INTAKE_POWER));
-    // //     addSequential(new frc.robot.commands.autonomouscommands.SetElevatorCommand(0, 0.25));
-
-        }
-
-    
 }
