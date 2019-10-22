@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.autonomouscommands.ClimbLockCommand;
 import frc.robot.commands.commandgroups.FinalsAutoWestern;
+import frc.robot.commands.commandgroups.TestAndResetCommandGroup;
 import frc.robot.commands.commandgroups.TestAuto;
 import frc.robot.constants.JoystickMap;
 import frc.robot.constants.RobotMap;
@@ -67,9 +68,10 @@ public class Robot extends TimedRobot {
 		// Scheduler.getInstance().add(new AutonomousCommandGroup());
 		// (new AutonomousCommandGroup()).start();
 		// Util.addCommand(new TestAuto(1));
-		(new ClimbLockCommand(true)).start();
+		// (new ClimbLockCommand(true)).start();
 		// (new TestAuto(1)).start();
-		(new FinalsAutoWestern()).start();
+		// (new FinalsAutoWestern()).start();
+		(new TestAndResetCommandGroup()).start();
 		Scheduler.getInstance().run();
 	}
 
