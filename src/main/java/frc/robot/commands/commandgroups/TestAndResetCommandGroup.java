@@ -38,7 +38,7 @@ public class TestAndResetCommandGroup extends CommandGroup{
     private final boolean REVERSE_CLAW = false;   //Might need to be reveresed
 
     private final double DRIVE_POWER = 0.25;
-    private final double DRIVE_DISTANCE = 130; //Distance, in inches, 134
+    private final double DRIVE_DISTANCE = 132; //Distance, in inches, 134
 
     private final double ELEVATOR_SPEED = 0.4;
 
@@ -72,10 +72,14 @@ public class TestAndResetCommandGroup extends CommandGroup{
         addSequential(new OpenClawCommand(this.REVERSE_CLAW)); //3
        
         
-        addSequential(new DriveDistanceCommand(0.12,this.DRIVE_DISTANCE/2, 0,true)); //6
+        // addSequential(new DriveDistanceCommand(0.12,this.DRIVE_DISTANCE/2, 0,true)); //6
+        addSequential(new DriveLocationRotateCommandGroup(0.12,this.DRIVE_DISTANCE/2, 0,true)); //6
+
         addParallel(new ElevatorLevelCommandGroup(GamePiece.HATCH, 1)); //4 & 5
 
-        addSequential(new DriveDistanceCommand(this.DRIVE_POWER,this.DRIVE_DISTANCE/2, 0,true)); //6
+        // addSequential(new DriveDistanceCommand(this.DRIVE_POWER,this.DRIVE_DISTANCE/2, 0,true)); //6     
+        addSequential(new DriveLocationRotateCommandGroup(this.DRIVE_POWER,this.DRIVE_DISTANCE/2, 0,true)); //6
+
         addSequential(new WaitCommand(1));
         addSequential(new OpenShovelCommand(!this.REVERSE_SHOVEL)); //7
         addSequential(new OpenClawCommand(!this.REVERSE_CLAW)); //7
@@ -85,7 +89,7 @@ public class TestAndResetCommandGroup extends CommandGroup{
     // Returns to starting position after autoDropHatchFromCenter.
     private void autoReturnToHome(){
             addSequential(new DriveDistanceCommand(- this.DRIVE_POWER,( -this.DRIVE_DISTANCE ), 0, true)); //Negative distance with negative power?
-
+            addSequential(new SetIntakeRotateCommand(0, this.INTAKE_POWER));
     }
 
 }
