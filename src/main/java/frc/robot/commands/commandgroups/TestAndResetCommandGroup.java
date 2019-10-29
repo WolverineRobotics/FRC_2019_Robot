@@ -38,7 +38,7 @@ public class TestAndResetCommandGroup extends CommandGroup{
     private final boolean REVERSE_CLAW = false;   //Might need to be reveresed
 
     private final double DRIVE_POWER = 0.25;
-    private final double DRIVE_DISTANCE = 132; //Distance, in inches, 134
+    private final double DRIVE_DISTANCE = 134; //Distance, in inches, 134
 
     private final double ELEVATOR_SPEED = 0.4;
 
