@@ -8,7 +8,7 @@ public class DriveDistanceLocationCommand extends DriveDistanceCommand {
     private double previousEncoderDistance;
     private LocationPID gyroPID;
 
-    private final double DISTANCE_END = 0.4;
+    private final double DISTANCE_END = 0.2;
 
     public DriveDistanceLocationCommand(double power, double distance, double heading, boolean brakeWhenFinished){
         super(power, distance, heading, brakeWhenFinished);
