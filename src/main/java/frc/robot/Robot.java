@@ -39,6 +39,14 @@ public class Robot extends TimedRobot {
 	@Override
 
 	public void robotInit() {
+		System.out.println("++++++++++++++++++++++++++++++++++++++");
+
+		m_intake.resetEncoders();
+		m_elevator.resetEncoder();
+		m_climb.resetEncoders();
+		m_drive.resetEncoders();
+		m_drive.pigeon.setYaw(0);
+
 		camera = CameraServer.getInstance().startAutomaticCapture();
 		camera.setVideoMode(PixelFormat.kMJPEG, 320, 240, 15);
 		camera.setExposureManual(70);
@@ -59,6 +67,7 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void autonomousInit() {
+
 		m_intake.resetEncoders();
 		m_elevator.resetEncoder();
 		m_climb.resetEncoders();
@@ -82,6 +91,7 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopInit() {
+
 		(new ClimbLockCommand(true)).start();
 		Scheduler.getInstance().removeAll();
 	}

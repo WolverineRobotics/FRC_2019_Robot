@@ -36,7 +36,7 @@ public class TestAndResetCommandGroup extends CommandGroup{
     private final boolean REVERSE_CLAW = false;   
 
     private final double DRIVE_POWER = 0.25;
-    private final double CENTER_DRIVE_DISTANCE = 134; //Distance to drive forward for a center auto
+    private final double CENTER_DRIVE_DISTANCE = 145; //Distance to drive forward for a center auto 180.25
 
     private final double ELEVATOR_SPEED = 0.4;
 
@@ -62,8 +62,8 @@ public class TestAndResetCommandGroup extends CommandGroup{
 
 
     public TestAndResetCommandGroup(){
-            // autoCenter();
-            autoDirectional(true);
+            autoCenter();
+            // autoDirectional(true);
         }
 
 
@@ -97,8 +97,8 @@ public class TestAndResetCommandGroup extends CommandGroup{
         addSequential(new DriveLocationRotateCommandGroup(this.DRIVE_POWER, this.SIDE_HORIZONAL_DRIVE_DISTANCE, turnHeading, true));
 
 
-        addSequential(new OpenShovelCommand(!this.REVERSE_SHOVEL)); //7
-        addSequential(new OpenClawCommand(!this.REVERSE_CLAW)); //7
+        addSequential(new OpenShovelCommand(!this.REVERSE_SHOVEL));
+        addSequential(new OpenClawCommand(!this.REVERSE_CLAW));
         addSequential(new WaitCommand(1));
 
 
@@ -124,7 +124,7 @@ public class TestAndResetCommandGroup extends CommandGroup{
        
         
         // addSequential(new DriveDistanceCommand(0.12,this.DRIVE_DISTANCE/2, 0,true)); //6
-        addSequential(new DriveLocationRotateCommandGroup(0.12,this.CENTER_DRIVE_DISTANCE/2, 0,true)); //6
+        addSequential(new DriveLocationRotateCommandGroup(0.25,this.CENTER_DRIVE_DISTANCE/2, 0,true)); //6
 
         addParallel(new ElevatorLevelCommandGroup(GamePiece.HATCH, 1)); //4 & 5
 

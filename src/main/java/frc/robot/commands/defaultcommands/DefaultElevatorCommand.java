@@ -25,14 +25,14 @@ public class DefaultElevatorCommand extends Command {
     @Override
     protected void execute() {
         // Manual control
-        // double elevatorSpeed = OI.getOperatorElevatorSpeed();
-        // if(!Robot.getClimbSubsystem().getLock()){
-        //     c_elevator.setElevatorRawSpeed(0);
-        // } else if(elevatorSpeed == 0){
-        //     c_elevator.setElevatorRawSpeed(-0.05);
-        // } else {
-        //     c_elevator.setElevatorRawSpeed(elevatorSpeed * 0.7);
-        // }
+        double elevatorSpeed = OI.getOperatorElevatorSpeed();
+        if(!Robot.getClimbSubsystem().getLock()){
+            c_elevator.setElevatorRawSpeed(0);
+        } else if(elevatorSpeed == 0){
+            c_elevator.setElevatorRawSpeed(-0.07);
+        } else {
+            c_elevator.setElevatorRawSpeed(elevatorSpeed * 0.7);
+        }
 
         //Operator A, B and Y Button controls
         GamePiece gamePiece = c_intake.getGamePiece();
@@ -45,10 +45,10 @@ public class DefaultElevatorCommand extends Command {
         }
         
         //Manual control
-        double elevatorSpeed = OI.getOperatorElevatorSpeed();
+        // double elevatorSpeed = OI.getOperatorElevatorSpeed();
 
         
-        c_elevator.setElevatorRawSpeed(elevatorSpeed * 0.7);
+        // c_elevator.setElevatorRawSpeed(elevatorSpeed * 0.7);
 
         // Reset Encoder
         if (OI.getTest().getRawButton(JoystickMap.BUTTON_START)) {
