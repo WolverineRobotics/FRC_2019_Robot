@@ -9,7 +9,7 @@ package frc.robot.constants;
 public enum GamePiece {
 
     HATCH(               // Elevator + IntakeRotate
-            1500, -130,  // Level 1
+            1488, -147,  // Level 1
             6800, -130,  // Level 2
             12500, -130, // Level 3
             1500, -130   // Player Station (Same as level 1)

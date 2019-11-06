@@ -37,10 +37,8 @@ public class Robot extends TimedRobot {
 	public static UsbCamera camera;
 
 	@Override
-
 	public void robotInit() {
-		System.out.println("++++++++++++++++++++++++++++++++++++++");
-
+		
 		m_intake.resetEncoders();
 		m_elevator.resetEncoder();
 		m_climb.resetEncoders();
