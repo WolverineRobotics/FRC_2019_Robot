@@ -50,10 +50,10 @@ public class DefaultDriveCommand extends Command {
         }
 
         // Driver Button X
-        if(OI.getDriverAutoAlign()){
-            Scheduler.getInstance().add(new SetIntakeRotateCommand(-10, 1));
-            Scheduler.getInstance().add(new ExecuteAfterWaitCommand(1, new RotateToVisionTargetCommand()));
-        }
+        // if(OI.getDriverAutoAlign()){
+        //     Scheduler.getInstance().add(new SetIntakeRotateCommand(-10, 1));
+        //     Scheduler.getInstance().add(new ExecuteAfterWaitCommand(1, new RotateToVisionTargetCommand()));
+        // }
 
         // Driver Left Bumper
         if(OI.getTest().getRawButton(JoystickMap.BUTTON_SELECT)) {
