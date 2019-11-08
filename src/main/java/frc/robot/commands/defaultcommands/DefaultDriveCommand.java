@@ -3,17 +3,11 @@ package frc.robot.commands.defaultcommands;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.Robot;
-import frc.robot.commands.autonomouscommands.AutoHatchDeliverCommand;
-import frc.robot.commands.autonomouscommands.ExecuteAfterWaitCommand;
 import frc.robot.commands.autonomouscommands.RotateToHeadingCommand;
-import frc.robot.commands.autonomouscommands.RotateToVisionTargetCommand;
-import frc.robot.commands.autonomouscommands.SetIntakeRotateCommand;
-import frc.robot.commands.commandgroups.TestAuto;
 import frc.robot.constants.JoystickMap;
 import frc.robot.constants.RobotConst;
 import frc.robot.oi.OI;
 import frc.robot.subsystems.DriveSubsystem;
-import frc.util.Util;
 
 public class DefaultDriveCommand extends Command {
     
@@ -44,16 +38,11 @@ public class DefaultDriveCommand extends Command {
         }
 
         // Driver POV
-        if(OI.getDriver().getPOV() != -1){
-            System.out.println("Starting rotate command");
-            Scheduler.getInstance().add(new RotateToHeadingCommand(-OI.getDriver().getPOV()));
-        }
-
-        // Driver Button X
-        // if(OI.getDriverAutoAlign()){
-        //     Scheduler.getInstance().add(new SetIntakeRotateCommand(-10, 1));
-        //     Scheduler.getInstance().add(new ExecuteAfterWaitCommand(1, new RotateToVisionTargetCommand()));
+        // if(OI.getDriver().getPOV() != -1){
+        //     System.out.println("Starting rotate command");
+        //     Scheduler.getInstance().add(new RotateToHeadingCommand(-OI.getDriver().getPOV()));
         // }
+
 
         // Driver Left Bumper
         if(OI.getTest().getRawButton(JoystickMap.BUTTON_SELECT)) {
