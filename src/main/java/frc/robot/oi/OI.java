@@ -47,7 +47,7 @@ import frc.util.Util;
 public class OI {
     private static Joystick driver = new Joystick(JoystickMap.DRIVER_PORT);
     private static Joystick operator = new Joystick(JoystickMap.OPERATOR_PORT);
-    private static Joystick test = new Joystick(3);
+    private static Joystick test = new Joystick(2);
 
     //********************************************************************************** 
     // Driver control

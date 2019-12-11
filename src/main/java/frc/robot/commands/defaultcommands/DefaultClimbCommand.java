@@ -40,9 +40,5 @@ public class DefaultClimbCommand extends Command {
         //wheel lift
         double throttle = OI.getDriverThrottle();
         c_climb.setWheelRawSpeed(-throttle * 0.9);
-
-        if(OI.getTest().getRawButton(JoystickMap.BUTTON_SELECT)){
-            c_climb.resetEncoders();
-        }
     }
 }

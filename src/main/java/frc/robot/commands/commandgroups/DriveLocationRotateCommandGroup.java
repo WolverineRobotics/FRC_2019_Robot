@@ -12,6 +12,7 @@ public class DriveLocationRotateCommandGroup extends CommandGroup {
     }
 
     public DriveLocationRotateCommandGroup(double power, double distance, double heading, Boolean breakWhenFinished){
+        // addSequential(new RotateToHeadingCommand(heading));
         addSequential(new DriveDistanceLocationCommand(power, distance, heading, breakWhenFinished));
         addSequential(new DriveDistanceCommand(power, 0.2, heading, breakWhenFinished));
         addSequential(new RotateToHeadingCommand(heading));

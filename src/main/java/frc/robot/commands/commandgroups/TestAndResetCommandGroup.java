@@ -2,14 +2,13 @@
 package frc.robot.commands.commandgroups;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import frc.robot.Robot;
 import frc.robot.commands.autonomouscommands.DriveDistanceCommand;
 import frc.robot.commands.autonomouscommands.OpenClawCommand;
 import frc.robot.commands.autonomouscommands.OpenShovelCommand;
+import frc.robot.commands.autonomouscommands.RotateToHeadingCommand;
 import frc.robot.commands.autonomouscommands.SetIntakeRotateCommand;
 import frc.robot.commands.autonomouscommands.WaitCommand;
 import frc.robot.constants.GamePiece;
-import frc.robot.subsystems.IntakeSubsystem;
 
 /*
 1. Rotate intake 10 deg
@@ -30,19 +29,22 @@ public class TestAndResetCommandGroup extends CommandGroup{
 
     private final double INTAKE_POWER = 0.45;
     
-    //TODO: Set Encoder Pos
     private int intakeEncoderPos1 = -30;
 
 
-    private final boolean REVERSE_SHOVEL = false; //Might need to be reveresed
-    private final boolean REVERSE_CLAW = false;   //Might need to be reveresed
+    private final boolean REVERSE_SHOVEL = false; 
+    private final boolean REVERSE_CLAW = false;   
 
     private final double DRIVE_POWER = 0.25;
-    private final double DRIVE_DISTANCE = 134; //Distance, in inches, 134
+    private final double CENTER_DRIVE_DISTANCE = 145; //Distance to drive forward for a center auto 180.25
 
     private final double ELEVATOR_SPEED = 0.4;
 
-    private final IntakeSubsystem c_intake = Robot.getIntakeSubsystem();
+    //Distance to drive forward during a side auto
+    private final double SIDE_FWD_DRIVE_DISTANCE = 174; 
+
+    //Distance to drive horizontally after turning during a side auto
+    private final double SIDE_HORIZONAL_DRIVE_DISTANCE = 20; 
 
 
     /* 
@@ -60,10 +62,59 @@ public class TestAndResetCommandGroup extends CommandGroup{
 
 
     public TestAndResetCommandGroup(){
-        autoDropHatchFromCenter();
-        autoReturnToHome();
+            autoCenter();
+            // autoDirectional(true);
         }
 
+
+    // Auto starting from left or right position instead of center
+    private void autoDirectional(boolean isRight){
+
+        double turnHeading;
+
+        if(isRight){
+            turnHeading = 90;
+        }else{
+            turnHeading = 270;
+        }
+
+        addSequential(new SetIntakeRotateCommand(this.intakeEncoderPos1, this.INTAKE_POWER));
+        addSequential(new OpenShovelCommand(this.REVERSE_SHOVEL)); //2
+        addSequential(new OpenClawCommand(this.REVERSE_CLAW)); //3
+       
+        
+        // addSequential(new DriveDistanceCommand(0.12,this.DRIVE_DISTANCE/2, 0,true)); //6
+        addSequential(new DriveLocationRotateCommandGroup(0.12,this.SIDE_FWD_DRIVE_DISTANCE/2, 0,true)); //6
+
+        addParallel(new ElevatorLevelCommandGroup(GamePiece.HATCH, 1)); //4 & 5
+
+        // addSequential(new DriveDistanceCommand(this.DRIVE_POWER,this.DRIVE_DISTANCE/2, 0,true)); //6     
+
+        addSequential(new DriveLocationRotateCommandGroup(this.DRIVE_POWER,this.SIDE_FWD_DRIVE_DISTANCE/2, 0,true)); 
+        addSequential(new WaitCommand(1));
+
+        addSequential(new RotateToHeadingCommand(turnHeading));
+        addSequential(new DriveLocationRotateCommandGroup(this.DRIVE_POWER, this.SIDE_HORIZONAL_DRIVE_DISTANCE, turnHeading, true));
+
+
+        addSequential(new OpenShovelCommand(!this.REVERSE_SHOVEL));
+        addSequential(new OpenClawCommand(!this.REVERSE_CLAW));
+        addSequential(new WaitCommand(1));
+
+
+        // Return to starting position
+        addSequential(new DriveDistanceCommand(- this.DRIVE_POWER,( -this.SIDE_HORIZONAL_DRIVE_DISTANCE ), turnHeading, true)); 
+        addParallel(new SetIntakeRotateCommand(0, this.ELEVATOR_SPEED));
+        addSequential(new DriveDistanceCommand(- this.DRIVE_POWER,( -this.SIDE_FWD_DRIVE_DISTANCE ), 0, true)); 
+
+    }
+
+
+
+     private void autoCenter(){
+        autoDropHatchFromCenter();
+        autoReturnToHomeFromCenter();
+    }
 
     // Code assumes hatch is in the robot. Places hatch on center cargo ship and lets go.
     private void autoDropHatchFromCenter(){
@@ -73,12 +124,12 @@ public class TestAndResetCommandGroup extends CommandGroup{
        
         
         // addSequential(new DriveDistanceCommand(0.12,this.DRIVE_DISTANCE/2, 0,true)); //6
-        addSequential(new DriveLocationRotateCommandGroup(0.12,this.DRIVE_DISTANCE/2, 0,true)); //6
+        addSequential(new DriveLocationRotateCommandGroup(0.25,this.CENTER_DRIVE_DISTANCE/2, 0,true)); //6
 
         addParallel(new ElevatorLevelCommandGroup(GamePiece.HATCH, 1)); //4 & 5
 
         // addSequential(new DriveDistanceCommand(this.DRIVE_POWER,this.DRIVE_DISTANCE/2, 0,true)); //6     
-        addSequential(new DriveLocationRotateCommandGroup(this.DRIVE_POWER,this.DRIVE_DISTANCE/2, 0,true)); //6
+        addSequential(new DriveLocationRotateCommandGroup(this.DRIVE_POWER,this.CENTER_DRIVE_DISTANCE/2, 0,true)); //6
 
         addSequential(new WaitCommand(1));
         addSequential(new OpenShovelCommand(!this.REVERSE_SHOVEL)); //7
@@ -87,8 +138,8 @@ public class TestAndResetCommandGroup extends CommandGroup{
     }
 
     // Returns to starting position after autoDropHatchFromCenter.
-    private void autoReturnToHome(){
-            addSequential(new DriveDistanceCommand(- this.DRIVE_POWER,( -this.DRIVE_DISTANCE ), 0, true)); //Negative distance with negative power?
+    private void autoReturnToHomeFromCenter(){
+            addSequential(new DriveDistanceCommand(- this.DRIVE_POWER,( -this.CENTER_DRIVE_DISTANCE ), 0, true));
             addSequential(new SetIntakeRotateCommand(0, this.INTAKE_POWER));
     }
 
